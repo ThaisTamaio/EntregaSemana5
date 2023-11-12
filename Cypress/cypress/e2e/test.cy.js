@@ -85,6 +85,61 @@ describe('Ghost Post Creation and Publication', () => {
     });
 
     it('Escenario 3: Crear un Post y asignar tags', () => {
+        const tags = ['tagTestPost'];
+        // Navegar a la sección de posts
+        cy.get('a[href="#/posts/"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/posts');
+
+        // Crear un nuevo post
+        cy.get('span').contains('New post').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/editor/post');
+
+        // Llenar el título y el contenido del post
+        cy.get('textarea[placeholder="Post title"]').type('Test 2');
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test 2');
+
+        // Asignar tags al post
+        // Abrir la configuración del post
+        cy.get('button.settings-menu-toggle').click();
+
+        // Asignar los tags al post
+        tags.forEach(tag => {
+            cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
+            cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').first().type(`${tag}{enter}`);
+        });
+
+        // Hacer clic en el botón de configuración del post antes de verificar el tag
+        cy.get('span.settings-menu-open').click();
+
+        // Publicar el post
+        cy.get('span').contains('Publish').click();
+
+        // Esperar a que aparezca el botón de confirmación
+        cy.get('span').contains('Continue, final review').click();
+
+        // Confirmar la publicación
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+        // Navegar al post publicado
+        cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
+
+        // Navegar directamente a la URL del post actualizado
+        cy.visit('http://localhost:2368/test-1/');
+
+        // Verificar el contenido y el título del post
+        cy.contains('contenido test 2').should('exist');
+        cy.contains('Test 2').should('exist');
+
+        // Verificar el tag en el post visitando la página
+        cy.visit('http://localhost:2368/tag/tagTestPost/');
+        cy.contains('Test 2').should('exist');
+    });
+
+    it('Escenario 4: Editar un Post y Cambiar sus tags', () => {
         // Crear tags
         const tags = ['tagtest1', 'tagtest2', 'tagtest3', 'tagtest4', 'tagtest5'];
         tags.forEach(tag => {
@@ -121,12 +176,12 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
 
         // Verificar el tag en el post visitando la página
-        cy.visit('http://localhost:2368/test-1/');
-        cy.get('a.gh-article-tag[href="http://localhost:2368/tag/tagtest1/"]').contains('tagtest1').should('exist');
+        cy.visit('http://localhost:2368/tag/tagtest1/');
+        cy.contains('Test 1').should('exist');
 
     });
 
-    it('Escenario 4: Editar un Post y cambiar sus tags', () => {
+    it('Escenario 5: Eliminar tag y Verificar en Post', () => {
         // Navegar a la sección de tags
         cy.get('a[data-test-nav="tags"]').click();
         cy.url().should('include', '/tags');
@@ -179,7 +234,51 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains('contenido test').should('exist');
     });
 
-    it('Escenario 17: Crear una Página y asignar tags', () => {
+    it('Escenario 13: Crear una Página y asignar tags', () => {
+        const tags = ['tagTestPage'];
+        // Navegar a la sección de páginas
+        cy.get('a[data-test-nav="pages"]').click();
+        cy.url().should('include', '/pages');
+
+        // Crear una nueva página
+        cy.get('span').contains('New page').click();
+
+        // Esperar a que la página del editor se cargue
+        cy.url().should('include', '/editor/page');
+
+        // Llenar el título y el contenido de la página
+        cy.get('textarea[placeholder="Page title"]').type('Pagina test 2');
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test 2');
+
+        // Asignar tags a la pagina
+        // Abrir la configuración de la pagina
+        cy.get('button.settings-menu-toggle').click();
+
+        // Asignar los tags a la pagina
+        tags.forEach(tag => {
+            cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
+            cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').first().type(`${tag}{enter}`);
+        });
+
+        // Hacer clic en el botón de configuración de la página antes de verificar el tag
+        cy.get('span.settings-menu-open').click();
+
+        // Publicar la página
+        cy.get('span').contains('Publish').click();
+
+        // Confirmar la publicación
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+
+        // Visitar la página publicada
+        cy.visit('http://localhost:2368/pagina-test-2/');
+
+        // Verificar el contenido y el título de la página
+        cy.contains('contenido test 2').should('exist');
+        cy.contains('Pagina test 2').should('exist');
+    });
+
+    it('Escenario 14: Editar una Página y Cambiar sus tags', () => {
         // Crear tags
         const tags = ['tagtest6', 'tagtest7', 'tagtes8', 'tagtest9', 'tagtest10'];
         tags.forEach(tag => {
@@ -218,6 +317,33 @@ describe('Ghost Post Creation and Publication', () => {
         // Verificar que se haya asignado el tag
         cy.contains('Updated').should('exist');
 
+    });
+
+    it('Escenario 17: Eliminar tag y Verificar en Página', () => {
+        // Navegar a la sección de tags
+        cy.get('a[data-test-nav="tags"]').click();
+        cy.url().should('include', '/tags');
+
+        // Seleccionar el tag "tagtest1" para eliminar
+        cy.contains('h3', 'tagtest6').click();
+
+        // Eliminar el tag
+        cy.get('span').contains('Delete tag').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Delete').click();
+        //** (uncaught exception)TransitionAborted: TransitionAborted */
+
+        // Navegar a la sección de páginas
+        cy.get('a[data-test-nav="pages"]').click();
+        cy.url().should('include', '/pages');
+
+        // Seleccionar la Página "Contacto test" para editar
+        cy.contains('h3', 'Contacto test').click();
+
+        // Abrir la configuración del post
+        cy.get('button.settings-menu-toggle').click();
+
+        //testtag6 should not exist
+        cy.contains('tagtest6').should('not.exist');
     });
 
 });

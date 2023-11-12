@@ -1,0 +1,41 @@
+{
+  "name": "kraken-node",
+  "version": "1.0.24",
+  "description": "<p align=\"center\">     <img src=\"./reporter/assets/images/kraken.png\" alt=\"kraken logo\" width=\"140\" height=\"193\"> <h1 align=\"center\">Kraken</h1>",
+  "main": "lib/index.js",
+  "types": "lib",
+  "bin": {
+    "kraken-node": "bin/kraken-node"
+  },
+  "scripts": {
+    "start": "ts-node src/test.ts",
+    "example": "ts-node example/index.ts",
+    "cucumber": "cucumber-js ./example",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "7.2.1",
+    "@faker-js/faker": "^6.0.0-alpha.3",
+    "@types/glob": "^7.1.3",
+    "ejs": "^3.1.6",
+    "glob": "^7.1.7",
+    "portfinder": "^1.0.28",
+    "ts-node": "^9.1.1",
+    "webdriverio": "^7.5.7"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.0.7",
+    "@types/fs-extra": "^9.0.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheSoftwareDesignLab/Kraken.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheSoftwareDesignLab/Kraken/issues"
+  },
+  "homepage": "https://github.com/TheSoftwareDesignLab/Kraken#readme"
+}

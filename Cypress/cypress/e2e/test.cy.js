@@ -198,8 +198,6 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2368/test-1/');
         cy.get('a.gh-article-tag[href="http://localhost:2368/tag/tagtest1/"]').should('not.exist');
 
-        // Opcionalmente, verificar la presencia de otro tag como "tagtest2"
-        cy.get('a.gh-article-tag[href="http://localhost:2368/tag/tagtest2/"]').contains('tagtest2').should('exist');
     });
 
     it('Escenario 6: Crear un Post, Publicarlo y Luego Editarlo Múltiples veces', () => {

@@ -157,6 +157,8 @@ npx kraken-node run
 
 ### Cypress
 
+Los tests se encuentran dentro de CypressTesting.
+
 1. Abrir una terminar en la carpeta Cypress e instalar las dependencias por medio del comando:
 
 ```

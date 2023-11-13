@@ -1,6 +1,6 @@
 describe('Ghost Post Creation and Publication', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:2370/ghost/');
+        cy.visit('http://localhost:2368/ghost/');
         cy.get('input[name="identification"]').type('pruebas@gmail.com');
         cy.get('input[name="password"]').type('pruebas1234');
         cy.get('span').contains('Sign in').click();
@@ -45,7 +45,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
 
         // Navegar directamente a la URL del post actualizado
-        cy.visit('http://localhost:2370/test-1/');
+        cy.visit('http://localhost:2368/test-1/');
 
         // Verificar el contenido y el título del post
         cy.contains('contenido test 1').should('exist');
@@ -78,7 +78,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a').contains('Published').click();
 
         // Navegar directamente a la URL del post actualizado
-        cy.visit('http://localhost:2370/test-1/');
+        cy.visit('http://localhost:2368/test-1/');
 
         // Verificar el contenido modificado
         cy.contains('Contenido modificado').should('exist');
@@ -128,14 +128,14 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
 
         // Navegar directamente a la URL del post actualizado
-        cy.visit('http://localhost:2370/test-1/');
+        cy.visit('http://localhost:2368/test-1/');
 
         // Verificar el contenido y el título del post
         cy.contains('contenido test 2').should('exist');
         cy.contains('Test 2').should('exist');
 
         // Verificar el tag en el post visitando la página
-        cy.visit('http://localhost:2370/tag/tagTestPost/');
+        cy.visit('http://localhost:2368/tag/tagTestPost/');
         cy.contains('Test 2').should('exist');
     });
 
@@ -176,7 +176,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
 
         // Verificar el tag en el post visitando la página
-        cy.visit('http://localhost:2370/tag/tagtest1/');
+        cy.visit('http://localhost:2368/tag/tagtest1/');
         cy.contains('Test 1').should('exist');
 
     });
@@ -195,8 +195,8 @@ describe('Ghost Post Creation and Publication', () => {
         //** (uncaught exception)TransitionAborted: TransitionAborted */
 
         // Verificar que el tag "tagtest1" ha sido eliminado visitando la página del post
-        cy.visit('http://localhost:2370/test-1/');
-        cy.get('a.gh-article-tag[href="http://localhost:2370/tag/tagtest1/"]').should('not.exist');
+        cy.visit('http://localhost:2368/test-1/');
+        cy.get('a.gh-article-tag[href="http://localhost:2368/tag/tagtest1/"]').should('not.exist');
 
     });
 
@@ -229,7 +229,7 @@ describe('Ghost Post Creation and Publication', () => {
         // Inicio del bucle para editar y verificar el post 5 veces
         for (let i = 1; i <= 5; i++) {
             // Navegar a la sección de posts
-            cy.visit('http://localhost:2370/ghost/');
+            cy.visit('http://localhost:2368/ghost/');
             cy.get('a[href="#/posts/"]').click({ multiple: true, force: true});
 
             // Esperar a que la nueva página se cargue
@@ -254,7 +254,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('a').contains('Published').click();
 
             // Navegar directamente a la URL del post actualizado
-            cy.visit('http://localhost:2370/test-multiple-edits/');
+            cy.visit('http://localhost:2368/test-multiple-edits/');
 
             // Verificar el contenido modificado
             cy.contains(`Contenido modificado ${i}`).should('exist');
@@ -291,14 +291,14 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
     
         // Navegar directamente a la URL del post actualizado
-        cy.visit('http://localhost:2370/test-multimedia/');
+        cy.visit('http://localhost:2368/test-multimedia/');
     
         // Verificar el contenido y el título del post
         cy.contains('contenido test multimedia').should('exist');
         cy.contains('Test multimedia').should('exist');
     
         // Navegar a la sección de posts
-        cy.visit('http://localhost:2370/ghost/');
+        cy.visit('http://localhost:2368/ghost/');
     
         // Navegar a la sección de posts
         cy.get('a[data-test-nav="posts"]').click();
@@ -335,7 +335,7 @@ describe('Ghost Post Creation and Publication', () => {
         //Crear varios posts con el mismo tag
         posts.forEach(post => {
             // Ir a la página de posts
-            cy.visit('http://localhost:2370/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
 
             // Esperar a que la nueva página se cargue
             cy.url().should('include', '/posts');
@@ -381,7 +381,7 @@ describe('Ghost Post Creation and Publication', () => {
 
             // Verificar el tag en el post visitando la página
             tags.forEach(tag => {
-                cy.visit('http://localhost:2370/tag/'+tag+'/');
+                cy.visit('http://localhost:2368/tag/'+tag+'/');
                 cy.contains(post).should('exist');
             });
         });
@@ -491,7 +491,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
 
         // Navegar directamente a la URL del post actualizado
-        cy.visit('http://localhost:2370/test-1/');
+        cy.visit('http://localhost:2368/test-1/');
 
         // Verificar el contenido y el título del post
         cy.contains(content).should('exist');
@@ -573,7 +573,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
         // Visitar la página publicada
-        cy.visit('http://localhost:2370/contacto-test/');
+        cy.visit('http://localhost:2368/contacto-test/');
 
         // Verificar el título y el contenido de la página
         cy.contains('Contacto test').should('exist');
@@ -617,7 +617,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
         // Visitar la página publicada
-        cy.visit('http://localhost:2370/pagina-test-2/');
+        cy.visit('http://localhost:2368/pagina-test-2/');
 
         // Verificar el contenido y el título de la página
         cy.contains('contenido test 2').should('exist');
@@ -671,7 +671,7 @@ describe('Ghost Post Creation and Publication', () => {
         pages.forEach(page => {
 
             // Navegar a la sección de paginas
-            cy.visit('http://localhost:2370/ghost/#/pages');
+            cy.visit('http://localhost:2368/ghost/#/pages');
 
             // Esperar a que la nueva página se cargue
             cy.url().should('include', '/pages');

@@ -1,4 +1,4 @@
-# Entrega Semena 5
+# Entrega Semana 5
 
 Este repositorio contiene el código y la documentación relacionados con la entrega de la semana 5. En la wiki se encuentra gran parte de la documentación requerida.
 
@@ -153,6 +153,7 @@ En la carpeta Kraken/features/escenarios se encuentran los escenarios en formato
 ```
 npx kraken-node run
 ```
+4. Algunas pruebas requieren la carga manual de una imagen desde el computador local, se recomienda subir una imagen en el transcurso de 5 segundos o se recomienda cancelar la acción. Esto con el fin de garantizar el correcto funcionamiento de las pruebas.
 
 ### Cypress
 1) Primer paso pendiente

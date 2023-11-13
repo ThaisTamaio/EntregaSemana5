@@ -184,6 +184,8 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a[data-test-nav="tags"]').click();
         cy.url().should('include', '/tags');
 
+        wait(1000);
+
         // Seleccionar el tag "tagtest1" para eliminar
         cy.contains('tagtest1').first().click();
 

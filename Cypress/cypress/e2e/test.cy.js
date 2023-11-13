@@ -329,7 +329,209 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Navegar a la vista del post
         cy.get('a').contains('Published').click();
-    });      
+    }); 
+
+    it('Escenario 8: Crear una Serie de Posts Relacionados con Tags Comunes', () => {
+        const posts = ['post1', 'post2', 'post3'];
+        const tags = ['tagEscenario8'];
+        //Crear varios posts con el mismo tag
+        posts.forEach(post => {
+            // Ir a la página de posts
+            cy.visit('http://localhost:2368/ghost/#/posts');
+
+            // Esperar a que la nueva página se cargue
+            cy.url().should('include', '/posts');
+
+            // Crear un nuevo post
+            cy.get('span').contains('New post').click();
+
+            // Esperar a que la nueva página se cargue
+            cy.url().should('include', '/editor/post');
+
+            // Llenar el título y el contenido del post
+            cy.get('textarea[placeholder="Post title"]').type(post);
+            cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido '+post);
+
+            // Asignar tags al post
+            // Abrir la configuración del post
+            cy.get('button.settings-menu-toggle').click();
+
+            // Asignar los tags al post
+            tags.forEach(tag => {
+                cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
+                cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').first().type(`${tag}{enter}`);
+            });
+
+            // Hacer clic en el botón de configuración del post antes de verificar el tag
+            cy.get('span.settings-menu-open').click();
+
+            // Publicar el post
+            cy.get('span').contains('Publish').click();
+
+            // Esperar a que aparezca el botón de confirmación
+            cy.get('span').contains('Continue, final review').click();
+
+            // Confirmar la publicación
+            cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+            // Navegar al post publicado
+            cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
+
+            // Verificar el contenido y el título del post
+            cy.contains('contenido '+post).should('exist');
+            cy.contains(post).should('exist');
+
+            // Verificar el tag en el post visitando la página
+            tags.forEach(tag => {
+                cy.visit('http://localhost:2368/tag/'+tag+'/');
+                cy.contains(post).should('exist');
+            });
+        });
+    });
+
+    // it('Escenario 9: Modificar un Post para Cambiar su Enfoque y Actualizar Tags y Multimedia', () => {
+    //     // Crear tags
+    //     const tags = ['nuevoEnfoqueTag1', 'nuevoEnfoqueTag2', 'nuevoEnfoqueTag3'];
+    //     tags.forEach(tag => {
+    //         cy.get('a[data-test-nav="tags"]').click();
+    //         cy.url().should('include', '/tags');
+    //         cy.get('span').contains('New tag').click();
+    //         cy.get('input[id="tag-name"]').type(tag);
+    //         cy.get('span[data-test-task-button-state="idle"]').contains('Save').click();
+    //         cy.get('a[data-test-nav="tags"]').click();
+    //         cy.contains(tag).should('exist');
+    //     });
+
+    //     // Navegar a la sección de páginas
+    //     cy.get('a[data-test-nav="pages"]').click();
+    //     cy.url().should('include', '/pages');
+
+    //     // Seleccionar la Página "Contacto test" para editar
+    //     cy.contains('h3', 'Contacto test').click();
+
+    //     // Abrir la configuración del post
+    //     cy.get('button.settings-menu-toggle').click();
+
+    //     // Asignar los tags al post
+    //     tags.forEach(tag => {
+    //         cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
+    //         cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').first().type(`${tag}{enter}`);
+    //     });
+
+    //     // Hacer clic en el botón de configuración del post antes de verificar el tag
+    //     cy.get('span.settings-menu-open').click();
+        
+    //     //TODO FALTAAAAAAAA
+
+    //     // Actualizar el post
+    //     cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
+
+    //     // Verificar que se haya asignado el tag
+    //     cy.contains('Updated').should('exist');
+    // });
+
+    it('Escenario 10: Crear un Post y Utilizar la Función de Vista Previa antes de Publicarlo', () => {
+        //title const
+        const title = 'New preview post';
+        const content = 'Contenido de new preview post';
+
+        // Navegar a la sección de posts
+        cy.get('a[href="#/posts/"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/posts');
+
+        // Crear un nuevo post
+        cy.get('span').contains('New post').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/editor/post');
+
+        // Llenar el título y el contenido del post
+        cy.get('textarea[placeholder="Post title"]').type(title);
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type(content);
+
+        // Ver preview
+        cy.get('span').contains('Preview').click();
+
+        //wait for preview
+        cy.wait(500);
+
+        //check if div.tabs is visible
+        cy.get('div.tabs').should('be.visible');
+        cy.get('div.gh-browserpreview-iframecontainer').should('be.visible');
+
+        cy.get('span').contains('Preview').click({force: true});
+
+        // Publicar el post
+        cy.get('span').contains('Publish').click({force: true});
+
+        // Esperar a que aparezca el botón de confirmación
+        cy.get('span').contains('Continue, final review').click();
+
+        // Confirmar la publicación
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+        // Navegar al post publicado
+        cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
+
+        // Navegar directamente a la URL del post actualizado
+        cy.visit('http://localhost:2368/test-1/');
+
+        // Verificar el contenido y el título del post
+        cy.contains(content).should('exist');
+        cy.contains(title).should('exist');
+    });
+
+    it('Escenario 11: Crear un Post y Programar su Publicación para una Fecha y Hora Futura', () => {
+        //title const
+        const title = 'New programmed post';
+        const content = 'Contenido de new programmed post';
+        const date = '2023-11-11';
+        const time = '11:11';
+
+        // Navegar a la sección de posts
+        cy.get('a[href="#/posts/"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/posts');
+
+        // Crear un nuevo post
+        cy.get('span').contains('New post').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/editor/post');
+
+        // Llenar el título y el contenido del post
+        cy.get('textarea[placeholder="Post title"]').type(title);
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type(content);
+
+        // Abrir la configuración del post
+        cy.get('button.settings-menu-toggle').click();
+
+        // Configurar la fecha y hora de publicación
+        cy.get('input[placeholder="YYYY-MM-DD"]').invoke('val', date);
+        cy.get('input[data-test-date-time-picker-time-input=""]').invoke('val', time);
+
+        // Hacer clic en el botón de configuración del post antes de verificar el tag
+        cy.get('span.settings-menu-open').click();
+
+        // Publicar el post
+        cy.get('span').contains('Publish').click();
+
+        // Esperar a que aparezca el botón de confirmación
+        cy.get('span').contains('Continue, final review').click();
+
+        // Confirmar la publicación
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+        // Navegar al post publicado
+        cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
+
+        // Verificar el contenido y el título del post
+        cy.contains(content).should('exist');
+        cy.contains(title).should('exist');
+    });
 
     it('Escenario 12: Crear una página estática', () => {
         // Navegar a la sección de páginas
@@ -446,6 +648,71 @@ describe('Ghost Post Creation and Publication', () => {
         // Verificar que se haya asignado el tag
         cy.contains('Updated').should('exist');
 
+    });
+
+    it('Escenario 15: Crear Varias Páginas Estáticas', () => {
+        const pages = ['page1', 'page2', 'page3'];
+        //iterar sobre las paginas
+        pages.forEach(page => {
+
+            // Navegar a la sección de paginas
+            cy.visit('http://localhost:2368/ghost/#/pages');
+
+            // Esperar a que la nueva página se cargue
+            cy.url().should('include', '/pages');
+
+            // Crear una nueva página
+            cy.get('span').contains('New page').click();
+
+            // Esperar a que la página del editor se cargue
+            cy.url().should('include', '/editor/page');
+
+            // Llenar el título y el contenido de la página
+            cy.get('textarea[placeholder="Page title"]').type(page);
+            cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido '+page);
+
+            // Publicar la página
+            cy.get('span').contains('Publish').click();
+
+            // Confirmar la publicación
+            cy.get('span').contains('Continue, final review').click();
+            cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+
+            // Verificar el título y el contenido de la página
+            cy.contains(page).should('exist');
+            cy.contains('contenido '+page).should('exist');
+        });
+    });
+
+    it('Escenario 16: Modificar una Página Estática', () => {
+        const newContent = 'Contenido modificado'+Math.floor(Math.random() * 1000);
+
+        // Navegar a la sección de posts
+        cy.get('a[data-test-nav="pages"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/pages');
+
+        // Seleccionar el post a editar
+        cy.contains('h3', 'page1').first().click();
+
+        // Esperar a que la página del editor se cargue
+        cy.url().should('include', '/editor/page');
+
+        // Borrar el contenido actual y escribir el nuevo contenido
+        cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(newContent);
+
+        // Actualizar el post
+        cy.get('span').contains('Update').click();
+
+        // Esperar a que se complete la actualización
+        cy.url().should('include', '/editor/page');
+
+        // Navegar a la vista del post
+        cy.get('a').contains('Published').click();
+
+        // Verificar el contenido modificado
+        cy.contains(newContent).should('exist');
     });
 
     it('Escenario 17: Eliminar tag y Verificar en Página', () => {

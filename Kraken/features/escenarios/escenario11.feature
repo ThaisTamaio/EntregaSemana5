@@ -16,4 +16,4 @@ Scenario: Como usuario creo y publico un post
   And I enter paragraphs
   And I wait for 2 seconds
 
--- programar su publicacion
+

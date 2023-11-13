@@ -9,3 +9,18 @@ Scenario: Como usuario edito un post y cambio sus tags
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
+  And I wait for 4 seconds
+  And I select a published post
+  And I wait for 2 seconds
+  And I click Settings
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
+  And I select a Tag
+  And I wait for 2 seconds
+  And I click the Publish button
+  And I wait for 2 seconds
+  And I publish
+  And I wait for 2 seconds
+  And I confirm the publish
+  

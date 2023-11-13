@@ -22,5 +22,27 @@ Scenario: Como usuario creo un post y lo edito múltiples veces
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
-
--- Editar múltiples veces
+  And I click Published
+  And I wait for 2 seconds
+  And I select a published post
+  And I wait for 2 seconds
+  And I click title
+  And I wait for 2 seconds
+  And I enter title
+  And I wait for 2 seconds
+  And I click the Update button
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  And I click Published
+  And I wait for 2 seconds
+  And I select a published post
+  And I wait for 2 seconds
+  And I click title
+  And I wait for 2 seconds
+  And I enter title
+  And I wait for 2 seconds
+  And I click the Update button
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds

@@ -1,4 +1,4 @@
-Feature: Crear un post y asignar tags
+Feature: Creación y publicación de un post
 
 @user1 @web
 Scenario: Como usuario creo y publico un post
@@ -10,18 +10,6 @@ Scenario: Como usuario creo y publico un post
   And I wait for 2 seconds
   And I click login
   And I wait for 2 seconds
-  And I click Tags
-  And I wait for 2 seconds
-  And I click new Tag
-  And I wait for 2 seconds
-  And I enter Tag Name
-  And I wait for 2 seconds
-  And I enter Tag Color
-  And I wait for 2 seconds
-  And I enter Tag Description
-  And I wait for 2 seconds
-  And I click Save Tag
-  And I wait for 2 seconds
   And I click new post
   And I wait for 2 seconds
   And I enter title
@@ -32,16 +20,9 @@ Scenario: Como usuario creo y publico un post
   And I wait for 2 seconds
   And I click image
   And I wait for 5 seconds
-  And I click Settings
-  And I wait for 2 seconds
-  And I click on Tags
-  And I wait for 2 seconds
-  And I select a Tag
-  And I wait for 2 seconds
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
-

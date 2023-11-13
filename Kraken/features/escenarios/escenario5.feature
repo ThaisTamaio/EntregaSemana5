@@ -9,3 +9,7 @@ Scenario: Como usuario elimino un tag
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
+  And I wait for 2 seconds
+  And I click tags
+  And I wait for 2 seconds
+  

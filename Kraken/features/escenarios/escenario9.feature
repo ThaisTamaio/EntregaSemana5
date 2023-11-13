@@ -9,3 +9,24 @@ Scenario: Como usuario edito los tags y el contenido de un post
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
+  And I wait for 2 seconds
+  And I click Published
+  And I wait for 2 seconds
+  And I select a published post
+  And I wait for 2 seconds
+  And I click add card
+  And I wait for 2 seconds
+  And I click image
+  And I wait for 2 seconds
+  And I click Settings
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
+  And I select a Tag
+  And I wait for 2 seconds
+  And I click the Publish button
+  And I wait for 2 seconds
+  And I publish
+  And I wait for 2 seconds
+  And I confirm the publish
+  

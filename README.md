@@ -35,9 +35,10 @@ npm init -y
 npm install kraken-node -g
 ```
 
-3. Se instala Kraken de forma local:
+3. Se instala Kraken de forma local, a veces puede ser necesario clonar el repo de GitHub si se presentan errores:
 
 ```
+git clone https://github.com/TheSoftwareDesignLab/Kraken.git # OPCIONAL: solo si el comando abajo falla!!
 npm install kraken-node --save
 ```
 
@@ -90,6 +91,57 @@ nano ~/.bashrc
 kraken-node doctor
 ```
 
+9. Ahora se debe instalar el CLI de Ghost, lo cual requiere Node.js v.18.18.1 y su inicialización. Todo esto se logra por medio de los siguientes comandos:
+
+```
+nvm use 18.18.1
+npm init
+```
+    
+10. Ahora se requiere instalar Ghost, la aplicación bajo pruebas. Para esto se recomienda instalarla en la misma carpeta donde la carpeta de Kraken se encuentra ubicada, no dentro de la carpeta de Kraken. 
+
+```
+npm install ghost-cli@latest
+```
+
+11. A continuación se comprueba la versión del CLI de Ghost
+
+```
+./node_modules/ghost-cli/bin/ghost -v
+```
+
+12. A través de la terminal, se crea la carpeta donde Ghost correrá y se ubica la terminal en esta carpeta:
+    
+```
+mkdir ghost
+cd ghost
+```
+
+13. En esta carpeta se instala Ghost de manera local:
+
+```
+./node_modules/ghost-cli/bin/ghost install local
+```
+
+14. Se abre Ghost en Google Chrome a través de la url [http://localhost:2368/ghost](http://localhost:2368/ghost).
+15. En caso de querer detener la instancia de Ghost recién instalada se puede correr el siguiente comando en la terminal:
+
+```
+./node_modules/ghost-cli/bin/ghost stop
+```
+  
+16.  Para reiniciar la instancia de Ghost se pueden utilizar los siguientes comandos:
+
+```
+./node_modules/ghost-cli/bin/ghost start
+./node_modules/ghost-cli/bin/ghost start --no-setup-linux-user # Solo si el comando anterior falla
+```
+
+17. No olvidar cambiar la versión de Node.js de vuelta a 16.14.2 cuando se ejecuten los escenarios de prueba:
+
+```
+nvm use 16.14.2
+```
 #### Ejecución de pruebas
 
 En la carpeta Kraken/features/escenarios se encuentran los escenarios en formato .feature a ejecutar, la manera apropiada de correrlos es la siguiente:

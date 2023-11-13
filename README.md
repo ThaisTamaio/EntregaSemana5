@@ -156,4 +156,17 @@ npx kraken-node run
 4. Algunas pruebas requieren la carga manual de una imagen desde el computador local, se recomienda subir una imagen en el transcurso de 5 segundos o se recomienda cancelar la acción. Esto con el fin de garantizar el correcto funcionamiento de las pruebas.
 
 ### Cypress
-1) Primer paso pendiente
+
+1. Abrir una terminar en la carpeta Cypress e instalar las dependencias por medio del comando:
+
+```
+npm install
+```
+
+2. En caso de no tener Ghost instalado de forma global en la máquina desde la cual se ejecutarán las pruebas, realizar el paso 2 del siguiente tutorial:
+
+[Tutorial instalación global Ghost](https://thesoftwaredesignlab.github.io/AutTestingCodelabs/ghost-local-deployment/index.html#1)
+
+3. Posteriormente, seguir los pasos de este video tutorial:
+
+[Tutorial ejecución pruebas Cypress](https://youtu.be/KZQ6f_LO2wU?feature=shared)

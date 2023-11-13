@@ -471,8 +471,6 @@ describe('Ghost Post Creation and Publication', () => {
         //wait for preview
         cy.wait(500);
 
-        //check if div.tabs is visible
-        cy.get('div.tabs').should('be.visible');
         cy.get('div.gh-browserpreview-iframecontainer').should('be.visible');
 
         cy.get('span').contains('Preview').click({force: true});

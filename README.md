@@ -10,8 +10,97 @@ Este repositorio contiene el código y la documentación relacionados con la ent
 
 ## Instalación
 
-### Kranken
-1) Primer paso pendiente
+### Kraken
+
+#### Prerrequisitos
+
+1. Ubuntu 22.04 LTS (Idealmente usar Pop!_OS 22.04 LTS x86_64)
+2. NVM
+3. Node.js v.16.14.2 (usar NVM si se tienen versiones adicionales)
+4. Android SDK
+5. Appium
+6. Java JDK (Idealmente usar OpenJDK 17.0.8.1).
+
+#### Instalación y Configuración
+
+1. Se crea un proyecto Node.js:
+
+```
+npm init -y
+```
+
+2. Se instala Kraken de forma global:
+
+```
+npm install kraken-node -g
+```
+
+3. Se instala Kraken de forma local:
+
+```
+npm install kraken-node --save
+```
+
+4. Se genera la estructura de features de Cucumber:
+
+```
+npx kraken-node gen
+```
+
+Para mayor infornación sobre la instalación de Kraken, por favor remitirse al [repositorio oficial de Kraken](https://github.com/TheSoftwareDesignLab/Kraken). 
+
+5. Instalar Android Studio según los [lineamientos de Google](https://developer.android.com/codelabs/basic-android-kotlin-compose-install-android-studio#0), asegurando que se instalan también:
+  - Android SDK Platform-Tools
+  - Android SDK Build-Tools
+
+6. Instalar OpenJDK con el siguiente comando:
+
+```
+sudo apt-get install openjdk-17-jre
+```
+
+7. Instalar Appium
+
+```
+npm install -g appium
+```
+
+8. Se debe añadir las siguientes líneas al archivo de configuración de Bash para guardar las nuevas variables del entorno:
+
+```
+# Adding ANDROID_HOME path
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/build-tools/34.0.0
+
+# Adding JAVA path
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+Para acceder al archivo de configuración de Bash se recomienda correr el siguiente comando
+
+```
+nano ~/.bashrc
+```
+
+8. Correr el siguiente comando para verificar la correcta instalación de Kraken y sus dependencias:
+
+```
+kraken-node doctor
+```
+
+#### Ejecución de pruebas
+
+En la carpeta Kraken/features/escenarios se encuentran los escenarios en formato .feature a ejecutar, la manera apropiada de correrlos es la siguiente:
+
+1. Mover el escenario.feature a probar un nivel arriba a la carpeta Kraken/features.
+2. Cerciorarse de que únicamente haya un archivo .feature en dicha carpeta. Si hay más de un archivo, es indispensable mover a la carpeta escenarios todos aquellos que no se deseen ejecutar.
+3. Ejecutar el siguiente comando en la terminal de Bash:
+
+```
+npx kraken-node run
+```
 
 ### Cypress
 1) Primer paso pendiente

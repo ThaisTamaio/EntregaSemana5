@@ -22,5 +22,3 @@ Scenario: Como usuario creo un post y lo visualizo por medio de la función vist
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
-
--- vista previa antes de publicar

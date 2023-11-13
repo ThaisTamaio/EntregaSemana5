@@ -9,3 +9,15 @@ Scenario: Como usuario edito la información de un miembro y cambio su estado de
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
+  And I wait for 5 seconds
+  And I click Members
+  And I wait for 2 seconds
+  And I click New member
+  And I wait for 2 seconds
+  And I enter member name
+  And I wait for 2 seconds
+  And I enter member email
+  And I wait for 2 seconds
+  And I enter member note
+  And I wait for 2 seconds
+  And I click Save member

@@ -1,7 +1,7 @@
 Feature: Crear una serie de posts relacionados con tags comunes
 
 @user1 @web
-Scenario: Como usuario creo y publico un post
+Scenario: Como usuario creo varios post y los relaciono por medio de tags
   Given I navigate to page "http://www.localhost:2368/ghost"
   And I wait for 2 seconds
   When I enter email "<USERNAME>"

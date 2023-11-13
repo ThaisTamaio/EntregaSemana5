@@ -9,3 +9,11 @@ Scenario: Como usuario creo y publico un post
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
+  And I click new post
+  And I wait for 2 seconds
+  And I enter title
+  And I wait for 2 seconds
+  And I enter paragraphs
+  And I wait for 2 seconds
+
+-- programar su publicacion

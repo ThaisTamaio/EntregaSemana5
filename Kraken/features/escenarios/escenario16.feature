@@ -1,7 +1,7 @@
 Feature: Modificar una página estática
 
 @user1 @web
-Scenario: Como usuario creo y publico un post
+Scenario: Como usuario edito una página estática
   Given I navigate to page "http://www.localhost:2368/ghost"
   And I wait for 2 seconds
   When I enter email "<USERNAME>"

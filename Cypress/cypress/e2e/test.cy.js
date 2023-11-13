@@ -740,4 +740,138 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains('tagtest6').should('not.exist');
     });
 
+    it('Escenario 18: Agregar un Miembro y Revisar su Información de Participación', () => {
+
+        const nombre = 'Juan';
+        const email = 'juan'+Math.floor(Math.random() * 1000)+'@gmail.com';
+
+        // Navegar a la sección de posts
+        cy.get('a[href="#/members/"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/members');
+
+        cy.get("body").then($body => {
+            if ($body.find("Add them manually").length > 0) {   
+                //evaluates as true
+                cy.get('a').contains('Add them manually').click();
+            }
+            else{
+                cy.get('span').contains('New member').click();
+            }
+        });
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/members/new');
+
+        // Llenar el título y el contenido del post
+        cy.get('input[data-test-input="member-name"]').type(nombre);
+        cy.get('input[data-test-input="member-email"]').type(email);
+
+        // Publicar el post
+        cy.get('span').contains('Save').click();
+
+        //wait for saved confirmation
+        cy.get('span').contains('Saved').should('exist');
+
+        // Verificar el contenido y el título del post
+        cy.contains(nombre).should('exist');
+        cy.contains(email).should('exist');
+    });
+
+    it('Escenario 19: Editar la Información de un Miembro y Cambiar el Estado de la Suscripción a la Newsletter', () => {
+        const nombre = 'Juan';
+
+        // Navegar a la sección de posts
+        cy.get('a[href="#/members/"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/members');
+
+        // Seleccionar el miembro
+        cy.get('h3').contains(nombre).first().click();
+
+        // Obtener el estado del checkbox
+        let isChecked = false;
+        cy.get('input[data-test-checkbox="member-subscribed"]').then(($input) => {
+            isChecked = $input.prop('checked');
+        });
+
+        cy.get('span.input-toggle-component').click();
+
+        // El estado del checkbox debe haber cambiado
+        cy.get('input[data-test-checkbox="member-subscribed"]').then(($input) => {
+            const tempIsChecked = $input.prop('checked');
+            if (isChecked) {
+                expect(tempIsChecked).to.be.false;
+            }
+            else{
+                expect(tempIsChecked).to.be.true;
+            }
+        });
+
+        // Publicar el post
+        cy.get('span').contains('Save').click();
+
+        // Esperar confirmación de guardado
+        cy.get('span').contains('Saved').should('exist');
+
+        // Verificar el contenido y el título del post
+        cy.contains(nombre).should('exist');
+    });
+
+    it('Escenario 20: Agregar Varios Miembros y Exportar su Lista', () => {
+        const nombres = ['Juan','Natalia','Sofia'];
+        //iterate over the array of names
+        nombres.forEach(nombreRaw => {
+            const random = Math.floor(Math.random() * 1000000);
+            const nombre = nombreRaw+random;
+            const email = nombreRaw+random+'@gmail.com';
+
+            // Navegar a la sección de miembros
+            cy.visit('http://localhost:2368/ghost/#/members');
+
+            // Esperar a que la nueva página se cargue
+            cy.url().should('include', '/members');
+
+            cy.get("body").then($body => {
+                if ($body.find("Add them manually").length > 0) {   
+                    //evaluates as true
+                    cy.get('a').contains('Add them manually').click();
+                }
+                else{
+                    cy.get('span').contains('New member').click();
+                }
+            });
+
+            // Esperar a que la nueva página se cargue
+            cy.url().should('include', '/members/new');
+
+            // Llenar el título y el contenido del post
+            cy.get('input[data-test-input="member-name"]').type(nombre);
+            cy.get('input[data-test-input="member-email"]').type(email);
+
+            // Publicar el post
+            cy.get('span').contains('Save').click();
+
+            //wait for saved confirmation
+            cy.get('span').contains('Saved').should('exist');
+
+            // Verificar el contenido y el título del post
+            cy.contains(nombre).should('exist');
+            cy.contains(email).should('exist');
+        });
+
+        // Navegar a la sección de miembros
+        cy.visit('http://localhost:2368/ghost/#/members');
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/members');
+
+        // Ver acciones sobre lista de miembros
+        cy.get('button[data-test-button="members-actions"]').click();
+
+        // Exportar lista con todos los miembros
+        cy.get('span').contains('Export all members').click();
+    });
 });

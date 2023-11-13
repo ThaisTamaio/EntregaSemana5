@@ -202,6 +202,135 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a.gh-article-tag[href="http://localhost:2368/tag/tagtest2/"]').contains('tagtest2').should('exist');
     });
 
+    it('Escenario 6: Crear un Post, Publicarlo y Luego Editarlo Múltiples veces', () => {
+        // Navegar a la sección de posts
+        cy.get('a[href="#/posts/"]').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/posts');
+
+        // Crear un nuevo post
+        cy.get('span').contains('New post').click();
+
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/editor/post');
+
+        // Llenar el título y el contenido del post
+        cy.get('textarea[placeholder="Post title"]').type('Test multiple edits');
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test multiple edits');
+
+        // Publicar el post
+        cy.get('span').contains('Publish').click();
+
+        // Esperar a que aparezca el botón de confirmación
+        cy.get('span').contains('Continue, final review').click();
+
+        // Confirmar la publicación
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+        // Inicio del bucle para editar y verificar el post 5 veces
+        for (let i = 1; i <= 5; i++) {
+            // Navegar a la sección de posts
+            cy.visit('http://localhost:2368/ghost/');
+            cy.get('a[href="#/posts/"]').click({ multiple: true, force: true});
+
+            // Esperar a que la nueva página se cargue
+            cy.url().should('include', '/posts');
+
+            // Seleccionar el post a editar
+            cy.contains('h3', 'Test multiple edits').click();
+
+            // Esperar a que la página del editor se cargue
+            cy.url().should('include', '/editor/post');
+
+            // Borrar el contenido actual y escribir el nuevo contenido
+            cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(`Contenido modificado ${i}`);
+
+            // Actualizar el post
+            cy.get('span').contains('Update').click();
+
+            // Esperar a que se complete la actualización
+            cy.url().should('include', '/editor/post');
+
+            // Navegar a la vista del post
+            cy.get('a').contains('Published').click();
+
+            // Navegar directamente a la URL del post actualizado
+            cy.visit('http://localhost:2368/test-multiple-edits/');
+
+            // Verificar el contenido modificado
+            cy.contains(`Contenido modificado ${i}`).should('exist');
+        }
+    });
+
+    it('Escenario 7: Crear un Post y luego Agregarle Elementos Multimedia', () => {
+        // Navegar a la sección de posts
+        cy.get('a[href="#/posts/"]').click();
+    
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/posts');
+    
+        // Crear un nuevo post
+        cy.get('span').contains('New post').click();
+    
+        // Esperar a que la nueva página se cargue
+        cy.url().should('include', '/editor/post');
+    
+        // Llenar el título y el contenido del post
+        cy.get('textarea[placeholder="Post title"]').type('Test multimedia');
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test multimedia');
+    
+        // Publicar el post
+        cy.get('span').contains('Publish').click();
+    
+        // Esperar a que aparezca el botón de confirmación
+        cy.get('span').contains('Continue, final review').click();
+    
+        // Confirmar la publicación
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    
+        // Navegar al post publicado
+        cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
+    
+        // Navegar directamente a la URL del post actualizado
+        cy.visit('http://localhost:2368/test-multimedia/');
+    
+        // Verificar el contenido y el título del post
+        cy.contains('contenido test multimedia').should('exist');
+        cy.contains('Test multimedia').should('exist');
+    
+        // Navegar a la sección de posts
+        cy.visit('http://localhost:2368/ghost/');
+    
+        // Navegar a la sección de posts
+        cy.get('a[data-test-nav="posts"]').click();
+        cy.url().should('include', '/posts');
+    
+        // Seleccionar el post "Test multimedia" para editar
+        cy.contains('h3', 'Test multimedia').click();
+    
+        // Hacer clic en el botón para insertar una imagen de Unsplash
+        cy.get('button.gh-editor-feature-image-unsplash').click({ force: true });
+
+        // Un wait 
+        cy.wait(1000);
+    
+        // Esperar a que el primer botón de Unsplash que dice "Insert image" esté visible y luego hacer clic, forzando el clic
+        cy.get('a.gh-unsplash-button').contains('Insert image').first().click({ force: true });
+
+        // Un wait 
+        cy.wait(1000);
+    
+        // Esperar a que el botón de Update esté disponible y hacer clic
+        cy.get('span').contains('Update').should('be.visible').click();
+    
+        // Esperar a que se complete la actualización
+        cy.url().should('include', '/editor/post');
+    
+        // Navegar a la vista del post
+        cy.get('a').contains('Published').click();
+    });      
+
     it('Escenario 12: Crear una página estática', () => {
         // Navegar a la sección de páginas
         cy.get('a[data-test-nav="pages"]').click();
@@ -280,7 +409,7 @@ describe('Ghost Post Creation and Publication', () => {
 
     it('Escenario 14: Editar una Página y Cambiar sus tags', () => {
         // Crear tags
-        const tags = ['tagtest6', 'tagtest7', 'tagtes8', 'tagtest9', 'tagtest10'];
+        const tags = ['tagtest6', 'tagtest7', 'tagtest8', 'tagtest9', 'tagtest10'];
         tags.forEach(tag => {
             cy.get('a[data-test-nav="tags"]').click();
             cy.url().should('include', '/tags');

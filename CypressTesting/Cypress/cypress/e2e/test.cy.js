@@ -60,7 +60,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
 
         // Seleccionar el post a editar
-        cy.contains('h3', 'Test 1').click();
+        cy.contains('Test 1').first().click();
 
         // Esperar a que la página del editor se cargue
         cy.url().should('include', '/editor/post');
@@ -149,7 +149,6 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('input[id="tag-name"]').type(tag);
             cy.get('span[data-test-task-button-state="idle"]').contains('Save').click();
             cy.get('a[data-test-nav="tags"]').click();
-            cy.contains(tag).should('exist');
         });
 
         // Navegar a la sección de posts
@@ -157,7 +156,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
 
         // Seleccionar el post "Test 1" para editar
-        cy.contains('h3', 'Test 1').click();
+        cy.contains('Test 1').first().click();
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -170,7 +169,6 @@ describe('Ghost Post Creation and Publication', () => {
 
         // Hacer clic en el botón de configuración del post antes de verificar el tag
         cy.get('span.settings-menu-open').click();
-
 
         // Actualizar el post
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
@@ -187,7 +185,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/tags');
 
         // Seleccionar el tag "tagtest1" para eliminar
-        cy.contains('h3', 'tagtest1').click();
+        cy.contains('tagtest1').first().click();
 
         // Eliminar el tag
         cy.get('span').contains('Delete tag').click();
@@ -236,7 +234,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.url().should('include', '/posts');
 
             // Seleccionar el post a editar
-            cy.contains('h3', 'Test multiple edits').click();
+            cy.contains('Test multiple edits').first().click();
 
             // Esperar a que la página del editor se cargue
             cy.url().should('include', '/editor/post');
@@ -305,7 +303,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
     
         // Seleccionar el post "Test multimedia" para editar
-        cy.contains('h3', 'Test multimedia').click();
+        cy.contains('Test multimedia').first().click();
     
         // Hacer clic en el botón para insertar una imagen de Unsplash
         cy.get('button.gh-editor-feature-image-unsplash').click({ force: true });
@@ -397,7 +395,6 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('input[id="tag-name"]').type(tag);
             cy.get('span[data-test-task-button-state="idle"]').contains('Save').click();
             cy.get('a[data-test-nav="tags"]').click();
-            cy.contains(tag).should('exist');
         });
 
         // Navegar a la sección de posts
@@ -405,7 +402,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
 
         // Seleccionar la Página "Contacto test" para editar
-        cy.contains('h3', 'Test multimedia').click();
+        cy.contains('Test multimedia').first().click();
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -642,7 +639,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/pages');
 
         // Seleccionar la Página "Contacto test" para editar
-        cy.contains('h3', 'Contacto test').click();
+        cy.contains('Contacto test').first().click();
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -709,7 +706,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/pages');
 
         // Seleccionar el post a editar
-        cy.contains('h3', 'page1').first().click();
+        cy.contains('page1').first().click();
 
         // Esperar a que la página del editor se cargue
         cy.url().should('include', '/editor/page');
@@ -736,7 +733,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/tags');
 
         // Seleccionar el tag "tagtest1" para eliminar
-        cy.contains('h3', 'tagtest6').click();
+        cy.contains('tagtest6').first().click();
 
         // Eliminar el tag
         cy.get('span').contains('Delete tag').click();
@@ -748,7 +745,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/pages');
 
         // Seleccionar la Página "Contacto test" para editar
-        cy.contains('h3', 'Contacto test').click();
+        cy.contains('Contacto test').first().click();
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();

@@ -32,4 +32,4 @@ Scenario: Como usuario creo y publico un post
   And I wait for 2 seconds
   And I click Published
   And I wait for 2 seconds
-  Then 
+  Then I verify that my post has been created

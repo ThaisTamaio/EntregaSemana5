@@ -1,6 +1,10 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { faker } = require('@faker-js/faker');
-const { browser, Key } = require('webdriverio');
+const { By, browser, Key, Builder } = require('webdriverio');
+const assert = require('assert');
+
+
+var title = ""
 
 // ----------------------------------------------------------------------------------------------------------------
 // Login
@@ -37,7 +41,9 @@ When('I click new post', async function() {
 
 When('I enter title', async function () {
     let element = await this.driver.$('div.gh-editor-title-container.page-improvements');
-    return await element.setValue(faker.lorem.lines(1));
+    title = faker.lorem.lines(1)
+    console.log(title)
+    return await element.setValue(title);
 });
 
 When('I enter paragraphs', async function () {
@@ -243,6 +249,7 @@ When('I go back to editor', async function() {
 // Validation
 // ----------------------------------------------------------------------------------------------------------------
 
-Then('', async function(){
-    
+Then('I verify that my post has been created', async function(){
+    let element = await this.driver.$('div.gh-posts-list-item-group:nth-child(1)');
+    assert.ok(element, 'El elemento no se encontró');
 });

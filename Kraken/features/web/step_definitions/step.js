@@ -10,12 +10,12 @@ var title = ""
 // Login
 // ----------------------------------------------------------------------------------------------------------------
 When('I enter email {kraken-string}', async function (email) {
-    let element = await this.driver.$('#identification');
+    let element = await this.driver.$('email');
     return await element.setValue(email);
 });
 
 When('I enter password {kraken-string}', async function (password) {
-    let element = await this.driver.$('#password');
+    let element = await this.driver.$('password');
     return await element.setValue(password);
 });
 

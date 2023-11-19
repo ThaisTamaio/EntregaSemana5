@@ -238,3 +238,11 @@ When('I go back to editor', async function() {
     let element = await this.driver.$('button.gh-back-to-editor > span');
     return await element.click();
 });
+
+// ----------------------------------------------------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------------------------------------------------
+
+Then('', async function(){
+    
+});

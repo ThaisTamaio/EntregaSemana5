@@ -130,14 +130,14 @@ describe('Ghost Post Creation and Publication', () => {
         const tags = ['tagTestPost'];
         // Navegar a la sección de posts
         cy.get('a[href="#/posts/"]').click();
-        cy.screenshot('v5-3-navegarSeccionPosts');
+        cy.screenshot('v5-esc3-navegarSeccionPosts');
 
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/posts');
 
         // Crear un nuevo post
         cy.get('span').contains('New post').click();
-        cy.screenshot('v5-3-crearNuevoPost');
+        cy.screenshot('v5-esc3-crearNuevoPost');
 
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/editor/post');
@@ -145,7 +145,7 @@ describe('Ghost Post Creation and Publication', () => {
         // Llenar el título y el contenido del post
         cy.get('textarea[placeholder="Post title"]').type('Test 2');
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test 2');
-        cy.screenshot('v5-3-llenarTituloContenido');
+        cy.screenshot('v5-esc3-llenarTituloContenido');
 
         // Asignar tags al post
         // Abrir la configuración del post
@@ -156,21 +156,21 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
             cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').first().type(`${tag}{enter}`);
         });
-        cy.screenshot('v5-3-asignarTags');
+        cy.screenshot('v5-esc3-asignarTags');
 
         // Hacer clic en el botón de configuración del post antes de verificar el tag
         cy.get('span.settings-menu-open').click();
 
         // Publicar el post
         cy.get('span').contains('Publish').click();
-        cy.screenshot('v5-3-publicarPost');
+        cy.screenshot('v5-esc3-publicarPost');
 
         // Esperar a que aparezca el botón de confirmación
         cy.get('span').contains('Continue, final review').click();
 
         // Confirmar la publicación
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.screenshot('v5-3-confirmarPublicacion');
+        cy.screenshot('v5-esc3-confirmarPublicacion');
 
         // Navegar al post publicado
         cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
@@ -185,7 +185,7 @@ describe('Ghost Post Creation and Publication', () => {
         // Verificar el tag en el post visitando la página
         cy.visit('http://localhost:2368/tag/tagTestPost/');
         cy.contains('Test 2').should('exist');
-        cy.screenshot('v5-3-verificarTag');
+        cy.screenshot('v5-esc3-verificarTag');
     });
 
     it('Escenario 4: Editar un Post y Cambiar sus tags', () => {
@@ -209,13 +209,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains('Test 1').should('be.visible').first().click();
     
         // Tomar un screenshot después de seleccionar el post para editar
-        cy.screenshot(`v5-4-Seleccionar-el-post-para-editar`);
+        cy.screenshot(`v5-esc4-Seleccionar-el-post-para-editar`);
     
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
     
         // Tomar un screenshot después de abrir la configuración del post
-        cy.screenshot(`v5-4-Abrir-configuracion-del-post`);
+        cy.screenshot(`v5-esc4-Abrir-configuracion-del-post`);
     
         // Asignar los tags al post
         tags.forEach(tag => {
@@ -224,7 +224,7 @@ describe('Ghost Post Creation and Publication', () => {
         });
     
         // Tomar un screenshot después de asignar los tags al post
-        cy.screenshot(`v5-4-Asignar-tags-al-post`);
+        cy.screenshot(`v5-esc4-Asignar-tags-al-post`);
     
         // Hacer clic en el botón de configuración del post antes de verificar el tag
         cy.get('span.settings-menu-open').click();
@@ -233,13 +233,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
     
         // Tomar un screenshot después de hacer clic en "Update"
-        cy.screenshot(`v5-4-Clic-en-Update`);
+        cy.screenshot(`v5-esc4-Clic-en-Update`);
     
         // Verificar el tag en el post visitando la página
         cy.visit('http://localhost:2368/tag/tagtest1/');
     
         // Tomar un screenshot después de verificar el tag en la página de tags
-        cy.screenshot(`v5-4-Verificar-tag-en-pagina-de-tags`);
+        cy.screenshot(`v5-esc4-Verificar-tag-en-pagina-de-tags`);
     });
     
     it('Escenario 5: Eliminar tag y Verificar en Post', () => {
@@ -253,20 +253,20 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2368/ghost/#/tags/tagtest1');
     
         // Tomar un screenshot después de seleccionar el tag para eliminar
-        cy.screenshot(`v5-5-Seleccionar-el-tag-para-eliminar`);
+        cy.screenshot(`v5-esc5-Seleccionar-el-tag-para-eliminar`);
     
         // Eliminar el tag
         cy.get('span').contains('Delete tag').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Delete').click();
     
         // Tomar un screenshot después de eliminar el tag
-        cy.screenshot(`v5-5-Eliminar-tag`);
+        cy.screenshot(`v5-esc5-Eliminar-tag`);
     
         // Verificar que el tag "tagtest1" ha sido eliminado visitando la página del post
         cy.visit('http://localhost:2368/test-1/');
     
         // Tomar un screenshot después de visitar la página del post para verificar la eliminación del tag
-        cy.screenshot(`v5-5-Verificar-eliminacion-de-tag-en-post`);
+        cy.screenshot(`v5-esc5-Verificar-eliminacion-de-tag-en-post`);
     });
     
     it('Escenario 6: Crear un Post, Publicarlo y Luego Editarlo Múltiples veces', () => {
@@ -308,7 +308,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.contains('Test multiple edits').should('be.visible').first().click();
     
             // Tomar un screenshot después de seleccionar el post para editar
-            cy.screenshot(`v5-6-Seleccionar-el-post-para-editar-${i}`);
+            cy.screenshot(`v5-esc6-Seleccionar-el-post-para-editar-${i}`);
     
             // Esperar a que la página del editor se cargue
             cy.url().should('include', '/editor/post');
@@ -320,7 +320,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span').contains('Update').click();
     
             // Tomar un screenshot después de actualizar el post
-            cy.screenshot(`v5-6-Actualizar-el-post-${i}`);
+            cy.screenshot(`v5-esc6-Actualizar-el-post-${i}`);
     
             // Esperar a que se complete la actualización
             cy.url().should('include', '/editor/post');
@@ -329,13 +329,13 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('a').contains('Published').click();
     
             // Tomar un screenshot después de navegar a la vista del post
-            cy.screenshot(`v5-6-Navegar-a-la-vista-del-post-${i}`);
+            cy.screenshot(`v5-esc6-Navegar-a-la-vista-del-post-${i}`);
     
             // Navegar directamente a la URL del post actualizado
             cy.visit('http://localhost:2368/test-multiple-edits/');
     
             // Tomar un screenshot después de visitar la URL del post actualizado
-            cy.screenshot(`v5-6-Visitar-URL-del-post-actualizado-${i}`);
+            cy.screenshot(`v5-esc6-Visitar-URL-del-post-actualizado-${i}`);
     
             // Verificar el contenido modificado
             cy.contains(`Contenido modificado ${i}`).should('exist');
@@ -347,7 +347,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a[href="#/posts/"]').click();
     
         // Tomar un screenshot después de navegar a la sección de posts
-        cy.screenshot(`v5-7-Navegar-a-la-seccion-de-posts`);
+        cy.screenshot(`v5-esc7-Navegar-a-la-seccion-de-posts`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/posts');
@@ -356,7 +356,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('New post').click();
     
         // Tomar un screenshot después de hacer clic en "New post"
-        cy.screenshot(`v5-7-Clic-en-New-post`);
+        cy.screenshot(`v5-esc7-Clic-en-New-post`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/editor/post');
@@ -366,37 +366,37 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test multimedia');
     
         // Tomar un screenshot después de llenar el título y contenido del post
-        cy.screenshot(`v5-7-Llenar-titulo-y-contenido`);
+        cy.screenshot(`v5-esc7-Llenar-titulo-y-contenido`);
     
         // Publicar el post
         cy.get('span').contains('Publish').click();
     
         // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v5-7-Clic-en-Publish`);
+        cy.screenshot(`v5-esc7-Clic-en-Publish`);
     
         // Esperar a que aparezca el botón de confirmación
         cy.get('span').contains('Continue, final review').click();
     
         // Tomar un screenshot después de hacer clic en "Continue, final review"
-        cy.screenshot(`v5-7-Clic-en-Continue-final-review`);
+        cy.screenshot(`v5-esc7-Clic-en-Continue-final-review`);
     
         // Confirmar la publicación
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
     
         // Tomar un screenshot después de hacer clic en "Publish post, right now"
-        cy.screenshot(`v5-7-Clic-en-Publish-post-right-now`);
+        cy.screenshot(`v5-esc7-Clic-en-Publish-post-right-now`);
     
         // Navegar al post publicado
         cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
     
         // Tomar un screenshot después de navegar al post publicado
-        cy.screenshot(`v5-7-Navegar-al-post-publicado`);
+        cy.screenshot(`v5-esc7-Navegar-al-post-publicado`);
     
         // Navegar directamente a la URL del post actualizado
         cy.visit('http://localhost:2368/test-multimedia/');
     
         // Tomar un screenshot después de visitar la URL del post actualizado
-        cy.screenshot(`v5-7-Visitar-URL-del-post-actualizado`);
+        cy.screenshot(`v5-esc7-Visitar-URL-del-post-actualizado`);
     
         // Verificar el contenido y el título del post
         cy.contains('contenido test multimedia').should('exist');
@@ -416,7 +416,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('button.gh-editor-feature-image-unsplash').click({ force: true });
     
         // Tomar un screenshot después de hacer clic en el botón para insertar una imagen de Unsplash
-        cy.screenshot(`v5-7-Clic-en-Insertar-imagen-de-Unsplash`);
+        cy.screenshot(`v5-esc7-Clic-en-Insertar-imagen-de-Unsplash`);
     
         // Un wait 
         cy.wait(1000);
@@ -425,7 +425,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a.gh-unsplash-button').contains('Insert image').first().click({ force: true });
     
         // Tomar un screenshot después de hacer clic en "Insert image"
-        cy.screenshot(`v5-7-Clic-en-Insertar-imagen`);
+        cy.screenshot(`v5-esc7-Clic-en-Insertar-imagen`);
     
         // Un wait 
         cy.wait(1000);
@@ -434,7 +434,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Update').should('be.visible').click();
     
         // Tomar un screenshot después de hacer clic en "Update"
-        cy.screenshot(`v5-7-Clic-en-Update`);
+        cy.screenshot(`v5-esc7-Clic-en-Update`);
     
         // Esperar a que se complete la actualización
         cy.url().should('include', '/editor/post');
@@ -443,7 +443,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a').contains('Published').click();
     
         // Tomar un screenshot después de navegar a la vista del post
-        cy.screenshot(`v5-7-Navegar-a-la-vista-del-post`);
+        cy.screenshot(`v5-esc7-Navegar-a-la-vista-del-post`);
     });    
 
     it('Escenario 8: Crear una Serie de Posts Relacionados con Tags Comunes', () => {
@@ -453,14 +453,14 @@ describe('Ghost Post Creation and Publication', () => {
         posts.forEach(post => {
             // Ir a la página de posts
             cy.visit('http://localhost:2368/ghost/#/posts');
-            cy.screenshot(`v5-8-Visitar-pagina-de-posts`);
+            cy.screenshot(`v5-esc8-Visitar-pagina-de-posts`);
 
             // Esperar a que la nueva página se cargue
             cy.url().should('include', '/posts');
 
             // Crear un nuevo post
             cy.get('span').contains('New post').click();
-            cy.screenshot(`v5-8-Clic-en-New-post`);
+            cy.screenshot(`v5-esc8-Clic-en-New-post`);
 
             // Esperar a que la nueva página se cargue
             cy.url().should('include', '/editor/post');
@@ -472,7 +472,7 @@ describe('Ghost Post Creation and Publication', () => {
             // Asignar tags al post
             // Abrir la configuración del post
             cy.get('button.settings-menu-toggle').click();
-            cy.screenshot(`v5-8-Abrir-configuracion-del-post`);
+            cy.screenshot(`v5-esc8-Abrir-configuracion-del-post`);
 
             // Asignar los tags al post
             tags.forEach(tag => {
@@ -485,7 +485,7 @@ describe('Ghost Post Creation and Publication', () => {
 
             // Publicar el post
             cy.get('span').contains('Publish').click();
-            cy.screenshot(`v5-8-Publicar-post`);
+            cy.screenshot(`v5-esc8-Publicar-post`);
 
             // Esperar a que aparezca el botón de confirmación
             cy.get('span').contains('Continue, final review').click();
@@ -495,7 +495,7 @@ describe('Ghost Post Creation and Publication', () => {
 
             // Navegar al post publicado
             cy.get('img[src="https://static.ghost.org/v5.0.0/images/publication-cover.jpg"]').click();
-            cy.screenshot(`v5-8-Navegar-al-post-publicado`);
+            cy.screenshot(`v5-esc8-Navegar-al-post-publicado`);
 
             // Verificar el contenido y el título del post
             cy.contains('contenido '+post).should('exist');
@@ -504,7 +504,7 @@ describe('Ghost Post Creation and Publication', () => {
             // Verificar el tag en el post visitando la página
             tags.forEach(tag => {
                 cy.visit('http://localhost:2368/tag/'+tag+'/');
-                cy.screenshot(`v5-8-Verificar-tag-${tag}`);
+                cy.screenshot(`v5-esc8-Verificar-tag-${tag}`);
                 cy.contains(post).should('exist');
             });
         });
@@ -515,24 +515,24 @@ describe('Ghost Post Creation and Publication', () => {
     const tags = ['nuevoEnfoqueTag1', 'nuevoEnfoqueTag2', 'nuevoEnfoqueTag3'];
     tags.forEach((tag, index) => {
         cy.get('a[data-test-nav="tags"]').click();
-        cy.screenshot(`v5-9-ClickTags-${index}`);
+        cy.screenshot(`v5-esc9-ClickTags-${index}`);
         cy.url().should('include', '/tags');
         cy.get('span').contains('New tag').click();
-        cy.screenshot(`v5-9-ClickNewTag-${index}`);
+        cy.screenshot(`v5-esc9-ClickNewTag-${index}`);
         cy.get('input[id="tag-name"]').type(tag);
         cy.get('span[data-test-task-button-state="idle"]').contains('Save').click();
-        cy.screenshot(`v5-9-CreateTag-${tag}`);
+        cy.screenshot(`v5-esc9-CreateTag-${tag}`);
         cy.get('a[data-test-nav="tags"]').click();
     });
 
     // Navegar a la sección de posts
     cy.get('a[href="#/posts/"]').click({ multiple: true });
-    cy.screenshot('v5-9-NavigatePosts');
+    cy.screenshot('v5-esc9-NavigatePosts');
     cy.url().should('include', '/posts');
 
     // Seleccionar la Página "Test multimedia" para editar
     cy.contains('Test multimedia').should('be.visible').first().click();
-    cy.screenshot('v5-9-SelectPost');
+    cy.screenshot('v5-esc9-SelectPost');
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -581,7 +581,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a[href="#/posts/"]').click();
     
         // Tomar un screenshot después de navegar a la sección de posts
-        cy.screenshot(`v5-10-Navegar-a-la-seccion-de-posts`);
+        cy.screenshot(`v5-esc10-Navegar-a-la-seccion-de-posts`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/posts');
@@ -590,7 +590,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('New post').click();
     
         // Tomar un screenshot después de hacer clic en "New post"
-        cy.screenshot(`v5-10-Clic-en-New-post`);
+        cy.screenshot(`v5-esc10-Clic-en-New-post`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/editor/post');
@@ -600,7 +600,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type(content);
     
         // Tomar un screenshot después de llenar el título y contenido del post
-        cy.screenshot(`v5-10-Llenar-titulo-y-contenido`);
+        cy.screenshot(`v5-esc10-Llenar-titulo-y-contenido`);
     
         // Ver vista previa
         cy.get('span').contains('Preview').click();
@@ -615,13 +615,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click({ force: true });
     
         // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v5-10-Clic-en-Publish`);
+        cy.screenshot(`v5-esc10-Clic-en-Publish`);
     
         // Esperar a que aparezca el botón de confirmación
         cy.get('span').contains('Continue, final review').click();
     
         // Tomar un screenshot después de hacer clic en "Continue, final review"
-        cy.screenshot(`v5-10-Clic-en-Continue-final-review`);
+        cy.screenshot(`v5-esc10-Clic-en-Continue-final-review`);
     
         // Confirmar la publicación
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
@@ -641,14 +641,14 @@ describe('Ghost Post Creation and Publication', () => {
         // Título y contenido del post
         const title = 'New programmed post';
         const content = 'Contenido de new programmed post';
-        const date = '2023-11-11';
+        const date = '2023-esc11-11';
         const time = '11:11';
     
         // Navegar a la sección de posts
         cy.get('a[href="#/posts/"]').click();
     
         // Tomar un screenshot después de navegar a la sección de posts
-        cy.screenshot(`v5-11-Navegar-a-la-seccion-de-posts`);
+        cy.screenshot(`v5-esc11-Navegar-a-la-seccion-de-posts`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/posts');
@@ -657,7 +657,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('New post').click();
     
         // Tomar un screenshot después de hacer clic en "New post"
-        cy.screenshot(`v5-11-Clic-en-New-post`);
+        cy.screenshot(`v5-esc11-Clic-en-New-post`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/editor/post');
@@ -667,7 +667,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type(content);
     
         // Tomar un screenshot después de llenar el título y contenido del post
-        cy.screenshot(`v5-11-Llenar-titulo-y-contenido`);
+        cy.screenshot(`v5-esc11-Llenar-titulo-y-contenido`);
     
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -683,13 +683,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
     
         // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v5-11-Clic-en-Publish`);
+        cy.screenshot(`v5-esc11-Clic-en-Publish`);
     
         // Esperar a que aparezca el botón de confirmación
         cy.get('span').contains('Continue, final review').click();
     
         // Tomar un screenshot después de hacer clic en "Continue, final review"
-        cy.screenshot(`v5-11-Clic-en-Continue-final-review`);
+        cy.screenshot(`v5-esc11-Clic-en-Continue-final-review`);
     
         // Confirmar la publicación
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
@@ -707,7 +707,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a[data-test-nav="pages"]').click();
     
         // Tomar un screenshot después de navegar a la sección de páginas
-        cy.screenshot(`v5-12-Navegar-a-la-seccion-de-paginas`);
+        cy.screenshot(`v5-esc12-Navegar-a-la-seccion-de-paginas`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/pages');
@@ -716,7 +716,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('New page').click();
     
         // Tomar un screenshot después de hacer clic en "New page"
-        cy.screenshot(`v5-12-Clic-en-New-page`);
+        cy.screenshot(`v5-esc12-Clic-en-New-page`);
     
         // Esperar a que la página del editor se cargue
         cy.url().should('include', '/editor/page');
@@ -726,13 +726,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test');
     
         // Tomar un screenshot después de llenar el título y contenido de la página
-        cy.screenshot(`v5-12-Llenar-titulo-y-contenido`);
+        cy.screenshot(`v5-esc12-Llenar-titulo-y-contenido`);
     
         // Publicar la página
         cy.get('span').contains('Publish').click();
     
         // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v5-12-Clic-en-Publish`);
+        cy.screenshot(`v5-esc12-Clic-en-Publish`);
     
         // Confirmar la publicación
         cy.get('span').contains('Continue, final review').click();
@@ -742,7 +742,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2368/contacto-test/');
     
         // Tomar un screenshot después de visitar la página publicada
-        cy.screenshot(`v5-12-Visitar-pagina-publicada`);
+        cy.screenshot(`v5-esc12-Visitar-pagina-publicada`);
     
         // Verificar el título y el contenido de la página
         cy.contains('Contacto test').should('exist');
@@ -760,7 +760,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('New page').click();
     
         // Tomar un screenshot después de hacer clic en "New page"
-        cy.screenshot(`v5-13-Clic-en-New-page`);
+        cy.screenshot(`v5-esc13-Clic-en-New-page`);
     
         // Esperar a que la página del editor se cargue
         cy.url().should('include', '/editor/page');
@@ -770,7 +770,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido test 2');
     
         // Tomar un screenshot después de llenar el título y contenido de la página
-        cy.screenshot(`v5-13-Llenar-titulo-y-contenido`);
+        cy.screenshot(`v5-esc13-Llenar-titulo-y-contenido`);
     
         // Asignar tags a la página
         // Abrir la configuración de la página
@@ -783,7 +783,7 @@ describe('Ghost Post Creation and Publication', () => {
         });
     
         // Tomar un screenshot después de asignar los tags a la página
-        cy.screenshot(`v5-13-Asignar-tags-a-la-pagina`);
+        cy.screenshot(`v5-esc13-Asignar-tags-a-la-pagina`);
     
         // Hacer clic en el botón de configuración de la página antes de verificar el tag
         cy.get('span.settings-menu-open').click();
@@ -792,7 +792,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
     
         // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v5-13-Clic-en-Publish`);
+        cy.screenshot(`v5-esc13-Clic-en-Publish`);
     
         // Confirmar la publicación
         cy.get('span').contains('Continue, final review').click();
@@ -802,7 +802,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2368/pagina-test-2/');
     
         // Tomar un screenshot después de visitar la página publicada
-        cy.screenshot(`v5-13-Visitar-pagina-publicada`);
+        cy.screenshot(`v5-esc13-Visitar-pagina-publicada`);
     
         // Verificar el contenido y el título de la página
         cy.contains('contenido test 2').should('exist');
@@ -829,13 +829,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains('Contacto test').should('be.visible').first().click();
     
         // Tomar un screenshot después de seleccionar la página para editar
-        cy.screenshot(`v5-14-Seleccionar-la-pagina-para-editar`);
+        cy.screenshot(`v5-esc14-Seleccionar-la-pagina-para-editar`);
     
         // Abrir la configuración de la página
         cy.get('button.settings-menu-toggle').click();
     
         // Tomar un screenshot después de abrir la configuración de la página
-        cy.screenshot(`v5-14-Abrir-configuracion-de-la-pagina`);
+        cy.screenshot(`v5-esc14-Abrir-configuracion-de-la-pagina`);
     
         // Asignar los tags a la página
         tags.forEach(tag => {
@@ -844,7 +844,7 @@ describe('Ghost Post Creation and Publication', () => {
         });
     
         // Tomar un screenshot después de asignar los tags a la página
-        cy.screenshot(`v5-14-Asignar-tags-a-la-pagina`);
+        cy.screenshot(`v5-esc14-Asignar-tags-a-la-pagina`);
     
         // Hacer clic en el botón de configuración de la página antes de verificar el tag
         cy.get('span.settings-menu-open').click();
@@ -853,7 +853,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
     
         // Tomar un screenshot después de hacer clic en "Update"
-        cy.screenshot(`v5-14-Clic-en-Update`);
+        cy.screenshot(`v5-esc14-Clic-en-Update`);
     
         // Verificar que se haya asignado el tag
         cy.contains('Updated').should('exist');
@@ -865,30 +865,30 @@ describe('Ghost Post Creation and Publication', () => {
         pages.forEach((page, index) => {
             // Navegar a la sección de páginas
             cy.visit('http://localhost:2368/ghost/#/pages');
-            cy.screenshot(`v5-15-${index+1}-navegarSeccionPaginas`);
+            cy.screenshot(`v5-esc15-${index+1}-navegarSeccionPaginas`);
     
             // Crear una nueva página
             cy.get('span').contains('New page').click({force: true});
-            cy.screenshot(`v5-15-${index+1}-crearNuevaPagina`);
+            cy.screenshot(`v5-esc15-${index+1}-crearNuevaPagina`);
     
             // Llenar el título y el contenido de la página
             cy.get('textarea[placeholder="Page title"]').type(page, { force: true });
             cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido '+page, { force: true });
-            cy.screenshot(`v5-15-${index+1}-llenarTituloContenido`);
+            cy.screenshot(`v5-esc15-${index+1}-llenarTituloContenido`);
     
             // Publicar la página
             cy.get('span').contains('Publish').click({ force: true });
-            cy.screenshot(`v5-15-${index+1}-publicarPagina`);
+            cy.screenshot(`v5-esc15-${index+1}-publicarPagina`);
     
             // Confirmar la publicación
             cy.get('span').contains('Continue, final review').click();
             cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
-            cy.screenshot(`v5-15-${index+1}-confirmarPublicacion`);
+            cy.screenshot(`v5-esc15-${index+1}-confirmarPublicacion`);
     
             // Verificar el título y el contenido de la página
             cy.contains(page).should('exist');
             cy.contains('contenido '+page).should('exist');
-            cy.screenshot(`v5-15-${index+1}-verificarTituloContenido`);
+            cy.screenshot(`v5-esc15-${index+1}-verificarTituloContenido`);
         });
     });    
 
@@ -905,7 +905,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains('page1').should('be.visible').first().click({ force: true });
     
         // Tomar un screenshot después de seleccionar la página para editar
-        cy.screenshot(`v5-16-Seleccionar-la-pagina-para-editar`);
+        cy.screenshot(`v5-esc16-Seleccionar-la-pagina-para-editar`);
     
         // Esperar a que la página del editor se cargue
         cy.url().should('include', '/editor/page');
@@ -914,7 +914,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(newContent);
     
         // Tomar un screenshot después de editar el contenido
-        cy.screenshot(`v5-16-Editar-contenido`);
+        cy.screenshot(`v5-esc16-Editar-contenido`);
     
         // Actualizar el post
         cy.get('span').contains('Update').click({ force: true });
@@ -926,7 +926,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a').contains('Published').click({ force: true });
     
         // Tomar un screenshot después de navegar a la vista del post actualizado
-        cy.screenshot(`v5-16-Navegar-a-la-vista-del-post-actualizado`);
+        cy.screenshot(`v5-esc16-Navegar-a-la-vista-del-post-actualizado`);
     
         // Verificar el contenido modificado
         cy.contains(newContent).should('exist');
@@ -941,14 +941,14 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2368/ghost/#/tags/tagtest6');
     
         // Tomar un screenshot después de seleccionar el tag para eliminar
-        cy.screenshot(`v5-17-Seleccionar-tag-para-eliminar`);
+        cy.screenshot(`v5-esc17-Seleccionar-tag-para-eliminar`);
     
         // Eliminar el tag
         cy.get('span').contains('Delete tag').click({ force: true });
         cy.get('span[data-test-task-button-state="idle"]').contains('Delete').click({ force: true });
     
         // Tomar un screenshot después de eliminar el tag
-        cy.screenshot(`v5-17-Eliminar-tag`);
+        cy.screenshot(`v5-esc17-Eliminar-tag`);
     
         // Navegar a la sección de páginas
         cy.get('a[data-test-nav="pages"]').click({ force: true });
@@ -958,13 +958,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains('Contacto test').first().click({ force: true });
     
         // Tomar un screenshot después de seleccionar la página para editar
-        cy.screenshot(`v5-17-Seleccionar-pagina-para-editar`);
+        cy.screenshot(`v5-esc17-Seleccionar-pagina-para-editar`);
     
         // Abrir la configuración de la página
         cy.get('button.settings-menu-toggle').click({ force: true });
     
         // Tomar un screenshot después de abrir la configuración de la página
-        cy.screenshot(`v5-17-Abrir-configuracion-de-la-pagina`);
+        cy.screenshot(`v5-esc17-Abrir-configuracion-de-la-pagina`);
     
         // El tag eliminado "tagtest6" no debe existir
         cy.contains('tagtest6').should('not.exist');
@@ -976,7 +976,7 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Navegar a la sección de miembros
         cy.get('a[href="#/members/"]').click();
-        cy.screenshot('v5-18-navegarSeccionMiembros');
+        cy.screenshot('v5-esc18-navegarSeccionMiembros');
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/members');
@@ -984,11 +984,11 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get("body").then($body => {
             if ($body.find("Add them manually").length > 0) {   
                 cy.get('a').contains('Add them manually').click();
-                cy.screenshot('v5-18-agregarManualmente');
+                cy.screenshot('v5-esc18-agregarManualmente');
             }
             else{
                 cy.get('span').contains('New member').click();
-                cy.screenshot('v5-18-nuevoMiembro');
+                cy.screenshot('v5-esc18-nuevoMiembro');
             }
         });
     
@@ -998,20 +998,20 @@ describe('Ghost Post Creation and Publication', () => {
         // Llenar el nombre y el email del miembro
         cy.get('input[data-test-input="member-name"]').type(nombre);
         cy.get('input[data-test-input="member-email"]').type(email);
-        cy.screenshot('v5-18-llenarNombreEmail');
+        cy.screenshot('v5-esc18-llenarNombreEmail');
     
         // Guardar la información del miembro
         cy.get('span').contains('Save').click();
-        cy.screenshot('v5-18-guardarMiembro');
+        cy.screenshot('v5-esc18-guardarMiembro');
     
         // Esperar a que aparezca la confirmación de guardado
         cy.get('span').contains('Saved').should('exist');
-        cy.screenshot('v5-18-confirmacionGuardado');
+        cy.screenshot('v5-esc18-confirmacionGuardado');
     
         // Verificar el nombre y email del miembro
         cy.contains(nombre).should('exist');
         cy.contains(email).should('exist');
-        cy.screenshot('v5-18-verificarInformacionMiembro');
+        cy.screenshot('v5-esc18-verificarInformacionMiembro');
     });    
 
     it('Escenario 19: Editar la Información de un Miembro y Cambiar el Estado de la Suscripción a la Newsletter', () => {
@@ -1019,7 +1019,7 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Navegar a la sección de miembros
         cy.get('a[href="#/members/"]').click();
-        cy.screenshot('v5-19-navegarSeccionMiembros');
+        cy.screenshot('v5-esc19-navegarSeccionMiembros');
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/members');
@@ -1027,23 +1027,23 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Seleccionar el miembro
         cy.contains(nombre).should('be.visible').first().click();
-        cy.screenshot('v5-19-seleccionarMiembro');
+        cy.screenshot('v5-esc19-seleccionarMiembro');
     
         // Obtener el estado del checkbox
         let isChecked = false;
         cy.get('input[data-test-checkbox="member-subscribed"]').then(($input) => {
             isChecked = $input.prop('checked');
-            cy.screenshot('v5-19-estadoCheckboxInicial');
+            cy.screenshot('v5-esc19-estadoCheckboxInicial');
         });
     
         // Cambiar el estado del checkbox
         cy.get('span.input-toggle-component').click();
-        cy.screenshot('v5-19-cambiarEstadoCheckbox');
+        cy.screenshot('v5-esc19-cambiarEstadoCheckbox');
     
         // El estado del checkbox debe haber cambiado
         cy.get('input[data-test-checkbox="member-subscribed"]').then(($input) => {
             const tempIsChecked = $input.prop('checked');
-            cy.screenshot('v5-19-estadoCheckboxModificado');
+            cy.screenshot('v5-esc19-estadoCheckboxModificado');
             if (isChecked) {
                 expect(tempIsChecked).to.be.false;
             }
@@ -1054,15 +1054,15 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Guardar la información del miembro
         cy.get('span').contains('Save').click();
-        cy.screenshot('v5-19-guardarCambios');
+        cy.screenshot('v5-esc19-guardarCambios');
     
         // Esperar confirmación de guardado
         cy.get('span').contains('Saved').should('exist');
-        cy.screenshot('v5-19-confirmacionGuardado');
+        cy.screenshot('v5-esc19-confirmacionGuardado');
     
         // Verificar el nombre del miembro
         cy.contains(nombre).should('exist');
-        cy.screenshot('v5-19-verificarInformacionMiembro');
+        cy.screenshot('v5-esc19-verificarInformacionMiembro');
     });    
 
     it('Escenario 20: Agregar Varios Miembros y Exportar su Lista', () => {
@@ -1077,7 +1077,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.visit('http://localhost:2368/ghost/#/members');
     
             // Tomar un screenshot después de navegar a la sección de miembros
-            cy.screenshot(`v5-20-Navegar-a-la-seccion-de-miembros-${nombre}`);
+            cy.screenshot(`v5-esc20-Navegar-a-la-seccion-de-miembros-${nombre}`);
     
             // Esperar a que la nueva página se cargue
             cy.url().should('include', '/members');
@@ -1093,7 +1093,7 @@ describe('Ghost Post Creation and Publication', () => {
             });
     
             // Tomar un screenshot después de hacer clic en "Add them manually" o "New member"
-            cy.screenshot(`v5-20-Clic-en-Add-them-manually-o-New-member-${nombre}`);
+            cy.screenshot(`v5-esc20-Clic-en-Add-them-manually-o-New-member-${nombre}`);
     
             // Esperar a que la nueva página se cargue
             cy.url().should('include', '/members/new');
@@ -1103,7 +1103,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('input[data-test-input="member-email"]').type(email);
     
             // Tomar un screenshot después de ingresar nombre y correo
-            cy.screenshot(`v5-20-Ingresar-nombre-y-correo-${nombre}`);
+            cy.screenshot(`v5-esc20-Ingresar-nombre-y-correo-${nombre}`);
     
             // Publicar el post
             cy.get('span').contains('Save').click({ force: true });
@@ -1112,7 +1112,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span').contains('Saved').should('exist');
     
             // Tomar un screenshot después de guardar
-            cy.screenshot(`v5-20-Guardar-miembro-${nombre}`);
+            cy.screenshot(`v5-esc20-Guardar-miembro-${nombre}`);
     
             // Verificar el contenido y el título del post
             cy.contains(nombre).should('exist');
@@ -1123,7 +1123,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2368/ghost/#/members');
     
         // Tomar un screenshot después de navegar a la sección de miembros
-        cy.screenshot(`v5-20-Navegar-a-la-seccion-de-miembros-exportar`);
+        cy.screenshot(`v5-esc20-Navegar-a-la-seccion-de-miembros-exportar`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/members');

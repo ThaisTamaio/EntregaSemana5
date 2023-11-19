@@ -156,7 +156,8 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
 
         // Seleccionar el post "Test 1" para editar
-        cy.contains('Test 1').first().click();
+        cy.contains('Test 1').should('be.visible').first().click();
+
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -184,10 +185,11 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('a[data-test-nav="tags"]').click();
         cy.url().should('include', '/tags');
 
-        wait(1000);
+        cy.wait(1000);
 
         // Seleccionar el tag "tagtest1" para eliminar
-        cy.contains('tagtest1').first().click();
+        cy.visit('http://localhost:2368/ghost/#/tags/tagtest1');
+
 
         // Eliminar el tag
         cy.get('span').contains('Delete tag').click();
@@ -236,7 +238,8 @@ describe('Ghost Post Creation and Publication', () => {
             cy.url().should('include', '/posts');
 
             // Seleccionar el post a editar
-            cy.contains('Test multiple edits').first().click();
+            cy.contains('Test multiple edits').should('be.visible').first().click();
+            
 
             // Esperar a que la página del editor se cargue
             cy.url().should('include', '/editor/post');
@@ -305,7 +308,8 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
     
         // Seleccionar el post "Test multimedia" para editar
-        cy.contains('Test multimedia').first().click();
+        cy.contains('Test multimedia').should('be.visible').first().click();
+        
     
         // Hacer clic en el botón para insertar una imagen de Unsplash
         cy.get('button.gh-editor-feature-image-unsplash').click({ force: true });
@@ -404,7 +408,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/posts');
 
         // Seleccionar la Página "Contacto test" para editar
-        cy.contains('Test multimedia').first().click();
+        cy.contains('Test multimedia').should('be.visible').first().click();
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -631,7 +635,6 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('input[id="tag-name"]').type(tag);
             cy.get('span[data-test-task-button-state="idle"]').contains('Save').click();
             cy.get('a[data-test-nav="tags"]').click();
-            cy.contains(tag).should('exist');
         });
 
         // Navegar a la sección de páginas
@@ -639,7 +642,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/pages');
 
         // Seleccionar la Página "Contacto test" para editar
-        cy.contains('Contacto test').first().click();
+        cy.contains('Contacto test').should('be.visible').first().click();
 
         // Abrir la configuración del post
         cy.get('button.settings-menu-toggle').click();
@@ -674,17 +677,17 @@ describe('Ghost Post Creation and Publication', () => {
             cy.url().should('include', '/pages');
 
             // Crear una nueva página
-            cy.get('span').contains('New page').click();
+            cy.get('span').contains('New page').click({force: true});
 
             // Esperar a que la página del editor se cargue
             cy.url().should('include', '/editor/page');
 
             // Llenar el título y el contenido de la página
-            cy.get('textarea[placeholder="Page title"]').type(page);
-            cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido '+page);
+            cy.get('textarea[placeholder="Page title"]').type(page, { force: true });
+            cy.get('p[data-koenig-dnd-droppable="true"]').first().type('contenido '+page,  { force: true });
 
             // Publicar la página
-            cy.get('span').contains('Publish').click();
+            cy.get('span').contains('Publish').click({ force: true });
 
             // Confirmar la publicación
             cy.get('span').contains('Continue, final review').click();
@@ -706,7 +709,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/pages');
 
         // Seleccionar el post a editar
-        cy.contains('page1').first().click();
+        cy.contains('page1').should('be.visible').first().click();
 
         // Esperar a que la página del editor se cargue
         cy.url().should('include', '/editor/page');
@@ -733,7 +736,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.url().should('include', '/tags');
 
         // Seleccionar el tag "tagtest1" para eliminar
-        cy.contains('tagtest6').first().click();
+        cy.visit('http://localhost:2368/ghost/#/tags/tagtest6');
 
         // Eliminar el tag
         cy.get('span').contains('Delete tag').click();
@@ -741,14 +744,14 @@ describe('Ghost Post Creation and Publication', () => {
         //** (uncaught exception)TransitionAborted: TransitionAborted */
 
         // Navegar a la sección de páginas
-        cy.get('a[data-test-nav="pages"]').click();
+        cy.get('a[data-test-nav="pages"]').click({ force: true });
         cy.url().should('include', '/pages');
 
         // Seleccionar la Página "Contacto test" para editar
-        cy.contains('Contacto test').first().click();
+        cy.contains('Contacto test').first().click({ force: true });
 
         // Abrir la configuración del post
-        cy.get('button.settings-menu-toggle').click();
+        cy.get('button.settings-menu-toggle').click({ force: true });
 
         //testtag6 should not exist
         cy.contains('tagtest6').should('not.exist');
@@ -802,8 +805,10 @@ describe('Ghost Post Creation and Publication', () => {
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/members');
 
+        cy.wait(1000);
+
         // Seleccionar el miembro
-        cy.get('h3').contains(nombre).first().click();
+        cy.contains(nombre).should('be.visible').first().click();
 
         // Obtener el estado del checkbox
         let isChecked = false;

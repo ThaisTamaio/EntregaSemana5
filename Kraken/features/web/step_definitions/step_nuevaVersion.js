@@ -83,22 +83,22 @@ When('I click Published on new version', async function() {
     return await element.click();
 });
 
-When('I select a published post', async function() {
+When('I select a published post on new version', async function() {
     let element = await this.driver.$('div.gh-posts-list-item-group:nth-child(1)');
     return await element.click();
 });
 
-When('I click title', async function() {
+When('I click title on new version', async function() {
     let element = await this.driver.$('div.gh-editor-title-container.page-improvements');
     return await element.click();
 });
 
-When('I click the Update button', async function() {
+When('I click the Update button on new version', async function() {
     let element = await this.driver.$('.darkgrey > span:nth-child(1)');
     return await element.click();
 });
 
-When('I go back to Posts on new version', async function() {
+When('I go back to Posts on new version on new version', async function() {
     let element = await this.driver.$('a.blue.link.fw4.flex.items-center.ember-view');
     return await element.click();
 });
@@ -109,17 +109,17 @@ When('I go back to Posts on new version', async function() {
 // ----------------------------------------------------------------------------------------------------------------
 // Page Creation
 // ----------------------------------------------------------------------------------------------------------------
-When('I click Pages', async function() {
+When('I click Pages on new version', async function() {
     let element = await this.driver.$('body > div.gh-app > div > nav.gh-nav > div > section > div.gh-nav-top > ul.gh-nav-list.gh-nav-manage > li:nth-child(2)');
     return await element.click();
 });
 
-When('I click New Page', async function() {
+When('I click New Page on new version', async function() {
     let element = await this.driver.$('a.ember-view.gh-btn.gh-btn-primary.view-actions-top-row > span');
     return await element.click();
 });
 
-When('I go back to Pages', async function() {
+When('I go back to Pages on new version', async function() {
     let element = await this.driver.$('a.ember-view.gh-btn-editor.gh-editor-back-button > span');
     return await element.click();
 });
@@ -134,47 +134,47 @@ When('I go back to Pages', async function() {
 // ----------------------------------------------------------------------------------------------------------------
 // Tag Creation
 // ----------------------------------------------------------------------------------------------------------------
-When('I click Tags', async function() {
+When('I click Tags on new version', async function() {
     let element = await this.driver.$('body > div.gh-app > div > nav.gh-nav > div > section > div.gh-nav-top > ul.gh-nav-list.gh-nav-manage > li:nth-child(3)');
     return await element.click();
 });
 
-When('I click new Tag', async function() {
+When('I click new Tag on new version', async function() {
     let element = await this.driver.$('a.ember-view.gh-btn.gh-btn-primary > span:nth-child(1)');
     return await element.click();
 });
 
-When('I enter Tag Name', async function () {
+When('I enter Tag Name on new version', async function () {
     let element = await this.driver.$('#tag-name');
     return await element.setValue(faker.animal.bird());
 });
 
-When('I enter Tag Color', async function () {
+When('I enter Tag Color on new version', async function () {
     let element = await this.driver.$('body > div.gh-app > div > main > section > form > div.gh-main-section > section > div > div:nth-child(1) > div.gh-tag-settings-multiprop > div.form-group.gh-tag-settings-colorcontainer > div > input');
     return await element.setValue(faker.random.numeric(6));
 });
 
-When('I enter Tag Description', async function () {
+When('I enter Tag Description on new version', async function () {
     let element = await this.driver.$('#tag-description');
     return await element.setValue(faker.lorem.sentence(10));
 });
 
-When('I click Save Tag', async function() {
+When('I click Save Tag on new version', async function() {
     let element = await this.driver.$('section.view-actions > button');
     return await element.click();
 });
 
-When('I click on Tags', async function() {
+When('I click on Tags on new version', async function() {
     let element = await this.driver.$('input.ember-power-select-trigger-multiple-input');
     return await element.click();
 });
 
-When('I select a Tag', async function() {
+When('I select a Tag on new version', async function() {
     let element = await this.driver.$('li.ember-power-select-option:nth-child(2)');
     return await element.click();
 });
 
-When('I select another Tag', async function() {
+When('I select another Tag on new version', async function() {
     let element = await this.driver.$('li.ember-power-select-option:nth-child(3)');
     return await element.click();
 });
@@ -190,32 +190,32 @@ When('I select another Tag', async function() {
 // ----------------------------------------------------------------------------------------------------------------
 // Member Creation
 // ----------------------------------------------------------------------------------------------------------------
-When('I click Members', async function() {
+When('I click Members on new version', async function() {
     let element = await this.driver.$('body > div.gh-app > div > nav.gh-nav > div > section > div.gh-nav-top > ul.gh-nav-list.gh-nav-manage > li:nth-child(4)');
     return await element.click();
 });
 
-When('I click New member', async function() {
+When('I click New member on new version', async function() {
     let element = await this.driver.$('ember-view.gh-btn.gh-btn-primary > span');
     return await element.click();
 });
 
-When('I enter member name', async function () {
+When('I enter member name on new version', async function () {
     let element = await this.driver.$('#member-name');
     return await element.setValue(faker.name());
 });
 
-When('I enter member email', async function () {
+When('I enter member email on new version', async function () {
     let element = await this.driver.$('#member-email');
     return await element.setValue(faker.internet.email());
 });
 
-When('I enter member note', async function () {
+When('I enter member note on new version', async function () {
     let element = await this.driver.$('#member-note');
     return await element.setValue(faker.lorem.sentence(10));
 });
 
-When('I click Save member', async function() {
+When('I click Save member on new version', async function() {
     let element = await this.driver.$('gh-btn gh-btn-primary gh-btn-icon ember-view > span');
     return await element.click();
 });
@@ -232,9 +232,9 @@ When('I click Save member', async function() {
 // Settings
 // ------------------------------------------------------
 
-When('I click Settings', async function() {
-    let element = await this.driver.$('body > div.gh-app > div > main > button > span');
-    return await element.click();
+When('I click Settings on new version', async function() {
+    let element = await this.driver.$('post-settings');
+    return await element.click(); 
 });
 
 When('I go back to editor on new version', async function() {

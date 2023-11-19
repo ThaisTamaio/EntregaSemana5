@@ -26,8 +26,6 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I wait for 2 seconds
   And I select a Tag
   And I wait for 2 seconds
-  And I select another Tag
-  And I wait for 2 seconds
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
@@ -54,11 +52,17 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I wait for 2 seconds
   And I select a Tag
   And I wait for 2 seconds
-  And I select another Tag
-  And I wait for 2 seconds
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
+  And I wait for 5 seconds
+  And I go back to editor
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  And I click Published
+  And I wait for 2 seconds
+  Then I verify that my post has been created

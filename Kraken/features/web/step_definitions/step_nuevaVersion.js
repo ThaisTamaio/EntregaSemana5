@@ -98,7 +98,7 @@ When('I click the Update button on new version', async function() {
     return await element.click();
 });
 
-When('I go back to Posts on new version on new version', async function() {
+When('I go back to Posts on new version', async function() {
     let element = await this.driver.$('a.blue.link.fw4.flex.items-center.ember-view');
     return await element.click();
 });
@@ -233,8 +233,12 @@ When('I click Save member on new version', async function() {
 // ------------------------------------------------------
 
 When('I click Settings on new version', async function() {
-    let element = await this.driver.$('post-settings');
+    let element = await this.driver.$('.post-settings');
     return await element.click(); 
+});
+When('I close Settings on new version', async function() {
+    let element = await this.driver.$('.close');
+    return await element.click()
 });
 
 When('I go back to editor on new version', async function() {

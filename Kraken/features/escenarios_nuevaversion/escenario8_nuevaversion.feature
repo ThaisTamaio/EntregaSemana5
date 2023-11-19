@@ -26,7 +26,7 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I wait for 2 seconds
   And I select a Tag on new version
   And I wait for 2 seconds
-  And I select another Tag on new version
+  And I close Settings on new version
   And I wait for 2 seconds
   And I click the Publish button on new version
   And I wait for 2 seconds
@@ -54,7 +54,7 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I wait for 2 seconds
   And I select a Tag on new version
   And I wait for 2 seconds
-  And I select another Tag on new version
+  And I close Settings on new version
   And I wait for 2 seconds
   And I click the Publish button on new version
   And I wait for 2 seconds
@@ -62,3 +62,10 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I wait for 2 seconds
   And I confirm the publish on new version
   And I wait for 5 seconds
+  And I go back to editor on new version
+  And I wait for 2 seconds
+  And I go back to Posts on new version
+  And I wait for 2 seconds
+  And I click Published on new version
+  And I wait for 2 seconds
+  Then I verify that my post has been created on new version

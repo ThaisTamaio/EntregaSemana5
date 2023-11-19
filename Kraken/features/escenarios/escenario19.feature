@@ -21,3 +21,7 @@ Scenario: Como usuario agrego un miembro y verifico su información
   And I enter member note
   And I wait for 2 seconds
   And I click Save member
+  And I wait for 2 seconds
+  And I go back to Members
+  And I wait for 2 seconds
+  Then I verify that a member has been created

@@ -23,8 +23,6 @@ When('I click login', async function() {
     let element = await this.driver.$('#ember5');
     return await element.click();
 });
-// ----------------------------------------------------------------------------------------------------------------
-
 
 // ----------------------------------------------------------------------------------------------------------------
 // Post Creation
@@ -76,6 +74,7 @@ When('I confirm the publish', async function() {
     return await element.click();
 });
 
+// ------------------------------------------------
 // Post Modification
 // ------------------------------------------------
 When('I click Published', async function() {
@@ -104,9 +103,6 @@ When('I go back to Posts', async function() {
 });
 
 // ----------------------------------------------------------------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------------------------------------------
 // Page Creation
 // ----------------------------------------------------------------------------------------------------------------
 When('I click Pages', async function() {
@@ -123,12 +119,10 @@ When('I go back to Pages', async function() {
     let element = await this.driver.$('a.ember-view.gh-btn-editor.gh-editor-back-button > span');
     return await element.click();
 });
-
+// ------------------------------------------------------
 // Page Modification
 // ------------------------------------------------------
 
-
-// ----------------------------------------------------------------------------------------------------------------
 
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -178,13 +172,9 @@ When('I select another Tag', async function() {
     let element = await this.driver.$('li.ember-power-select-option:nth-child(3)');
     return await element.click();
 });
-
+// ------------------------------------------------------
 // Tag Modification
 // ------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------------------------------------------
-
 
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -196,13 +186,13 @@ When('I click Members', async function() {
 });
 
 When('I click New member', async function() {
-    let element = await this.driver.$('ember-view.gh-btn.gh-btn-primary > span');
+    let element = await this.driver.$('.ember-view.gh-btn.gh-btn-primary');
     return await element.click();
 });
 
 When('I enter member name', async function () {
     let element = await this.driver.$('#member-name');
-    return await element.setValue(faker.name());
+    return await element.setValue(faker.name.firstName());
 });
 
 When('I enter member email', async function () {
@@ -216,24 +206,24 @@ When('I enter member note', async function () {
 });
 
 When('I click Save member', async function() {
-    let element = await this.driver.$('gh-btn gh-btn-primary gh-btn-icon ember-view > span');
+    let element = await this.driver.$('.gh-btn.gh-btn-primary.gh-btn-icon.ember-view');
     return await element.click();
 });
 
-// Member Modification
-// ------------------------------------------------------
+When('I go back to Members', async function() {
+    let element = await this.driver.$('.members_svg__cls-1');
+    return await element.click();
+});
 
-
-// ----------------------------------------------------------------------------------------------------------------
-
-
+Then('I verify that a member has been created', async function(){
+    let element = await this.driver.$('.ma0.pa0.gh-members-list-name');
+    assert.ok(element, 'El elemento no se encontró');
+});
 
 // ----------------------------------------------------------------------------------------------------------------
 // Settings
-// ------------------------------------------------------
-
-
 // ----------------------------------------------------------------------------------------------------------------
+
 
 When('I click Settings', async function() {
     let element = await this.driver.$('body > div.gh-app > div > main > button > span');

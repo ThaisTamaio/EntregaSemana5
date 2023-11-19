@@ -23,8 +23,6 @@ When('I click login on new version', async function() {
     let element = await this.driver.$('#ember12');
     return await element.click();
 });
-// ----------------------------------------------------------------------------------------------------------------
-
 
 // ----------------------------------------------------------------------------------------------------------------
 // Post Creation
@@ -76,6 +74,7 @@ When('I confirm the publish on new version', async function() {
     return await element.click();
 });
 
+// ------------------------------------------------
 // Post Modification
 // ------------------------------------------------
 When('I click Published on new version', async function() {
@@ -104,9 +103,6 @@ When('I go back to Posts on new version', async function() {
 });
 
 // ----------------------------------------------------------------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------------------------------------------
 // Page Creation
 // ----------------------------------------------------------------------------------------------------------------
 When('I click Pages on new version', async function() {
@@ -123,12 +119,10 @@ When('I go back to Pages on new version', async function() {
     let element = await this.driver.$('a.ember-view.gh-btn-editor.gh-editor-back-button > span');
     return await element.click();
 });
-
+// ------------------------------------------------------
 // Page Modification
 // ------------------------------------------------------
 
-
-// ----------------------------------------------------------------------------------------------------------------
 
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -178,12 +172,9 @@ When('I select another Tag on new version', async function() {
     let element = await this.driver.$('li.ember-power-select-option:nth-child(3)');
     return await element.click();
 });
-
+// ------------------------------------------------------
 // Tag Modification
 // ------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------------------------------------------
 
 
 
@@ -220,13 +211,15 @@ When('I click Save member on new version', async function() {
     return await element.click();
 });
 
-// Member Modification
-// ------------------------------------------------------
+When('I go back to Members on new version', async function() {
+    let element = await this.driver.$('.members_svg__cls-1');
+    return await element.click();
+});
 
-
-// ----------------------------------------------------------------------------------------------------------------
-
-
+Then('I verify that a member has been created on new version', async function(){
+    let element = await this.driver.$('.ma0.pa0.gh-members-list-name');
+    assert.ok(element, 'El elemento no se encontró');
+});
 
 // ----------------------------------------------------------------------------------------------------------------
 // Settings

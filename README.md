@@ -142,7 +142,7 @@ cd ghost
 ```
 nvm use 16.14.2
 ```
-#### Ejecución de pruebas
+#### Ejecución de pruebas con Kraken
 
 En la carpeta Kraken/features/escenarios se encuentran los escenarios en formato .feature a ejecutar, la manera apropiada de correrlos es la siguiente:
 
@@ -172,3 +172,21 @@ npm install
 3. Posteriormente, seguir los pasos de este video tutorial:
 
 [Tutorial ejecución pruebas Cypress](https://youtu.be/KZQ6f_LO2wU?feature=shared)
+
+
+### Ejecución de pruebas con BackstopJS
+
+1. Instalar las dependencias
+   
+Para hacer uso de las herramientas de Backstop, debe descargar la CLI. Abra una terminal y ejecute el siguiente comando:
+
+```
+npm install -g backstopjs
+```
+
+Para ejecutar las pruebas navegue en la terminal a la carpeta donde se encuente el archivo backstop.json y para ejecutar sus test ejecute el comando:
+
+```
+backstop test
+```
+

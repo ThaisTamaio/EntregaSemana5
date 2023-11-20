@@ -157,9 +157,6 @@ describe('Ghost Post Creation and Publication', () => {
             // Borrar el contenido actual y escribir el nuevo contenido
             cy.get('div.koenig-editor__editor').clear({ force: true }).type(`Contenido modificado ${i}`);
     
-            // Tomar un screenshot después de modificar el contenido
-            cy.screenshot(`v3-esc6-Modificar-el-contenido-${i}`);
-    
             // Actualizar el post
             cy.get('span').contains('Update').click({ force: true });
 

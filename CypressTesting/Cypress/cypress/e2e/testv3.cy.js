@@ -144,7 +144,7 @@ describe('Ghost tests version 3.42', () => {
         // Visitar la sección de posts para verificar la creación del post
         cy.visit('http://localhost:3001/ghost/#/posts');
 
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 5; i++) {
             // Seleccionar el post "Test modificado" a editar
             cy.contains('Test modificado').first().click();
 

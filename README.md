@@ -196,14 +196,20 @@ backstop test
 
 En primer lugar, es importante aclarar que para ejecutar el VRT con resemble, se debe hacer uso de la versión 18 de node.
 
-1. Instalar las dependencias: Por medio del siguiente comando:
+1. Abrir la carpeta **resembleGhost** en vscode:
+
+```
+EntregaSemana5/CypressTesting/resembleGhosts
+```
+
+2. Instalar las dependencias: Por medio del siguiente comando:
 
 ```
 npm install
 ```
-2. Ejecutar los tests de Cypress (las isntruccioens se encuentran arriba).
+3. Ejecutar los tests de Cypress (las isntruccioens se encuentran arriba).
 
-3. Pasar los screenshots de la carpeta 
+4. Pasar los screenshots de la carpeta 
 
 ```
 EntregaSemana5/CypressTesting/Cypress/cypress/screenshots
@@ -222,10 +228,15 @@ EntregaSemana5/CypressTesting/resembleGhost/v3
 ```
 EntregaSemana5/CypressTesting/resembleGhost/v5
 ```
-4. Abrir la carpeta **resembleGhost** en vscode
 
-4. Ejecutar el programa por medio de:
+5. Ejecutar el programa por medio de:
 
 ```
 node index.js
+```
+
+Los resultados, incluyendo el html con el reporte se encuentran en:
+
+```
+EntregaSemana5/CypressTesting/resembleGhost/results
 ```

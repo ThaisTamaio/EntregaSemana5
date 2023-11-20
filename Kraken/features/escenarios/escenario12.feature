@@ -28,3 +28,10 @@ Scenario: Como usuario creo una página estática
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
+  And I go back to editor
+  And I wait for 2 seconds
+  And I go back to Pages
+  And I wait for 2 seconds
+  And I click Pages
+  And I wait for 2 seconds
+  Then I verify that my page has been created

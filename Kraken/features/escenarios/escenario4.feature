@@ -10,7 +10,11 @@ Scenario: Como usuario edito un post y cambio sus tags
   And I wait for 2 seconds
   And I click login
   And I wait for 4 seconds
+  And I click Published
+  And I wait for 2 seconds
   And I select a published post
+  And I wait for 2 seconds
+  And I enter paragraphs
   And I wait for 2 seconds
   And I click Settings
   And I wait for 2 seconds
@@ -18,9 +22,31 @@ Scenario: Como usuario edito un post y cambio sus tags
   And I wait for 2 seconds
   And I select a Tag
   And I wait for 2 seconds
-  And I click the Publish button
+  And I click the Update button
   And I wait for 2 seconds
-  And I publish
+  And I go back to Posts
   And I wait for 2 seconds
-  And I confirm the publish
+  And I click Published
+  And I wait for 2 seconds
+  And I get the Tag
+  And I wait for 2 seconds
+  And I select a published post
+  And I wait for 2 seconds
+  And I click Settings
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
+  And I remove a Tag
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
+  And I select another Tag
+  And I wait for 2 seconds
+  And I click the Update button
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  And I get the new Tag
+  And I wait for 2 seconds  
+  Then I verify I have changed the tags
   

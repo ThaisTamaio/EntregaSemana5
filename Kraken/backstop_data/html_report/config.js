@@ -3,14 +3,14 @@ report({
   "tests": [
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso1_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso1_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso1_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso1_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso1_0_document_0_default.png",
-        "label": "Paso1",
+        "fileName": "backstop_default_Escenario1-Paso1_0_document_0_default.png",
+        "label": "Escenario1-Paso1",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso1_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso1_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -21,22 +21,22 @@ report({
           },
           "rawMisMatchPercentage": 6.840899265023778,
           "misMatchPercentage": "6.84",
-          "analysisTime": 87
+          "analysisTime": 308
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso1_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso1_0_document_0_default.png"
       },
       "status": "fail"
     },
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso2_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso2_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso2_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso2_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso2_0_document_0_default.png",
-        "label": "Paso2",
+        "fileName": "backstop_default_Escenario1-Paso2_0_document_0_default.png",
+        "label": "Escenario1-Paso2",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso2_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso2_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -47,22 +47,22 @@ report({
           },
           "rawMisMatchPercentage": 7.043450064850843,
           "misMatchPercentage": "7.04",
-          "analysisTime": 81
+          "analysisTime": 221
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso2_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso2_0_document_0_default.png"
       },
       "status": "fail"
     },
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso3_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso3_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso3_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso3_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso3_0_document_0_default.png",
-        "label": "Paso3",
+        "fileName": "backstop_default_Escenario1-Paso3_0_document_0_default.png",
+        "label": "Escenario1-Paso3",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso3_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso3_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -73,22 +73,22 @@ report({
           },
           "rawMisMatchPercentage": 1.4782666533639295,
           "misMatchPercentage": "1.48",
-          "analysisTime": 74
+          "analysisTime": 293
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso3_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso3_0_document_0_default.png"
       },
       "status": "fail"
     },
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso4_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso4_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso4_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso4_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso4_0_document_0_default.png",
-        "label": "Paso4",
+        "fileName": "backstop_default_Escenario1-Paso4_0_document_0_default.png",
+        "label": "Escenario1-Paso4",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso4_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso4_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -99,22 +99,22 @@ report({
           },
           "rawMisMatchPercentage": 7.80064185706209,
           "misMatchPercentage": "7.80",
-          "analysisTime": 39
+          "analysisTime": 153
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso4_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso4_0_document_0_default.png"
       },
       "status": "fail"
     },
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso5_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso5_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso5_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso5_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso5_0_document_0_default.png",
-        "label": "Paso5",
+        "fileName": "backstop_default_Escenario1-Paso5_0_document_0_default.png",
+        "label": "Escenario1-Paso5",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso5_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso5_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -125,22 +125,22 @@ report({
           },
           "rawMisMatchPercentage": 6.467125611094484,
           "misMatchPercentage": "6.47",
-          "analysisTime": 32
+          "analysisTime": 197
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso5_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso5_0_document_0_default.png"
       },
       "status": "fail"
     },
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso6_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso6_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso6_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso6_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso6_0_document_0_default.png",
-        "label": "Paso6",
+        "fileName": "backstop_default_Escenario1-Paso6_0_document_0_default.png",
+        "label": "Escenario1-Paso6",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso6_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso6_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -151,22 +151,22 @@ report({
           },
           "rawMisMatchPercentage": 5.214090924207656,
           "misMatchPercentage": "5.21",
-          "analysisTime": 35
+          "analysisTime": 139
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso6_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso6_0_document_0_default.png"
       },
       "status": "fail"
     },
     {
       "pair": {
-        "reference": "../../screenshots/bitmaps_reference/backstop_default_Paso7_0_document_0_default.png",
-        "test": "../../screenshots/bitmaps_test/20231119-173442/backstop_default_Paso7_0_document_0_default.png",
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario1-Paso7_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario1-Paso7_0_document_0_default.png",
         "selector": "document",
-        "fileName": "backstop_default_Paso7_0_document_0_default.png",
-        "label": "Paso7",
+        "fileName": "backstop_default_Escenario1-Paso7_0_document_0_default.png",
+        "label": "Escenario1-Paso7",
         "requireSameDimensions": true,
         "misMatchThreshold": 0.1,
-        "url": "/screenshots/bitmaps_test/backstop_default_Paso7_0__0_default.png",
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario1-Paso7_0__0_default.png",
         "expect": 0,
         "viewportLabel": "default",
         "diff": {
@@ -177,9 +177,399 @@ report({
           },
           "rawMisMatchPercentage": 9.187036482756328,
           "misMatchPercentage": "9.19",
-          "analysisTime": 96
+          "analysisTime": 263
         },
-        "diffImage": "../../screenshots/bitmaps_test/20231119-173442/failed_diff_backstop_default_Paso7_0_document_0_default.png"
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario1-Paso7_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso1_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso1_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso1_0_document_0_default.png",
+        "label": "Escenario2-Paso1",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso1_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 6.996325118893212,
+          "misMatchPercentage": "7.00",
+          "analysisTime": 196
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso1_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso2_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso2_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso2_0_document_0_default.png",
+        "label": "Escenario2-Paso2",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso2_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 1.4811766270910238,
+          "misMatchPercentage": "1.48",
+          "analysisTime": 276
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso2_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso3_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso3_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso3_0_document_0_default.png",
+        "label": "Escenario2-Paso3",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso3_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": 0,
+            "height": -250
+          },
+          "rawMisMatchPercentage": 8.097045380346065,
+          "misMatchPercentage": "8.10",
+          "analysisTime": 300
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso3_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso4_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso4_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso4_0_document_0_default.png",
+        "label": "Escenario2-Paso4",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso4_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 250
+          },
+          "rawMisMatchPercentage": 9.598759386222659,
+          "misMatchPercentage": "9.60",
+          "analysisTime": 202
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso4_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso5_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso5_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso5_0_document_0_default.png",
+        "label": "Escenario2-Paso5",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso5_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 12.586143536532642,
+          "misMatchPercentage": "12.59",
+          "analysisTime": 323
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso5_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso6_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso6_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso6_0_document_0_default.png",
+        "label": "Escenario2-Paso6",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso6_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 6.700588646113938,
+          "misMatchPercentage": "6.70",
+          "analysisTime": 256
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso6_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso7_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso7_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso7_0_document_0_default.png",
+        "label": "Escenario2-Paso7",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso7_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 5.876484086600818,
+          "misMatchPercentage": "5.88",
+          "analysisTime": 331
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso7_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso8_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso8_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso8_0_document_0_default.png",
+        "label": "Escenario2-Paso8",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso8_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 2.7397319498486814,
+          "misMatchPercentage": "2.74",
+          "analysisTime": 287
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso8_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso9_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso9_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso9_0_document_0_default.png",
+        "label": "Escenario2-Paso9",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso9_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 1.4796800691742324,
+          "misMatchPercentage": "1.48",
+          "analysisTime": 313
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso9_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso10_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso10_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso10_0_document_0_default.png",
+        "label": "Escenario2-Paso10",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso10_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 8.520486215038744,
+          "misMatchPercentage": "8.52",
+          "analysisTime": 172
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso10_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso10_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso10_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso10_0_document_0_default.png",
+        "label": "Escenario2-Paso10",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso10_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 8.520486215038744,
+          "misMatchPercentage": "8.52",
+          "analysisTime": 211
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso10_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso11_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso11_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso11_0_document_0_default.png",
+        "label": "Escenario2-Paso11",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso11_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -354,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 10.195103385764865,
+          "misMatchPercentage": "10.20",
+          "analysisTime": 41
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso11_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso12_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso12_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso12_0_document_0_default.png",
+        "label": "Escenario2-Paso12",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso12_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": false,
+          "dimensionDifference": {
+            "width": -360,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 6.978366423891716,
+          "misMatchPercentage": "6.98",
+          "analysisTime": 133
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso12_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso13_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso13_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso13_0_document_0_default.png",
+        "label": "Escenario2-Paso13",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso13_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 9.029939472546475,
+          "misMatchPercentage": "9.03",
+          "analysisTime": 220
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso13_0_document_0_default.png"
+      },
+      "status": "fail"
+    },
+    {
+      "pair": {
+        "reference": "../../screenshots/bitmaps_reference/backstop_default_Escenario2-Paso14_0_document_0_default.png",
+        "test": "../../screenshots/bitmaps_test/20231119-185711/backstop_default_Escenario2-Paso14_0_document_0_default.png",
+        "selector": "document",
+        "fileName": "backstop_default_Escenario2-Paso14_0_document_0_default.png",
+        "label": "Escenario2-Paso14",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "/screenshots/bitmaps_test/backstop_default_Escenario2-Paso14_0__0_default.png",
+        "expect": 0,
+        "viewportLabel": "default",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "rawMisMatchPercentage": 12.928015564202337,
+          "misMatchPercentage": "12.93",
+          "analysisTime": 224
+        },
+        "diffImage": "../../screenshots/bitmaps_test/20231119-185711/failed_diff_backstop_default_Escenario2-Paso14_0_document_0_default.png"
       },
       "status": "fail"
     }

@@ -1,6 +1,6 @@
-# Entrega Semana 5
+# Instrucciones ejecución pruebas
 
-Este repositorio contiene el código y la documentación relacionados con la entrega de la semana 5. En la wiki se encuentra gran parte de la documentación requerida.
+Este repositorio contiene el código y la documentación relacionados con la entrega de la semana 5 y semana 6. En la wiki se encuentra gran parte de la documentación requerida.
 
 ## Integrantes
 - Thais Tamaio: [t.tamaio@uniandes.edu.co](mailto:t.tamaio@uniandes.edu.co)
@@ -190,7 +190,7 @@ Para ejecutar las pruebas navegue en la terminal a la carpeta donde se encuente 
 backstop test
 ```
 
-Video de configuración del ambiente e incidencias: https://uniandes-my.sharepoint.com/:v:/g/personal/jf_gonzalezg12_uniandes_edu_co/EYCAsnNW1DdIk7UAvjF2UokBGKh40MXGOkAOjHjR4ohIFw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=K3oKdI
+[Video de configuración del ambiente e incidencias](https://uniandes-my.sharepoint.com/:v:/g/personal/jf_gonzalezg12_uniandes_edu_co/EYCAsnNW1DdIk7UAvjF2UokBGKh40MXGOkAOjHjR4ohIFw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=K3oKdI)
 
 ### ResembleJS
 

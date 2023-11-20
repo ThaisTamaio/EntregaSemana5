@@ -107,12 +107,12 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Tomar un screenshot después de navegar a la vista del post
         cy.screenshot(`v3-esc2-Navegar-a-la-vista-del-post`);
-    
-        // Navegar directamente a la URL del post actualizado
-        cy.visit('http://localhost:3001/test-1/');
-    
-        // Tomar un screenshot después de visitar la URL del post actualizado
-        cy.screenshot(`v3-esc2-Visitar-URL-del-post-actualizado`);
+
+        // Hacer clic en el botón para regresar a la sección de posts
+        cy.get('a[href="#/posts/"]').click({ force: true, multiple: true });
+
+        // Seleccionar el post "Test modificado" a editar
+        cy.contains('Test 1').first().click();
     
         // Verificar el contenido modificado
         cy.contains('Contenido modificado').should('exist');
@@ -143,9 +143,6 @@ describe('Ghost Post Creation and Publication', () => {
     
         // Visitar la sección de posts para verificar la creación del post
         cy.visit('http://localhost:3001/ghost/#/posts');
-    
-        // Verificar que el post "Test modificado" aparezca en la lista
-        cy.contains('Test modificado').should('be.visible');
 
         for (let i = 1; i <= 3; i++) {
             // Seleccionar el post "Test modificado" a editar
@@ -153,9 +150,6 @@ describe('Ghost Post Creation and Publication', () => {
 
             // Tomar un screenshot después de seleccionar el post para editar
             cy.screenshot(`v3-esc6-Seleccionar-el-post-para-editar-${i}`);
-    
-            // Tomar un screenshot después de seleccionar el post a editar
-            cy.screenshot(`v3-esc6-Seleccionar-el-post-a-editar-${i}`);
     
             // Esperar a que la página del editor se cargue
             cy.url().should('include', '/editor/post');

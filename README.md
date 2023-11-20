@@ -190,3 +190,5 @@ Para ejecutar las pruebas navegue en la terminal a la carpeta donde se encuente 
 backstop test
 ```
 
+Video de configuración del ambiente e incidencias: https://uniandes-my.sharepoint.com/:v:/g/personal/jf_gonzalezg12_uniandes_edu_co/EYCAsnNW1DdIk7UAvjF2UokBGKh40MXGOkAOjHjR4ohIFw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=K3oKdI
+

@@ -279,7 +279,7 @@ describe('Ghost tests version 3.42', () => {
         cy.url().should('include', '/staff');
     
         cy.get('span').contains('Invite people').click();
-        cy.screenshot('v3-esc18-agregarManualmente');
+        cy.screenshot('v3-esc18-nuevoMiembro');
     
         // Llenar el nombre y el email del miembro
         cy.get('input[id="new-user-email"]').type(email);

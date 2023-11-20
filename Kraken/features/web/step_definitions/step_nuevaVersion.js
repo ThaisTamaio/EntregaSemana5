@@ -3,8 +3,9 @@ const { faker } = require('@faker-js/faker');
 const { By, browser, Key, Builder } = require('webdriverio');
 const assert = require('assert');
 
-
 var title = ""
+let previousTag = ""
+let currentTag = ""
 
 // ----------------------------------------------------------------------------------------------------------------
 // Login
@@ -83,7 +84,7 @@ When('I click Published on new version', async function() {
 });
 
 When('I select a published post on new version', async function() {
-    let element = await this.driver.$('div.gh-posts-list-item-group:nth-child(1)');
+    let element = await this.driver.$('div > main > section > section > ol > li:nth-child(2)');
     return await element.click();
 });
 
@@ -93,7 +94,12 @@ When('I click title on new version', async function() {
 });
 
 When('I click the Update button on new version', async function() {
-    let element = await this.driver.$('.darkgrey > span:nth-child(1)');
+    let element = await this.driver.$('div.ember-view.ember-basic-dropdown-trigger.gh-btn.gh-btn-outline.gh-publishmenu-trigger');
+    return await element.click();
+});
+
+When('I confirm the Update on new version', async function() {
+    let element = await this.driver.$('button.gh-btn.gh-btn-blue.gh-publishmenu-button.gh-btn-icon.ember-view');
     return await element.click();
 });
 
@@ -106,17 +112,17 @@ When('I go back to Posts on new version', async function() {
 // Page Creation
 // ----------------------------------------------------------------------------------------------------------------
 When('I click Pages on new version', async function() {
-    let element = await this.driver.$('body > div.gh-app > div > nav.gh-nav > div > section > div.gh-nav-top > ul.gh-nav-list.gh-nav-manage > li:nth-child(2)');
+    let element = await this.driver.$('div.gh-nav-top > ul.gh-nav-list.gh-nav-manage > li:nth-child(3)');
     return await element.click();
 });
 
 When('I click New Page on new version', async function() {
-    let element = await this.driver.$('a.ember-view.gh-btn.gh-btn-primary.view-actions-top-row > span');
+    let element = await this.driver.$('a.ember-view.gh-btn.gh-btn-green > span');
     return await element.click();
 });
 
 When('I go back to Pages on new version', async function() {
-    let element = await this.driver.$('a.ember-view.gh-btn-editor.gh-editor-back-button > span');
+    let element = await this.driver.$('a.blue.link.fw4.flex.items-center.ember-view');
     return await element.click();
 });
 // ------------------------------------------------------
@@ -175,8 +181,22 @@ When('I select another Tag on new version', async function() {
 // ------------------------------------------------------
 // Tag Modification
 // ------------------------------------------------------
+When('I get the Tag on new version',async function(){
+    let element = await this.driver.$(`div > main > section > section > ol > li:nth-child(2) > a.ember-view.permalink.gh-list-data.gh-post-list-title > p > span:nth-child(1) > span:nth-child(2)`);
+    previousTag = await element.getText();
+    console.log(previousTag);
+});
 
+When('I get the new Tag on new version',async function(){
+    let element = await this.driver.$(`div > main > section > section > ol > li:nth-child(2) > a.ember-view.permalink.gh-list-data.gh-post-list-title > p > span:nth-child(1) > span:nth-child(2)`);
+    currentTag = await element.getText();
+    console.log(currentTag);
+});
 
+When('I remove a Tag on new version', async function(){
+    let element = await this.driver.$("div.settings-menu-pane-in.settings-menu.settings-menu-pane > div.settings-menu-content > form > div:nth-child(3) > div > div > ul > li:nth-child(1) > span");
+    return await element.click();
+});
 
 // ----------------------------------------------------------------------------------------------------------------
 // Member Creation
@@ -245,5 +265,15 @@ When('I go back to editor on new version', async function() {
 
 Then('I verify that my post has been created on new version', async function(){
     let element = await this.driver.$('ol.posts-list.gh-list:nth-child(1)');
+    assert.ok(element, 'El elemento no se encontró');
+});
+
+Then('I verify I have changed the tags on new version', async function(){
+    assert.notEqual(previousTag,currentTag,'Se cambió el tag exitosamente')
+    return
+});
+
+Then('I verify that my page has been created on new version', async function(){
+    let element = await this.driver.$('ol.gh-list > li:nth-child(2)');
     assert.ok(element, 'El elemento no se encontró');
 });

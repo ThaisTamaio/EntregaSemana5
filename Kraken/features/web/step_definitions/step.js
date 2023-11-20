@@ -3,8 +3,10 @@ const { faker } = require('@faker-js/faker');
 const { By, browser, Key, Builder } = require('webdriverio');
 const assert = require('assert');
 
-
 var title = ""
+let previousTag = ""
+let currentTag = ""
+
 
 // ----------------------------------------------------------------------------------------------------------------
 // Login
@@ -83,7 +85,7 @@ When('I click Published', async function() {
 });
 
 When('I select a published post', async function() {
-    let element = await this.driver.$('div.gh-posts-list-item-group:nth-child(1)');
+    let element = await this.driver.$('div.gh-app > div > main > section > section > div.posts-list.gh-list.feature-memberAttribution > div:nth-child(1)');
     return await element.click();
 });
 
@@ -93,7 +95,7 @@ When('I click title', async function() {
 });
 
 When('I click the Update button', async function() {
-    let element = await this.driver.$('.darkgrey > span:nth-child(1)');
+    let element = await this.driver.$('button.gh-btn.gh-btn-editor.gh-editor-save-trigger.green.ember-view');
     return await element.click();
 });
 
@@ -175,7 +177,24 @@ When('I select another Tag', async function() {
 // ------------------------------------------------------
 // Tag Modification
 // ------------------------------------------------------
+When('I get the Tag',async function(){
+    let element = await this.driver.$(`div.gh-app > div > main > section > section > div.posts-list.gh-list.feature-memberAttribution > div:nth-child(1) > li > a.ember-view.permalink.gh-list-data.gh-post-list-title > p.gh-content-entry-meta > span.gh-content-entry-author > span`);
+    previousTag = await element.getText();
+    console.log(previousTag);
+});
 
+When('I get the new Tag',async function(){
+    let element = await this.driver.$(`div.gh-app > div > main > section > section > div.posts-list.gh-list.feature-memberAttribution > div:nth-child(1) > li > a.ember-view.permalink.gh-list-data.gh-post-list-title > p.gh-content-entry-meta > span.gh-content-entry-author > span`);
+    currentTag = await element.getText();
+    console.log(currentTag);
+});
+
+When('I remove a Tag', async function(){
+    let element = await this.driver.$(`div.ember-view.ember-basic-dropdown-trigger.ember-basic-dropdown-trigger--in-place.ember-power-select-trigger.ember-power-select-multiple-trigger.gh-token-input  > 
+                                       ul.ember-power-select-multiple-options.sortable-objects.ember-view > li.ember-power-select-multiple-option.tag-token.js-draggableObject.draggable-object.ember-view > 
+                                       span.ember-power-select-multiple-remove-btn`);
+    return await element.click();
+});
 
 // ----------------------------------------------------------------------------------------------------------------
 // Member Creation
@@ -241,5 +260,15 @@ When('I go back to editor', async function() {
 
 Then('I verify that my post has been created', async function(){
     let element = await this.driver.$('div.gh-posts-list-item-group:nth-child(1)');
+    assert.ok(element, 'El elemento no se encontró');
+});
+
+Then('I verify I have changed the tags', async function(){
+    assert.notEqual(previousTag,currentTag,'Se cambió el tag exitosamente')
+    return
+});
+
+Then('I verify that my page has been created', async function(){
+    let element = await this.driver.$('div.posts-list.gh-list.feature-memberAttribution:nth-child(1)');
     assert.ok(element, 'El elemento no se encontró');
 });

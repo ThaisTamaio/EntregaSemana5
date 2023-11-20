@@ -1,6 +1,6 @@
 # Instrucciones ejecución pruebas
 
-Este repositorio contiene el código y la documentación relacionados con la entrega de la semana 5. En la wiki se encuentra gran parte de la documentación requerida.
+Este repositorio contiene el código y la documentación relacionados con la entrega de la semana 5 y semana 6. En la wiki se encuentra gran parte de la documentación requerida.
 
 ## Integrantes
 - Thais Tamaio: [t.tamaio@uniandes.edu.co](mailto:t.tamaio@uniandes.edu.co)

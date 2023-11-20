@@ -1,4 +1,4 @@
-describe('Ghost Post Creation and Publication', () => {
+describe('Ghost tests version 3.42', () => {
     beforeEach(() => {
         // Visita la URL
         cy.visit('http://localhost:3001/ghost/');
@@ -220,14 +220,14 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click({ force: true });
     
         // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v5-esc11-Clic-en-Publish`);
+        cy.screenshot(`v3-esc11-Clic-en-Publish`);
     
         // Esperar a que aparezca el botón de confirmación
         cy.get('div').contains('Schedule it for later').click();
         cy.get('span').contains('Schedule').click();
     
         // Tomar un screenshot después de hacer clic en "Continue, final review"
-        cy.screenshot(`v5-esc11-Clic-en-Continue-final-review`);
+        cy.screenshot(`v3-esc11-Clic-en-Continue-final-review`);
     
         // Confirmar la publicación
         cy.visit('http://localhost:3001/ghost/#/posts');

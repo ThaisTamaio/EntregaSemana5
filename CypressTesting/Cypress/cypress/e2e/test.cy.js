@@ -334,9 +334,6 @@ describe('Ghost Post Creation and Publication', () => {
             // Navegar directamente a la URL del post actualizado
             cy.visit('http://localhost:2368/test-multiple-edits/');
     
-            // Tomar un screenshot después de visitar la URL del post actualizado
-            cy.screenshot(`v5-esc6-Visitar-URL-del-post-actualizado-${i}`);
-    
             // Verificar el contenido modificado
             cy.contains(`Contenido modificado ${i}`).should('exist');
         }

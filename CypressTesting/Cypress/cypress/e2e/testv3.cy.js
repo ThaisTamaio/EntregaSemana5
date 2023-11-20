@@ -122,17 +122,11 @@ describe('Ghost Post Creation and Publication', () => {
         // Navegar a la sección de posts
         cy.get('a[href="#/posts/"]').click({ multiple: true });
     
-        // Tomar un screenshot después de navegar a la sección de posts
-        cy.screenshot(`v3-esc1-Navegar-a-la-seccion-de-posts`);
-    
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/posts');
     
         // Crear un nuevo post
         cy.get('span').contains('New post').click();
-    
-        // Tomar un screenshot después de hacer clic en "New post"
-        cy.screenshot(`v3-esc1-Clic-en-New-post`);
     
         // Esperar a que la nueva página se cargue
         cy.url().should('include', '/editor/post');
@@ -141,14 +135,8 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('textarea[placeholder="Post Title"]').type('Test modificado');
         cy.get('div.koenig-editor__editor').type('Contenido test modificado');
     
-        // Tomar un screenshot después de llenar el título y contenido
-        cy.screenshot(`v3-esc1-Llenar-titulo-y-contenido`);
-    
         // Oprimir el botón "Publish" una vez este haya aparecido
         cy.get('span').contains('Publish').click({ force: true });
-    
-        // Tomar un screenshot después de hacer clic en "Publish"
-        cy.screenshot(`v3-esc1-Clic-en-Publish`);
     
         // Oprimir el botón "Publish" en el cuadro de diálogo de confirmación
         cy.get('span').contains('Publish').click();
@@ -156,15 +144,15 @@ describe('Ghost Post Creation and Publication', () => {
         // Visitar la sección de posts para verificar la creación del post
         cy.visit('http://localhost:3001/ghost/#/posts');
     
-        // Tomar un screenshot después de navegar al post publicado
-        cy.screenshot(`v3-esc1-Navegar-al-post-publicado`);
-    
         // Verificar que el post "Test modificado" aparezca en la lista
         cy.contains('Test modificado').should('be.visible');
 
         for (let i = 1; i <= 3; i++) {
             // Seleccionar el post "Test modificado" a editar
             cy.contains('Test modificado').first().click();
+
+            // Tomar un screenshot después de seleccionar el post para editar
+            cy.screenshot(`v5-esc6-Seleccionar-el-post-para-editar-${i}`);
     
             // Tomar un screenshot después de seleccionar el post a editar
             cy.screenshot(`v6-esc6-Seleccionar-el-post-a-editar-${i}`);
@@ -180,9 +168,9 @@ describe('Ghost Post Creation and Publication', () => {
     
             // Actualizar el post
             cy.get('span').contains('Update').click({ force: true });
-    
-            // Tomar un screenshot después de hacer clic en "Update"
-            cy.screenshot(`v6-esc6-Clic-en-Update-${i}`);
+
+            // Tomar un screenshot después de actualizar el post
+            cy.screenshot(`v5-esc6-Actualizar-el-post-${i}`);
     
             // Oprimir el botón "Update" en el cuadro de diálogo de confirmación
             cy.get('span').contains('Update').click();
@@ -194,5 +182,37 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('a[href="#/posts/"]').click({ force: true, multiple: true });
         }
     });
+
+    it('Escenario 15: Crear Varias Páginas Estáticas', () => {
+        const pages = ['page1', 'page2', 'page3'];
+    
+        pages.forEach((page, index) => {
+            // Navegar a la sección de páginas
+            cy.visit('http://localhost:3001/ghost/#/pages');
+            cy.screenshot(`v5-esc15-${index+1}-navegarSeccionPaginas`);
+    
+            // Crear una nueva página
+            cy.get('span').contains('New page').click({force: true});
+            cy.screenshot(`v5-esc15-${index+1}-crearNuevaPagina`);
+    
+            // Llenar el título y el contenido de la página
+            cy.get('textarea[placeholder="Page Title"]').type(page, { force: true });
+            cy.get('div.koenig-editor__editor').type('contenido '+page, { force: true });
+            cy.screenshot(`v5-esc15-${index+1}-llenarTituloContenido`);
+    
+            // Publicar la página
+            cy.get('span').contains('Publish').click({ force: true });
+            cy.screenshot(`v5-esc15-${index+1}-publicarPagina`);
+
+            // Oprimir el botón "Publish" en el cuadro de diálogo de confirmación
+            cy.get('span').contains('Publish').click();
+            cy.screenshot(`v5-esc15-${index+1}-confirmarPublicacion`);
+    
+            // Verificar el título y el contenido de la página
+            cy.contains(page).should('exist');
+            cy.contains('contenido '+page).should('exist');
+            cy.screenshot(`v5-esc15-${index+1}-verificarTituloContenido`);
+        });
+    });   
     
 });

@@ -171,10 +171,10 @@ npm install
 
 3. Posteriormente, seguir los pasos de este video tutorial:
 
-[Tutorial ejecución pruebas Cypress](https://youtu.be/KZQ6f_LO2wU?feature=shared)
+[Tutorial ejecución pruebas Cypress](https://youtu.be/ar7QeW1J2Cs)
 
 
-### Ejecución de pruebas con BackstopJS
+### BackstopJS
 
 1. Instalar las dependencias
    
@@ -191,4 +191,6 @@ backstop test
 ```
 
 Video de configuración del ambiente e incidencias: https://uniandes-my.sharepoint.com/:v:/g/personal/jf_gonzalezg12_uniandes_edu_co/EYCAsnNW1DdIk7UAvjF2UokBGKh40MXGOkAOjHjR4ohIFw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=K3oKdI
+
+### ResembleJS
 

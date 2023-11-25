@@ -9,42 +9,43 @@ Scenario: Como usuario edito el contenido de una página y sus tags
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
-  And I wait for 2 seconds
-  And I click Tags
-  And I wait for 2 seconds
-  And I click new Tag
-  And I wait for 2 seconds
-  And I enter Tag Name
-  And I wait for 2 seconds
-  And I enter Tag Color
-  And I wait for 2 seconds
-  And I enter Tag Description
-  And I wait for 2 seconds
-  And I click Save Tag
-  And I wait for 2 seconds
+  And I wait for 4 seconds
   And I click Pages
   And I wait for 2 seconds
-  And I click New Page
-  And I wait for 2 seconds
-  And I enter title
+  And I select a published page
   And I wait for 2 seconds
   And I enter paragraphs
   And I wait for 2 seconds
-  And I click add card
-  And I wait for 2 seconds
-  And I click image
-  And I wait for 5 seconds
   And I click Settings
   And I wait for 2 seconds
   And I click on Tags
   And I wait for 2 seconds
   And I select a Tag
   And I wait for 2 seconds
+  And I click the Update button
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  And I click Pages
+  And I wait for 2 seconds
+  And I get the Tag
+  And I wait for 2 seconds
+  And I select a published page
+  And I wait for 2 seconds
+  And I click Settings
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
+  And I remove a Tag
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
   And I select another Tag
   And I wait for 2 seconds
-  And I click the Publish button
+  And I click the Update button
   And I wait for 2 seconds
-  And I publish
+  And I go back to Pages
   And I wait for 2 seconds
-  And I confirm the publish
-  And I wait for 5 seconds
+  And I get the new Tag
+  And I wait for 2 seconds  
+  Then I verify I have changed the tags

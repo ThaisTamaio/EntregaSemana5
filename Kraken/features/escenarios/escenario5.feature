@@ -9,7 +9,7 @@ Scenario: Como usuario elimino un tag
   And I enter password "<PASSWORD>"
   And I wait for 2 seconds
   And I click login
-  And I wair for 5 seconds
+  And I wait for 2 seconds
   And I click Tags
   And I wait for 2 seconds
   And I click new Tag
@@ -22,5 +22,20 @@ Scenario: Como usuario elimino un tag
   And I wait for 2 seconds
   And I click Save Tag
   And I wait for 2 seconds
-  
-  
+  And I click Published
+  And I wait for 2 seconds
+  And I get the Tag
+  And I wait for 2 seconds
+  And I select a published post
+  And I wait for 2 seconds
+  And I click Settings
+  And I wait for 2 seconds
+  And I click on Tags
+  And I wait for 2 seconds
+  And I remove all Tags
+  And I wait for 2 seconds
+  And I click the Update button
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  Then I verify I have deleted all Tags

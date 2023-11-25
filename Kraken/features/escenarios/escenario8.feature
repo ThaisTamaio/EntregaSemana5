@@ -36,6 +36,10 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I wait for 2 seconds
   And I go back to Posts
   And I wait for 2 seconds
+  And I click Published
+  And I wait for 2 seconds
+  And I get the Tag
+  And I wait for 2 seconds
   And I click new post
   And I wait for 2 seconds
   And I enter title
@@ -57,12 +61,13 @@ Scenario: Como usuario creo una serie de posts relacionados con tags comunes
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
-  And I wait for 5 seconds
-  And I wait for 5 seconds
+  And I wait for 2 seconds
   And I go back to editor
   And I wait for 2 seconds
   And I go back to Posts
   And I wait for 2 seconds
   And I click Published
   And I wait for 2 seconds
-  Then I verify that my post has been created
+  And I get the new Tag
+  And I wait for 2 seconds
+  Then I verify I have assigned the same tag

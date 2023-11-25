@@ -10,18 +10,6 @@ Scenario: Como usuario creo varias páginas estáticas
   And I wait for 2 seconds
   And I click login
   And I wait for 2 seconds
-  And I click Tags
-  And I wait for 2 seconds
-  And I click new Tag
-  And I wait for 2 seconds
-  And I enter Tag Name
-  And I wait for 2 seconds
-  And I enter Tag Color
-  And I wait for 2 seconds
-  And I enter Tag Description
-  And I wait for 2 seconds
-  And I click Save Tag
-  And I wait for 2 seconds
   And I click Pages
   And I wait for 2 seconds
   And I click New Page
@@ -40,19 +28,19 @@ Scenario: Como usuario creo varias páginas estáticas
   And I wait for 2 seconds
   And I select a Tag
   And I wait for 2 seconds
-  And I select another Tag
-  And I wait for 2 seconds
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
-  And I wait for 5 seconds
+  And I wait for 2 seconds
   And I go back to editor
   And I wait for 2 seconds
   And I go back to Pages
   And I wait for 2 seconds
-  And I click New Page
+  Then I verify that my page has been created
+  And I wait for 2 seconds
+  When I click New Page
   And I wait for 2 seconds
   And I enter title
   And I wait for 2 seconds
@@ -68,10 +56,14 @@ Scenario: Como usuario creo varias páginas estáticas
   And I wait for 2 seconds
   And I select a Tag
   And I wait for 2 seconds
-  And I select another Tag
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
-  And I wait for 5 seconds
+  And I wait for 2 seconds
+  And I go back to editor
+  And I wait for 2 seconds
+  And I go back to Pages
+  And I wait for 2 seconds
+  Then I verify that my page has been created

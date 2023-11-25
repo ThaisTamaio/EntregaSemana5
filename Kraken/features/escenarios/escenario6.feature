@@ -15,20 +15,26 @@ Scenario: Como usuario creo un post y lo edito múltiples veces
   And I enter title
   And I wait for 2 seconds
   And I enter paragraphs
-  And I wair for 2 seconds
+  And I wait for 2 seconds
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
+  And I go back to editor
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
   And I click Published
   And I wait for 2 seconds
-  And I select a published post
+  Then I verify that my post has been created
+  And I wait for 2 seconds
+  When I select a published post
   And I wait for 2 seconds
   And I click title
   And I wait for 2 seconds
-  And I enter title
+  And I modify the title
   And I wait for 2 seconds
   And I click the Update button
   And I wait for 2 seconds
@@ -36,13 +42,18 @@ Scenario: Como usuario creo un post y lo edito múltiples veces
   And I wait for 2 seconds
   And I click Published
   And I wait for 2 seconds
-  And I select a published post
+  Then I verify that my post has been modified
+  And I wait for 2 seconds
+  When I select a published post
   And I wait for 2 seconds
   And I click title
   And I wait for 2 seconds
-  And I enter title
+  And I modify the title
   And I wait for 2 seconds
   And I click the Update button
   And I wait for 2 seconds
   And I go back to Posts
   And I wait for 2 seconds
+  And I click Published
+  And I wait for 2 seconds
+  Then I verify that my post has been modified

@@ -12,19 +12,16 @@ Scenario: Como usuario edito una página estática
   And I wait for 2 seconds
   And I click Pages
   And I wait for 2 seconds
-  And I click New Page
+  And I select a published page
   And I wait for 2 seconds
-  And I enter title
+  And I click title
+  And I wait for 2 seconds
+  And I modify the title
   And I wait for 2 seconds
   And I enter paragraphs
   And I wait for 2 seconds
-  And I click add card
-  And I wait for 2 seconds
-  And I click image
+  And I click the Update button
   And I wait for 5 seconds
-  And I click the Publish button
+  And I go back to Pages
   And I wait for 2 seconds
-  And I publish
-  And I wait for 2 seconds
-  And I confirm the publish
-  And I wait for 5 seconds
+  Then I verify that my page has been modified

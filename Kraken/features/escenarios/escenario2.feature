@@ -16,9 +16,12 @@ Scenario: Como usuario modifico un post existente
   And I wait for 2 seconds
   And I click title
   And I wait for 2 seconds
-  And I enter title
+  And I modify the title
   And I wait for 2 seconds
-  And I enter paragraph
+  And I enter paragraphs
   And I wait for 2 seconds
   And I click the Update button
   And I wait for 5 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  Then I verify that my post has been modified

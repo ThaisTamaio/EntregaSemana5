@@ -16,9 +16,22 @@ Scenario: Como usuario creo un post y lo visualizo por medio de la función vist
   And I wait for 2 seconds
   And I enter paragraphs
   And I wait for 2 seconds
+  And I click add card
+  And I wait for 2 seconds
+  And I click image
+  And I wait for 5 seconds
+  And I click Preview
+  And I wait for 10 seconds
   And I click the Publish button
   And I wait for 2 seconds
   And I publish
   And I wait for 2 seconds
   And I confirm the publish
   And I wait for 5 seconds
+  And I go back to editor
+  And I wait for 2 seconds
+  And I go back to Posts
+  And I wait for 2 seconds
+  And I click Published
+  And I wait for 2 seconds
+  Then I verify that my post has been created

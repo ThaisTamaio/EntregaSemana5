@@ -15,6 +15,8 @@ let originalMemberEmail = ""
 let originalMembersNumber = ""
 let membersNumber = ""
 let originalMemberNote = ""
+let originalUserEmail = ""
+let originalUserPassword = ""
 
 // ----------------------------------------------------------------------------------------------------------------
 // Login
@@ -524,6 +526,42 @@ When('I enter member note {string}', async function (member_note) {
     return await element.setValue(member_note);
 });
 
+When('I enter my email {string}', async function (user_email) {
+    let element = await this.driver.$('#identification');
+    originalUserEmail = user_email
+    return await element.setValue(user_email);
+});
+
+When('I enter my password {string}', async function (user_password) {
+    let element = await this.driver.$('#password');
+    originalUserPassword = user_password
+    return await element.setValue(user_password);
+});
+
+
+When('I enter my Tag Name {string}', async function (tag_name) {
+    let element = await this.driver.$('#tag-name');
+    return await element.setValue(tag_name);
+});
+
+When('I enter my Tag Color {string}', async function (tag_color) {
+    let element = await this.driver.$('body > div.gh-app > div > main > section > form > div.gh-main-section > section > div > div:nth-child(1) > div.gh-tag-settings-multiprop > div.form-group.gh-tag-settings-colorcontainer > div > input');
+    return await element.setValue(tag_color);
+});
+
+When('I enter my Tag Description {string}', async function (tag_description) {
+    let element = await this.driver.$('#tag-description');
+    return await element.setValue(tag_description);
+});
+
+When('I enter a slug {string}', async function (tag_slug) {
+    let element = await this.driver.$('#tag-slug');
+    return await element.setValue(tag_slug);
+});
+
+
+
+
 
 Then('I verify the behavior while saving member', async function(){
     if (originalMemberNote == 'Escenario original: todo bien') {
@@ -550,6 +588,46 @@ Then('I verify the behavior while saving member', async function(){
         let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div:nth-child(1) > div > div.form-group.mb0.gh-member-note.error > p.response');
         let errorMessage = await element.getText();
         return assert.equal(errorMessage, "Note is too long.", "Error: mensaje no es el esperado") 
+    }
+});
+
+Then('I verify the behavior while try to login {string}', async function(id){
+    if (id == '1') {
+        let element = await this.driver.$('.main-error');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Please fill out the form to sign in."), "Error: mensaje no es el esperado")
+    } else if (id == '2') {
+        let element = await this.driver.$('.main-error');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Your password is incorrect.") , "Error: mensaje no es el esperado")
+    } else if (id == '3') {
+        let element = await this.driver.$('.main-error');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("There is no user with that email address."), "Error: mensaje no es el esperado")
+    }
+});
+
+Then('I verify the behavior while saving Tag {string}', async function(id){
+    if (id == '1') {
+        let element = await this.driver.$('p.response:nth-child(1)');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Tag names cannot be longer than 191 characters."), "Error: mensaje no es el esperado")
+    } else if (id == '2') {
+        let element = await this.driver.$('p.response:nth-child(1)');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("You must specify a name for the tag.") , "Error: mensaje no es el esperado")
+    } else if (id == '3') {
+        let element = await this.driver.$('p.response:nth-child(2)');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("The colour should be in valid hex format"), "Error: mensaje no es el esperado")
+    } else if (id == '4') {
+        let element = await this.driver.$('p.response:nth-child(4)');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("URL cannot be longer than 191 characters."), "Error: mensaje no es el esperado")
+    } else if (id == '5') {
+        let element = await this.driver.$('p.response:nth-child(3)');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Description cannot be longer than 500 characters."), "Error: mensaje no es el esperado")
     }
 });
 

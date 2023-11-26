@@ -1,7 +1,7 @@
-Feature: Agregar la información de un miembro y revisar el estado de la suscripción a la newsletter
+Feature: Agregar un miembro con diferentes tipos de datos inválidos
 
 @user1 @web
-Scenario Outline: Como usuario edito la información de un miembro y cambio su estado de suscripción
+Scenario Outline: Como usuario agrego un miembro con diferentes tipos de datos inválidos
   Given I navigate to page "http://www.localhost:2368/ghost"
   And I wait for 2 seconds
   When I enter email "<USERNAME>"

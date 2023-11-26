@@ -14,6 +14,7 @@ let memberEmail = ""
 let originalMemberEmail = ""
 let originalMembersNumber = ""
 let membersNumber = ""
+let originalMemberNote = ""
 
 // ----------------------------------------------------------------------------------------------------------------
 // Login
@@ -475,13 +476,13 @@ Then('I verify that a member has been created', async function(){
 Then('I verify the subscription is turned on', async function(){
     let element = await this.driver.$('div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div.gh-main-section-content.grey.gh-member-newsletter-section > div.gh-member-newsletters > div > div.for-switch > label > input');
     let isSubscribed = await element.getProperty('checked');
-    assert.isTrue(isSubscribed,"El miembro no está suscrito a ningún newsletter")
+    return assert.isTrue(isSubscribed,"El miembro no está suscrito a ningún newsletter")
 });
 
 Then('I verify the subscription is turned off', async function(){
     let element = await this.driver.$('div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div.gh-main-section-content.grey.gh-member-newsletter-section > div.gh-member-newsletters > div > div.for-switch > label > input');
     let isSubscribed = await element.getProperty('checked');
-    assert.isFalse(isSubscribed,"El miembro no está suscrito a ningún newsletter")
+    return assert.isFalse(isSubscribed,"El miembro no está suscrito a ningún newsletter")
 });
 
 Then('I save my member info updates', async function(){
@@ -491,11 +492,64 @@ Then('I save my member info updates', async function(){
     console.log(buttonStatus);
     let updateStatus = buttonStatus == 'failure' ? false : true;
     assert.isTrue(updateStatus,'No se pueden guardar los cambios');
-    assert.notEqual(memberEmail, originalMemberEmail, 'El miembro no fue modificado exitosamente')
+    return assert.notEqual(memberEmail, originalMemberEmail, 'El miembro no fue modificado exitosamente')
 });
 
 Then('I verify the number of members is the same', async function(){
     let element = await this.driver.$('table.gh-list > thead > tr > th:nth-child(1)');
     membersNumber = await element.getText();
-    assert.equal(membersNumber, originalMembersNumber,'El proceso de importar usuarios previamente exportados ha creado nuevos records');
+    return assert.equal(membersNumber, originalMembersNumber,'El proceso de importar usuarios previamente exportados ha creado nuevos records');
 });
+
+
+
+
+// Probando datos a priori
+
+When('I enter member name {string}', async function (member_name) {
+    let element = await this.driver.$('#member-name');
+    originalMemberName = member_name;
+    return await element.setValue(member_name);
+});
+
+When('I enter member email {string}', async function (member_email) {
+    let element = await this.driver.$('#member-email');
+    originalMemberEmail = member_email;
+    return await element.setValue(member_email);
+});
+
+When('I enter member note {string}', async function (member_note) {
+    let element = await this.driver.$('#member-note');
+    originalMemberNote = member_note;
+    return await element.setValue(member_note);
+});
+
+
+Then('I verify the behavior while saving member', async function(){
+    if (originalMemberNote == 'Escenario original: todo bien') {
+        let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > section > div > div.gh-member-details-attribution > p');
+        let isCreated = await element.isExisting();
+        return assert.isTrue(isCreated,'El miembro no fue creado');
+    } else if (originalMemberNote == 'Escenario 1: email duplicado') {
+        let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div:nth-child(1) > div > div.gh-cp-member-email-name > div.form-group.max-width.error > p');
+        let errorMessage = await element.getText();
+        return assert.equal(errorMessage, "Member already exists. Attempting to add member with existing email address", "Error: mensaje no es el esperado")
+    } else if (originalMemberNote == 'Escenario 2: email en blanco') {
+        let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div:nth-child(1) > div > div.gh-cp-member-email-name > div.form-group.max-width.error > p');
+        let errorMessage = await element.getText();
+        return assert.equal(errorMessage, "Please enter an email.", "Error: mensaje no es el esperado")
+    } else if (originalMemberNote == 'Escenario 3: email inválido') {
+        let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div:nth-child(1) > div > div.gh-cp-member-email-name > div.form-group.max-width.error > p');
+        let errorMessage = await element.getText();
+        return assert.equal(errorMessage, "Invalid Email.", "Error: mensaje no es el esperado")
+    } else if (originalMemberNote == "Escenario 4: nombre excede límite de caracteres") {
+        let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div:nth-child(1) > div > div.gh-cp-member-email-name > div:nth-child(1) > p');
+        let errorMessage = await element.getText();
+        return assert.equal(errorMessage, "Name cannot be longer than 191 characters.", "Error: mensaje no es el esperado");
+    } else if (originalMemberName == "Escenario 5: nota excede límite de caracteres") {
+        let element = await this.driver.$('body > div.gh-app > div > main > section > div:nth-child(2) > form > div > section > div > div:nth-child(1) > div > div.form-group.mb0.gh-member-note.error > p.response');
+        let errorMessage = await element.getText();
+        return assert.equal(errorMessage, "Note is too long.", "Error: mensaje no es el esperado") 
+    }
+});
+

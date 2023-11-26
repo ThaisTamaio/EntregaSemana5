@@ -506,7 +506,7 @@ Then('I verify the number of members is the same', async function(){
 
 
 
-// Probando datos a priori
+// A Priori Data
 
 When('I enter member name {string}', async function (member_name) {
     let element = await this.driver.$('#member-name');
@@ -559,8 +559,37 @@ When('I enter a slug {string}', async function (tag_slug) {
     return await element.setValue(tag_slug);
 });
 
+When('I enter my first title {string}', async function (first_title) {
+    let element = await this.driver.$('div.gh-editor-title-container.page-improvements');
+    return await element.setValue(first_title);
+});
+
+When('I enter my title {string}', async function (post_title) {
+    let element = await this.driver.$('div.gh-editor-title-container.page-improvements');
+    return await element.setValue(post_title);
+});
+When('I enter my paragraphs {string}', async function (post_paragraphs) {
+    let element = await this.driver.$('div.kg-prose');
+    return await element.setValue(post_paragraphs);
+});
+
+When('I enter date {string}', async function (date_settings) {
+    let element = await this.driver.$('.gh-date-time-picker-date > input:nth-child(1)');
+    return await element.setValue(date_settings);
+});
+
+When('I enter hour {string}', async function (hour_settings) {
+    let element = await this.driver.$('.gh-date-time-picker-time > input:nth-child(1)');
+    return await element.setValue(hour_settings);
+});
+
+When('I enter excerpt {string}', async function (excerpt_settings) {
+    let element = await this.driver.$('#custom-excerpt');
+    return await element.setValue(excerpt_settings);
+});
 
 
+//--------
 
 
 Then('I verify the behavior while saving member', async function(){
@@ -631,3 +660,36 @@ Then('I verify the behavior while saving Tag {string}', async function(id){
     }
 });
 
+
+Then('I verify the behavior while saving a Post {string}', async function(id){
+    let element = await this.driver.$('div.gh-publish-cta > button > span:nth-child(1)');
+    let isCreated = await element.isExisting();
+    return assert.isTrue(isCreated,'No permite crear el post');
+});
+
+Then('I verify the behavior while saving a Post v2', async function(){
+    return assert.exists(await this.driver.$('div.gh-publish-cta > button > span:nth-child(1)'),"existe el elemento")
+});
+
+
+Then('I verify the behavior of settings {string}', async function(id){
+    if (id == '1') {
+        let element = await this.driver.$('.gh-date-time-picker-error');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Invalid date format, must be YYYY-MM-DD"), "Error: mensaje no es el esperado")
+    } else if (id == '2') {
+        let element = await this.driver.$('.gh-date-time-picker-error');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Must be in format:") , "Error: mensaje no es el esperado")
+    } else if (id == '3') {
+        let element = await this.driver.$('div.form-group:nth-child(5) > p:nth-child(3)');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Excerpt cannot be longer than 300 characters."), "Error: mensaje no es el esperado")
+    }
+});
+
+Then('I verify the behavior on update', async function(){
+        let element = await this.driver.$('.gh-alert');
+        let errorMessage = await element.getText();
+        return assert.ok(errorMessage.includes("Validation failed: Title cannot be longer than 255 characters."), "Error: mensaje no es el esperado")
+});

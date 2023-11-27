@@ -33,7 +33,7 @@ describe('Ghost Post Creation and Publication', () => {
     });    
 
     it('Escenario 2: Modificar un post existente', () => {
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.paragraph();
         const newPostContent = faker.lorem.paragraph();
 
@@ -61,7 +61,7 @@ describe('Ghost Post Creation and Publication', () => {
 
     it('Escenario 3: Crear un Post y asignar tags', () => {
         const tags = [faker.lorem.word()];
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.sentence();
 
         cy.get('a[href="#/posts/"]').click();
@@ -93,7 +93,7 @@ describe('Ghost Post Creation and Publication', () => {
         const tagtest1 = faker.lorem.word();
         const tagtest2 = faker.lorem.word();
         const tags = [tagtest1, tagtest2];
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.paragraph();
 
         cy.get('a[href="#/posts/"]').click();
@@ -152,7 +152,7 @@ describe('Ghost Post Creation and Publication', () => {
     });
     
     it('Escenario 6: Crear un Post, Publicarlo y Luego Editarlo Múltiples veces', () => {
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.paragraph();
 
         cy.get('a[href="#/posts/"]').click();
@@ -181,7 +181,7 @@ describe('Ghost Post Creation and Publication', () => {
     });     
 
     it('Escenario 7: Crear un Post y luego Agregarle Elementos Multimedia', () => {
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.paragraph();
 
         cy.get('a[href="#/posts/"]').click();
@@ -244,7 +244,7 @@ describe('Ghost Post Creation and Publication', () => {
     });   
     
     it('Escenario 9: Modificar un Post para Cambiar su Enfoque y Actualizar Tags y Multimedia', () => {
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.paragraph();
 
         cy.get('a[href="#/posts/"]').click();
@@ -308,7 +308,7 @@ describe('Ghost Post Creation and Publication', () => {
     });     
 
     it('Escenario 10: Crear un Post y Utilizar la Función de Vista Previa antes de Publicarlo', () => {
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.paragraph();
 
         cy.get('a[href="#/posts/"]').click();
@@ -689,7 +689,7 @@ describe('Ghost Post Creation and Publication', () => {
 
     it('Escenario 23: Uso de Tags No Permitidos en un Post', () => {
         const tags = [faker.lorem.paragraph() + faker.lorem.paragraph()];
-        const postTitle = faker.lorem.word();
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
         const postContent = faker.lorem.sentence();
 
         cy.get('a[href="#/posts/"]').click();
@@ -739,5 +739,184 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2369/ghost/#/dashboard');
         cy.contains('6');
     });
+
+    it('Escenario 25: Programar Publicación con Fecha Pasada', () => {
+        function formatDateWithEsc(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-esc${month}-${day}`;
+        }
+
+        const pastDate = faker.date.past();
+        const dateString = formatDateWithEsc(pastDate);
+        const timeString = `${faker.datatype.number({ min: 0, max: 20 }).toString().padStart(2, '0')}:${faker.datatype.number({ min: 0, max: 59 }).toString().padStart(2, '0')}`;
+        const title = faker.lorem.word();
+        const content = faker.lorem.paragraph();
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(title);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(content);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('input[placeholder="YYYY-MM-DD"]').clear();
+        cy.get('input[data-test-date-time-picker-time-input=""]').clear();
+        cy.get('input[placeholder="YYYY-MM-DD"]').invoke('val', dateString);
+        cy.get('input[data-test-date-time-picker-time-input=""]').invoke('val', timeString);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.contains(content).should('exist');
+        cy.contains(title).should('exist');
+    });
+
+    it('Escenario 26: Editar Post para Eliminar Todo el Contenido', () => {
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
+        const postContent = faker.lorem.paragraph();
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.wait(1000)
+        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.url().should('include', '/posts');
+        cy.wait(1000)
+        cy.contains(postTitle).click({force: true});
+        cy.get('textarea[placeholder="Post title"]').clear();
+        cy.get('p[data-koenig-dnd-droppable="true"]').clear();
+        cy.get('span').contains('Update').click({ force: true });
+        cy.url().should('include', '/editor/post');
+        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.contains("(Untitled)");
+    });
+
+    it('Escenario  27: Crear Página Estática sin Título', () => {
+        const pageContent = faker.lorem.paragraph();
+
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+        cy.wait(1000)
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.contains("(Untitled)");
+    });
+
+    it('Escenario 28: Asignar Tags Incorrectos a una Página', () => {
+        const tags = [faker.lorem.paragraph() + faker.lorem.paragraph()];
+        const pageTitle = faker.lorem.word()+ faker.lorem.word();
+        const pageContent = faker.lorem.sentence();
+
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('button.settings-menu-toggle').click();
+
+        tags.forEach(tag => {
+            cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
+            cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').type(`${tag}{enter}`);
+        });
+
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+        cy.contains('Validation error')
+    });
+
+    it('Escenario 29: Eliminar Contenido de Página y Guardar', () => {
+        const pageTitle = faker.lorem.word()+ faker.lorem.word();
+        const pageContent = faker.lorem.paragraph();
+
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+        cy.wait(1000)
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.url().should('include', '/pages');
+        cy.wait(1000)
+        cy.contains(pageTitle).click({force: true});
+        cy.get('textarea[placeholder="Page title"]').clear();
+        cy.get('p[data-koenig-dnd-droppable="true"]').clear();
+        cy.get('span').contains('Update').click({ force: true });
+        cy.url().should('include', '/editor/page');
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.contains("(Untitled)");
+    });
+
+    it('Escenario 30: Agregar un Miembro con Correo Electrónico Inválido', () => {
+        const nombre = faker.name.firstName();
+        const email = `invalid${faker.random.alphaNumeric(5)}@${faker.random.word()}.${
+          faker.random.word()
+        }`;
+    
+        cy.get('a[href="#/members/"]').click();
+        cy.url().should('include', '/members');
+    
+        cy.get("body").then($body => {
+            if ($body.find("Add them manually").length > 0) {   
+                cy.get('a').contains('Add them manually').click();
+            }
+            else{
+                cy.get('span').contains('New member').click();
+            }
+        });
+    
+        cy.url().should('include', '/members/new');
+        cy.get('input[data-test-input="member-name"]').type(nombre);
+        cy.get('input[data-test-input="member-email"]').type(email);
+        cy.get('span').contains('Save').click();
+    });
+
+    it('Escenario 31: Crear un Post con Excerpt Normal', () => {
+        const tags = [faker.lorem.word()];
+        const postTitle = faker.lorem.word() + faker.lorem.word();
+        const postContent = faker.lorem.sentence();
+        const postExcerpt = faker.lorem.sentence();
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('textarea.post-setting-custom-excerpt').type(postExcerpt);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    
+        cy.wait(1000);
+        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.wait(1000);
+        cy.contains(postTitle).click({force: true});
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('textarea.post-setting-custom-excerpt').invoke('val').should('eq', postExcerpt);
+    });    
     
 });

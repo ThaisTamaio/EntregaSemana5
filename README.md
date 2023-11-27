@@ -148,8 +148,8 @@ nvm use 16.14.2
 
 En la carpeta Kraken/features/escenarios se encuentran los escenarios en formato .feature a ejecutar, la manera apropiada de correrlos es la siguiente:
 
-1. Mover el escenario.feature a probar un nivel arriba a la carpeta Kraken/features.
-2. Cerciorarse de que únicamente haya un archivo .feature en dicha carpeta. Si hay más de un archivo, es indispensable mover a la carpeta escenarios todos aquellos que no se deseen ejecutar.
+1. Mover el `escenario.feature` a probar un nivel arriba en la carpeta `Kraken/features`.
+2. Cerciorarse de que únicamente haya un archivo `.feature` en dicha carpeta. Si hay más de un archivo, es indispensable mover a la carpeta escenarios todos aquellos que no se deseen ejecutar.
 3. Ejecutar el siguiente comando en la terminal de Bash:
 
 ```

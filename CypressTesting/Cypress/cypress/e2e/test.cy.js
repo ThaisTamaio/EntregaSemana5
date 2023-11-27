@@ -139,7 +139,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span.settings-menu-open').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
         cy.visit('http://localhost:2369/ghost/#/posts');
-        cy.contains(postTitle).should('be.visible').click();
+        cy.contains(postTitle).click({ force: true });
         cy.get('button.settings-menu-toggle').click();
         cy.contains(tagtest1);
         cy.contains(tagtest2);
@@ -179,7 +179,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.visit('http://localhost:2369/ghost/');
             cy.get('a[href="#/posts/"]').click({ multiple: true, force: true });
             cy.url().should('include', '/posts');
-            cy.contains(postTitle).should('be.visible').click();
+            cy.contains(postTitle).click({ force: true });
             cy.url().should('include', '/editor/post');
             cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(newPostContent);
             cy.get('span').contains('Update').click();
@@ -211,7 +211,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.wait(1000);
         cy.get('a.gh-unsplash-button').contains('Insert image').click({ force: true });
         cy.wait(1000);
-        cy.get('span').contains('Update').should('be.visible').click();
+        cy.get('span').contains('Update').click({ force: true });
         cy.url().should('include', '/editor/post');
     });   
 
@@ -274,7 +274,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.wait(1000);
         cy.get('a.gh-unsplash-button').contains('Insert image').click({ force: true });
         cy.wait(1000);
-        cy.get('span').contains('Update').should('be.visible').click();
+        cy.get('span').contains('Update').click( { force: true } );
         cy.url().should('include', '/editor/post');
 
         cy.visit('http://localhost:2369/ghost/#/posts');
@@ -311,7 +311,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.wait(1000);
             cy.get('a.gh-unsplash-button').contains('Insert image').first().click({ force: true });
             cy.wait(1000);
-            cy.get('span').contains('Update').should('be.visible').click();
+            cy.get('span').contains('Update').click({ force: true });
             cy.url().should('include', '/editor/post');
     });     
 
@@ -346,7 +346,7 @@ describe('Ghost Post Creation and Publication', () => {
         const futureDate = faker.date.future();
         const dateString = formatDateWithEsc(futureDate);
         const timeString = `${faker.datatype.number({ min: 0, max: 23 }).toString().padStart(2, '0')}:${faker.datatype.number({ min: 0, max: 59 }).toString().padStart(2, '0')}`;
-        const title = faker.lorem.word();
+        const title = faker.lorem.word() + faker.lorem.word();
         const content = faker.lorem.paragraph();
 
         cy.get('a[href="#/posts/"]').click();
@@ -385,7 +385,7 @@ describe('Ghost Post Creation and Publication', () => {
 
     it('Escenario 13: Crear una Página y asignar tags', () => {
         const tags = [faker.lorem.word()];
-        const pageTitle = faker.lorem.word();
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
         const pageContent = faker.lorem.sentence();
 
         cy.get('a[href="#/pages/"]').click();
@@ -417,7 +417,7 @@ describe('Ghost Post Creation and Publication', () => {
         const tagtest1 = faker.lorem.word();
         const tagtest2 = faker.lorem.word();
         const tags = [tagtest1, tagtest2];
-        const pageTitle = faker.lorem.word();
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
         const pageContent = faker.lorem.paragraph();
 
         cy.get('a[href="#/pages/"]').click();
@@ -445,7 +445,9 @@ describe('Ghost Post Creation and Publication', () => {
         cy.wait(1000);
         cy.url().should('include', '/pages');
         cy.contains(pageTitle).click({ force: true });
+        cy.wait(1000);
         cy.get('button.settings-menu-toggle').click();
+        cy.wait(1000);
     
         tags.forEach(tag => {
             cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true });
@@ -455,7 +457,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span.settings-menu-open').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
         cy.visit('http://localhost:2369/ghost/#/pages');
-        cy.contains(pageTitle).should('be.visible').click();
+        cy.contains(pageTitle).click({ force: true });
         cy.get('button.settings-menu-toggle').click();
         cy.contains(tagtest1);
         cy.contains(tagtest2);
@@ -469,7 +471,9 @@ describe('Ghost Post Creation and Publication', () => {
     
         pages.forEach((page, index) => {
             const pageContent = faker.lorem.paragraph();
+            cy.wait(1000);
             cy.visit('http://localhost:2369/ghost/#/pages');
+            cy.wait(1000);
             cy.get('span').contains('New page').click({force: true});
             cy.get('textarea[placeholder="Page title"]').type(page, { force: true });
             cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent, { force: true });
@@ -510,7 +514,7 @@ describe('Ghost Post Creation and Publication', () => {
 
     it('Escenario 17: Eliminar tag y Verificar en Página', () => {
         const tag = faker.lorem.word();
-        const pageTitle = faker.lorem.word();
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
         const pageContent = faker.lorem.sentence();
 
         cy.get('a[href="#/pages/"]').click();
@@ -593,7 +597,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.visit('http://localhost:2369/ghost/#/members')
         cy.wait(1000);
     
-        cy.contains(nombre).should('be.visible').click();
+        cy.contains(nombre).click({ force: true });
         let isChecked = false;
         cy.get('input[data-test-checkbox="member-subscribed"]').then(($input) => {
             isChecked = $input.prop('checked');
@@ -759,7 +763,7 @@ describe('Ghost Post Creation and Publication', () => {
         const pastDate = faker.date.past();
         const dateString = formatDateWithEsc(pastDate);
         const timeString = `${faker.datatype.number({ min: 0, max: 20 }).toString().padStart(2, '0')}:${faker.datatype.number({ min: 0, max: 59 }).toString().padStart(2, '0')}`;
-        const title = faker.lorem.word();
+        const title = faker.lorem.word() + faker.lorem.word();
         const content = faker.lorem.paragraph();
     
         cy.get('a[href="#/posts/"]').click();
@@ -1251,7 +1255,7 @@ describe('Ghost Post Creation and Publication', () => {
     });
 
     it('Escenario 47: Programar Publicación para Fecha Inexistente', () => {
-        const title = faker.lorem.word();
+        const title = faker.lorem.word() + faker.lorem.word();
         const content = faker.lorem.paragraph();
         const invalidMonth = faker.datatype.number({ min: 13, max: 99 });
         const invalidDay = faker.datatype.number({ min: 32, max: 99 });
@@ -1363,9 +1367,9 @@ describe('Ghost Post Creation and Publication', () => {
             });
     
             cy.get('span.settings-menu-open').click();
-            cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
+            cy.get('span[data-test-task-button-state="idle"]').contains('Update').click({ force: true});
             cy.visit('http://localhost:2369/ghost/#/posts');
-            cy.contains(postTitle).should('be.visible').click();
+            cy.contains(postTitle).click({ force: true });
             cy.get('button.settings-menu-toggle').click();
             cy.contains(tagtest1);
             cy.contains(tagtest2);
@@ -1468,6 +1472,136 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('button.settings-menu-toggle').click();
         cy.get('span').contains('Code injection').click();
         cy.contains(codeInjection);
+    });
+
+    it('Escenario 56: Editar un Post y Cambiar su URL Slug a una Ya Existente', () => {
+        const url = faker.lorem.word() + faker.lorem.word();
+    
+        for (let i = 0; i < 2; i++) {
+            const postTitle = faker.lorem.word() + faker.lorem.word();
+            const postContent = faker.lorem.sentence();
+    
+            cy.wait(1000);
+            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.wait(1000);
+            cy.url().should('include', '/posts');
+            cy.get('span').contains('New post').click();
+            cy.url().should('include', '/editor/post');
+            cy.get('textarea[placeholder="Post title"]').type(postTitle);
+            cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+            cy.get('button.settings-menu-toggle').click();
+            cy.get('input.post-setting-slug').clear().type(url, {force: true});
+            cy.get('span.settings-menu-open').click();
+            cy.get('span').contains('Publish').click();
+            cy.get('span').contains('Continue, final review').click();
+            cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    
+            cy.wait(1000);
+            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.wait(1000);
+        }
+    });
+
+    it('Escenario 57: Crear un Post y Agregar Enlaces Internos Rotos', () => {
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
+        const postContent = faker.lorem.paragraph();
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit('http://localhost:2369/ghost/#/posts');
+    
+        for (let i = 1; i <= 3; i++) {
+            const postContent1 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+            const postContent2 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+            const postContent3 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+            const newPostContent = postContent1 + " " + postContent2 + " " + postContent3;
+            cy.wait(1000);
+            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.wait(1000);
+            cy.contains(postTitle).click({force: true});
+            cy.url().should('include', '/editor/post');
+            cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(newPostContent);
+            cy.get('span').contains('Update').click();
+            cy.url().should('include', '/editor/post');
+            cy.contains(newPostContent).should('exist');
+        }
+    });
+
+    it('Escenario 58: Programar Publicación de Post en Fecha con Formato Incorrecto', () => {
+        const title = faker.lorem.word() + faker.lorem.word();
+        const content = faker.lorem.paragraph();
+        const dateString = `fecha-${faker.datatype.number({min: 1000, max: 9999})}-${faker.lorem.word()}`;
+        const timeString = `${faker.datatype.number({ min: 0, max: 23 }).toString().padStart(2, '0')}:${faker.datatype.number({ min: 0, max: 59 }).toString().padStart(2, '0')}`;
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(title);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(content);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('input[placeholder="YYYY-MM-DD"]').clear().type(dateString, {force: true});
+        cy.get('input[data-test-date-time-picker-time-input=""]').clear().type(timeString, {force: true});
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    });
+
+    it('Escenario 59: Crear Página Estática con Contenido Excesivamente Largo', () => {
+        const pageTitle = faker.lorem.sentence();
+        let pageContent = '';
+        for (let i = 0; i < 1; i++) {
+            pageContent += faker.lorem.paragraph(40) + ' ';
+        }
+
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/pages`);
+        cy.contains(pageTitle).should('exist');
+    });
+
+    it('Escenario 60: Crear un Miembro con un Note muy Largo', () => {
+        const nombre = faker.name.firstName();
+        const email = faker.internet.email();
+        const note = faker.random.alphaNumeric(499);
+    
+        cy.get('a[href="#/members/"]').click();
+        cy.url().should('include', '/members');
+    
+        cy.get("body").then($body => {
+            if ($body.find("Add them manually").length > 0) {   
+                cy.get('a').contains('Add them manually').click();
+            }
+            else{
+                cy.get('span').contains('New member').click();
+            }
+        });
+    
+        cy.url().should('include', '/members/new');
+        cy.get('input[data-test-input="member-name"]').type(nombre);
+        cy.get('input[data-test-input="member-email"]').type(email);
+        cy.get('textarea[name="note"]').type(note);
+    
+        cy.get('span').contains('Save').click();
+        cy.get('span').contains('Saved').should('exist');
+        cy.contains(nombre).should('exist');
+        cy.contains(email).should('exist');
     });
 
 

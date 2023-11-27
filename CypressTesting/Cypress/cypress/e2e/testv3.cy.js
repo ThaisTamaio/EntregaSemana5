@@ -15,19 +15,35 @@ describe('Ghost tests version 3.42', () => {
         });
     });  
 
-    it('Escenario 50: Exportar Lista de Miembros Sin Ningún Miembro Presente', () => {
-        cy.visit('http://localhost:2369/ghost/#/members');
-        cy.url().should('include', '/members');
+    it('Escenario 55: Crear una Página con Code Injection Inválido', () => {
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
+        const pageContent = faker.lorem.sentence();
+        const codeInjection = faker.lorem.paragraph();
     
-        // Abrir el menú de acciones de miembros
-        cy.get('button[data-test-button="members-actions"]').click({ force: true });
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.get('div.CodeMirror-scroll').first().type(codeInjection);
     
-        // Verificar que el botón "Export all members" no exista
-        cy.get('span').contains('Export all members').should('not.exist');
-    
-        // Verificar que el texto "Export selected members" sí exista
-        cy.contains('Export selected members').should('exist');
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click({force: true});
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.wait(1000);
+        cy.contains(pageTitle).click({force: true});
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.contains(codeInjection);
     });
+    
+    
     
     
     

@@ -892,7 +892,6 @@ describe('Ghost Post Creation and Publication', () => {
     });
 
     it('Escenario 31: Crear un Post con Excerpt Normal', () => {
-        const tags = [faker.lorem.word()];
         const postTitle = faker.lorem.word() + faker.lorem.word();
         const postContent = faker.lorem.sentence();
         const postExcerpt = faker.lorem.sentence();
@@ -917,6 +916,199 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains(postTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
         cy.get('textarea.post-setting-custom-excerpt').invoke('val').should('eq', postExcerpt);
-    });    
+    });
+
+    it('Escenario 32: Crear un Post con Excerpt Muy Largo', () => {
+        const postTitle = faker.lorem.word() + faker.lorem.word();
+        const postContent = faker.lorem.sentence();
+        const postExcerpt = faker.lorem.paragraph()+faker.lorem.paragraph()+faker.lorem.paragraph()+faker.lorem.paragraph();
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('textarea.post-setting-custom-excerpt').type(postExcerpt);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click({force: true});
+        cy.contains('Validation failed');
+    });
+
+    it('Escenario 33: Modificar Página Estática con URL Inválida', () => {
+        const postTitle = faker.lorem.word() + faker.lorem.word();
+        const postContent = faker.lorem.sentence();
+        const invalidUrl = `invalid-url-%<>{}[]|:^~#${faker.random.alphaNumeric(5)}`;
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('button.settings-menu-toggle').click();
+    
+        cy.get('input.post-setting-slug').clear().type(invalidUrl, {force: true});
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    
+        cy.wait(1000);
+        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.wait(1000);
+    });
+
+    it('Escenario 34: Crear Post con Tags Repetidos', () => {
+        const tagtest1 = faker.lorem.word();
+        const tags = [tagtest1, tagtest1, tagtest1];
+        const postTitle = faker.lorem.word()+ faker.lorem.word();
+        const postContent = faker.lorem.paragraph();
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('button.settings-menu-toggle').click();
+        tags.forEach(tag => {
+            cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true });
+            cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').type(`${tag}{enter}`);
+        });
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    });
+
+    it('Escenario 35: Publicar Post con Enlaces Rotos', () => {
+        const postTitle = faker.lorem.sentence();
+        const postContent = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+    });
+
+    it('Escenario 36: Crear un Post con Code Injection Válido', () => {
+        const postTitle = faker.lorem.word() + faker.lorem.word();
+        const postContent = faker.lorem.sentence();
+        const codeInjection = `<script>alert('${faker.random.word()}')</script>`;
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.get('div.CodeMirror-scroll').first().type(codeInjection);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click({force: true});
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.wait(1000);
+        cy.contains(postTitle).click({force: true});
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.contains(codeInjection);
+    });
+
+    it('Escenario 37: Uso de Caracteres Especiales en Títulos de Posts', () => {
+        const specialCharacters = "!@#$%^&*()_+[]{};':,.<>/?`~";
+        const postTitle = faker.lorem.word() + specialCharacters + faker.lorem.word();
+        const postContent = faker.lorem.paragraph();
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+    }); 
+
+    it('Escenario 38: Introducir HTML o Scripts en el Contenido del Post', () => {
+        const postTitle = faker.lorem.sentence();
+        const postContent = `<h1>${faker.lorem.sentence()}</h1><p>${faker.lorem.paragraph()}</p><script>alert('Test');</script>`;
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+    });   
+
+    it('Escenario 39: Crear un Post con Code Injection Inválido', () => {
+        const postTitle = faker.lorem.word() + faker.lorem.word();
+        const postContent = faker.lorem.sentence();
+        const codeInjection = faker.lorem.paragraph();
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.get('div.CodeMirror-scroll').first().type(codeInjection);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click({force: true});
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+
+        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.wait(1000);
+        cy.contains(postTitle).click({force: true});
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.contains(codeInjection);
+    });
+    
+    it('Escenario 40: Crear un Post y Utilizar Caracteres no Convencionales en el Contenido', () => {
+        const postTitle = faker.lorem.sentence();
+        // Generar un párrafo con caracteres especiales
+        const specialCharacters = "!@#$%^&*()_+[]{};':,.<>/?`~";
+        const postContent = faker.lorem.sentence() + specialCharacters + faker.lorem.sentence();
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+        });
     
 });

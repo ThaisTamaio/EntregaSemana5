@@ -15,42 +15,25 @@ describe('Ghost tests version 3.42', () => {
         });
     }); 
 
-    it('Escenario 31: Crear un Post con Excerpt Normal', () => {
-        const tags = [faker.lorem.word()];
-        const postTitle = faker.lorem.word() + faker.lorem.word();
-        const postContent = faker.lorem.sentence();
-        const postExcerpt = faker.lorem.sentence(); // Generar un excerpt aleatorio
-    
-        cy.get('a[href="#/posts/"]').click();
-        cy.url().should('include', '/posts');
-        cy.get('span').contains('New post').click();
-        cy.url().should('include', '/editor/post');
-        cy.get('textarea[placeholder="Post title"]').type(postTitle);
-        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
-        cy.get('button.settings-menu-toggle').click();
-    
-        // Agregar excerpt
-        cy.get('textarea.post-setting-custom-excerpt').type(postExcerpt);
-    
-        cy.get('span.settings-menu-open').click();
-        cy.get('span').contains('Publish').click();
-        cy.get('span').contains('Continue, final review').click();
-        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-    
-        cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/posts');
-        cy.wait(1000);
-        cy.contains(postTitle).click({force: true});
-        cy.get('button.settings-menu-toggle').click();
-    
-        // Verificar el excerpt
-        cy.get('textarea.post-setting-custom-excerpt').invoke('val').should('eq', postExcerpt);
-    });    
-    
-    
+    it('Escenario 40: Crear un Post y Utilizar Caracteres no Convencionales en el Contenido', () => {
+    const postTitle = faker.lorem.sentence();
+    // Generar un párrafo con caracteres especiales
+    const specialCharacters = "!@#$%^&*()_+[]{};':,.<>/?`~";
+    const postContent = faker.lorem.sentence() + specialCharacters + faker.lorem.sentence();
 
+    cy.get('a[href="#/posts/"]').click();
+    cy.url().should('include', '/posts');
+    cy.get('span').contains('New post').click();
+    cy.url().should('include', '/editor/post');
+    cy.get('textarea[placeholder="Post title"]').type(postTitle);
+    cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(postContent);
+    cy.get('span').contains('Publish').click();
+    cy.get('span').contains('Continue, final review').click();
+    cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    cy.visit(`http://localhost:2369/ghost/#/posts`);
+    cy.contains(postTitle).should('exist');
+});
 
-     
 
     
 });

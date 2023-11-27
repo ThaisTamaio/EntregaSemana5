@@ -159,7 +159,7 @@ npx kraken-node run
 
 ### Cypress
 
-Los tests se encuentran dentro de CypressTesting.
+Los tests se encuentran dentro de CypressTesting. **IMPORTANTE USAR LA VERSIÓN GHOST 5.74.3**
 
 1. Abrir una terminar en la carpeta Cypress e instalar las dependencias por medio del comando:
 
@@ -173,7 +173,7 @@ npm install
 
 3. Posteriormente, seguir los pasos de este video tutorial:
 
-[Tutorial ejecución pruebas Cypress](https://youtu.be/ar7QeW1J2Cs)
+[Tutorial ejecución pruebas Cypress](https://youtu.be/KZQ6f_LO2wU)
 
 
 ### BackstopJS

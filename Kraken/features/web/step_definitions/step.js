@@ -2,6 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { faker } = require('@faker-js/faker');
 const { By, Key, browser, Builder } = require('webdriverio');
 const { assert, expect } = require('chai');
+const axios = require('axios');
 
 let title = ""
 let postTitle = ""
@@ -401,6 +402,65 @@ When('I clear the filter', async function(){
     return await element.click();
 });
 
+// --------------------------------
+// Global Settings
+// --------------------------------
+
+When('I click Global Settings', async function(){
+    let element = await this.driver.$('a[href="#/settings/"] > svg');
+    return await element.click();
+});
+
+When('I click View History', async function(){
+    let element = await this.driver.$('div[data-testid="history"] > div > div:nth-child(2) > button');
+    return await element.click();
+});
+
+When('I click Open Labs', async function(){
+    let element = await this.driver.$('div[data-testid="labs"] > div:nth-child(2) > button');
+    return await element.click();
+});
+
+When('I click Edit Publication Language', async function(){
+    let element = await this.driver.$('div[data-testid="publication-language"] > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button');
+    return await element.click();
+});
+
+When('I clear the Publication Language field', async function(){
+    let element = await this.driver.$('div[data-testid="publication-language"] > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > input');
+    return await element.clearValue();
+});
+
+When('I enter new Publication Language {string}', async function(lang){
+    let element = await this.driver.$('div[data-testid="publication-language"] > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > input');
+    await element.click();
+    return await element.setValue(lang);
+});
+
+Then('I save Publication Language', async function(){
+    let element = await this.driver.$('div[data-testid="publication-language"] > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)');
+    return await element.click();
+});
+
+Then('I use Export Analytics', async function(){
+    let element = await this.driver.$('div[data-testid="analytics"] > div:nth-child(4) > button');
+    return await element.click();
+});
+
+Then('I use Export Content', async function(){
+    let element = await this.driver.$('.border-grey-700 > section:nth-child(3) > div:nth-child(2) > div:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1) > span:nth-child(1)');
+    return await element.click();
+});
+
+Then('I close History', async function(){
+    let element = await this.driver.$('.bg-black');
+    let buttonText = await element.getProperty('innerText')
+    assert.equal(buttonText,"Close","Botón de cerrar no existe, por ende el System Event Log no se abrió")
+    return await element.click();
+});
+
+// ----------------------------------------------------------------------------------------------------------------
+
 
 // ----------------------------------------------------------------------------------------------------------------
 // Verification
@@ -589,6 +649,8 @@ When('I enter excerpt {string}', async function (excerpt_settings) {
 });
 
 
+
+
 //--------
 
 
@@ -692,4 +754,15 @@ Then('I verify the behavior on update', async function(){
         let element = await this.driver.$('.gh-alert');
         let errorMessage = await element.getText();
         return assert.ok(errorMessage.includes("Validation failed: Title cannot be longer than 255 characters."), "Error: mensaje no es el esperado")
+});
+
+
+
+// API - Testing
+
+
+Then('I should receive mock data', function () {
+    // Add assertions to verify the response, e.g., status code, response body
+    expect(this.response.status).to.equal(200);
+    // Add more assertions as needed
 });

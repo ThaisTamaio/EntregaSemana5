@@ -13,27 +13,26 @@ describe('Ghost tests version 3.42', () => {
             console.error('Se detectó una excepción no capturada:', err);
             return false;
         });
-    }); 
+    });  
 
-    it('Escenario 40: Crear un Post y Utilizar Caracteres no Convencionales en el Contenido', () => {
-    const postTitle = faker.lorem.sentence();
-    // Generar un párrafo con caracteres especiales
-    const specialCharacters = "!@#$%^&*()_+[]{};':,.<>/?`~";
-    const postContent = faker.lorem.sentence() + specialCharacters + faker.lorem.sentence();
-
-    cy.get('a[href="#/posts/"]').click();
-    cy.url().should('include', '/posts');
-    cy.get('span').contains('New post').click();
-    cy.url().should('include', '/editor/post');
-    cy.get('textarea[placeholder="Post title"]').type(postTitle);
-    cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(postContent);
-    cy.get('span').contains('Publish').click();
-    cy.get('span').contains('Continue, final review').click();
-    cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-    cy.visit(`http://localhost:2369/ghost/#/posts`);
-    cy.contains(postTitle).should('exist');
-});
-
+    it('Escenario 50: Exportar Lista de Miembros Sin Ningún Miembro Presente', () => {
+        cy.visit('http://localhost:2369/ghost/#/members');
+        cy.url().should('include', '/members');
+    
+        // Abrir el menú de acciones de miembros
+        cy.get('button[data-test-button="members-actions"]').click({ force: true });
+    
+        // Verificar que el botón "Export all members" no exista
+        cy.get('span').contains('Export all members').should('not.exist');
+    
+        // Verificar que el texto "Export selected members" sí exista
+        cy.contains('Export selected members').should('exist');
+    });
+    
+    
+    
+    
+    
 
     
 });

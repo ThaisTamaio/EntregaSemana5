@@ -15,6 +15,14 @@ describe('Ghost Post Creation and Publication', () => {
         });
     });
 
+    it('Escenario 50: Exportar Lista de Miembros Sin Ningún Miembro Presente', () => {
+        cy.visit('http://localhost:2369/ghost/#/members');
+        cy.url().should('include', '/members');
+        cy.get('button[data-test-button="members-actions"]').click({ force: true });
+        cy.get('span').contains('Export all members').should('not.exist');
+        cy.contains('Export selected members').should('exist');
+    });
+
     it('Escenario 1: Creación y publicación de un post', () => {
         const postTitle = faker.lorem.sentence();
         const postContent = faker.lorem.paragraph();
@@ -1094,7 +1102,6 @@ describe('Ghost Post Creation and Publication', () => {
     
     it('Escenario 40: Crear un Post y Utilizar Caracteres no Convencionales en el Contenido', () => {
         const postTitle = faker.lorem.sentence();
-        // Generar un párrafo con caracteres especiales
         const specialCharacters = "!@#$%^&*()_+[]{};':,.<>/?`~";
         const postContent = faker.lorem.sentence() + specialCharacters + faker.lorem.sentence();
     
@@ -1109,6 +1116,214 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
         cy.visit(`http://localhost:2369/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
+    });
+
+    it('Escenario 41: Crear una Página con Excerpt Normal', () => {
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
+        const pageContent = faker.lorem.sentence();
+        const pageExcerpt = faker.lorem.sentence();
+    
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('textarea[name="post-setting-custom-excerpt"]').type(pageExcerpt);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+    
+        cy.wait(1000);
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.wait(1000);
+        cy.contains(pageTitle).click({force: true});
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('textarea.post-setting-custom-excerpt').invoke('val').should('eq', pageExcerpt);
+    });
+
+    it('Escenario 42: Asignación de Tags Largos a un Post', () => {
+        const tags = [faker.random.alphaNumeric(189)];
+        const pageTitle = faker.lorem.word()+ faker.lorem.word();
+        const pageContent = faker.lorem.sentence();
+
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('button.settings-menu-toggle').click();
+
+        tags.forEach(tag => {
+            cy.get('span.ember-power-select-status-icon').click({ multiple: true, force: true});
+            cy.get('div#tag-input ul.ember-power-select-multiple-options input.ember-power-select-trigger-multiple-input').type(`${tag}{enter}`);
         });
+
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+
+        cy.wait(1000);
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.wait(1000);
+        cy.contains(pageTitle).click({force: true});
+    });
+
+    it('Escenario 43: Crear Post con URL Externas no Válidas', () => {
+        const postTitle = faker.lorem.sentence();
+        const postContent1 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+        const postContent2 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+        const postContent3 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent1 + " " + postContent2 + " " + postContent3);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+    });
+
+    it('Escenario 44: Crear Página Estática con Título Demasiado Largo', () => {
+        //titulo tiene que ser un párrafo largo
+        const pageFirstTitle = faker.lorem.words();
+        const pageSecondTitle = faker.lorem.paragraph() + faker.lorem.paragraph() + faker.lorem.paragraph();
+        const pageContent = faker.lorem.paragraph();
+
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageFirstTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').click();
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type(pageContent);
+        cy.get('textarea[placeholder="Page title"]').clear().type(pageSecondTitle);
+        cy.get('span').contains('Publish').click({force: true});
+        cy.contains('Validation failed: Title cannot be longer than 255 characters.');
+    });
+
+    it('Escenario 45: Crear una Página con Excerpt Muy Largo', () => {
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
+        const pageContent = faker.lorem.sentence();
+        const pageExcerpt = faker.lorem.paragraph()+faker.lorem.paragraph()+faker.lorem.paragraph()+faker.lorem.paragraph();
+    
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('textarea.post-setting-custom-excerpt').type(pageExcerpt);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click({force: true});
+        cy.contains('Validation failed');
+    });
+
+    it('Escenario 46: Crear un Post con Contenido que Exceda el Límite Máximo', () => {
+        const postTitle = faker.lorem.sentence();
+        let postContent = '';
+        for (let i = 0; i < 1; i++) {
+            postContent += faker.lorem.paragraph(40) + ' ';
+        }
+
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(postTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent);
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+    });
+
+    it('Escenario 47: Programar Publicación para Fecha Inexistente', () => {
+        const title = faker.lorem.word();
+        const content = faker.lorem.paragraph();
+        const invalidMonth = faker.datatype.number({ min: 13, max: 99 });
+        const invalidDay = faker.datatype.number({ min: 32, max: 99 });
+        const year = new Date().getFullYear();
+        const dateString = `${year}-esc${invalidMonth}-${invalidDay}`;
+        const timeString = `${faker.datatype.number({ min: 0, max: 23 }).toString().padStart(2, '0')}:${faker.datatype.number({ min: 0, max: 59 }).toString().padStart(2, '0')}`;
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+        cy.get('textarea[placeholder="Post title"]').type(title);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(content);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('input[placeholder="YYYY-MM-DD"]').clear().type(dateString, {force: true});
+        cy.get('input[data-test-date-time-picker-time-input=""]').clear().type(timeString, {force: true});
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+    });
+
+    it('Escenario 48: Crear una Página con Code Injection Válido', () => {
+        const pageTitle = faker.lorem.word() + faker.lorem.word();
+        const pageContent = faker.lorem.sentence();
+        const codeInjection = `<script>alert('${faker.random.word()}')</script>`;
+    
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+        cy.get('span').contains('New page').click();
+        cy.url().should('include', '/editor/page');
+        cy.get('textarea[placeholder="Page title"]').type(pageTitle);
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(pageContent);
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.get('div.CodeMirror-scroll').first().type(codeInjection);
+    
+        cy.get('span.settings-menu-open').click();
+        cy.get('span').contains('Publish').click({force: true});
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
+
+        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.wait(1000);
+        cy.contains(pageTitle).click({force: true});
+        cy.get('button.settings-menu-toggle').click();
+        cy.get('span').contains('Code injection').click();
+        cy.contains(codeInjection);
+    });
+
+    it('Escenario 49: Crear Post con Uso Excesivo de Negritas o Itálicas', () => {
+        // Generar título y contenido con negritas e itálicas
+        const postTitle = `<strong>${faker.lorem.sentence()}</strong>`;
+        const postContent = `<em>${faker.lorem.paragraph()}</em>`;
+    
+        cy.get('a[href="#/posts/"]').click();
+        cy.url().should('include', '/posts');
+        cy.get('span').contains('New post').click();
+        cy.url().should('include', '/editor/post');
+    
+        // Escribir el título y contenido. Si el editor no permite HTML directamente, es posible que necesites otro enfoque
+        cy.get('textarea[placeholder="Post title"]').type(postTitle, { parseSpecialCharSequences: false });
+        cy.get('p[data-koenig-dnd-droppable="true"]').type(postContent, { parseSpecialCharSequences: false });
+    
+        cy.get('span').contains('Publish').click();
+        cy.get('span').contains('Continue, final review').click();
+        cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
+        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.contains(postTitle).should('exist');
+    });
+
+
     
 });

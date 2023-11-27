@@ -42,10 +42,12 @@ git clone https://github.com/TheSoftwareDesignLab/Kraken.git # OPCIONAL: solo si
 npm install kraken-node --save
 ```
 
-4. Se genera la estructura de features de Cucumber:
+4. Se genera la estructura de features de Cucumber y se instalan dependencias:
 
 ```
-npx kraken-node gen
+$ npx kraken-node gen
+$ npm install
+$ npm install chai
 ```
 
 Para mayor infornación sobre la instalación de Kraken, por favor remitirse al [repositorio oficial de Kraken](https://github.com/TheSoftwareDesignLab/Kraken). 

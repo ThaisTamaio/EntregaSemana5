@@ -209,7 +209,7 @@ En primer lugar, es importante aclarar que para ejecutar el VRT con resemble, se
 
 Para correr las pruebas seguir este tutorial:
 
-https://youtu.be/ar7QeW1J2Cs
+[Configuracion cypress y ghost para pruebas VRT](https://youtu.be/ar7QeW1J2Cs)
 
 1. Abrir la carpeta **resembleGhost** en vscode:
 

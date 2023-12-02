@@ -3,7 +3,7 @@ import {faker} from '@faker-js/faker';
 
 describe('Ghost Post Creation and Publication', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:2369/ghost/');
+        cy.visit('http://localhost:2368/ghost/');
         cy.get('input[name="identification"]').type('pruebas@gmail.com');
         cy.get('input[name="password"]').type('pruebas1234');
         cy.get('span').contains('Sign in').click();
@@ -16,7 +16,7 @@ describe('Ghost Post Creation and Publication', () => {
     });
 
     it('Escenario 50: Exportar Lista de Miembros Sin Ningún Miembro Presente', () => {
-        cy.visit('http://localhost:2369/ghost/#/members');
+        cy.visit('http://localhost:2368/ghost/#/members');
         cy.url().should('include', '/members');
         cy.get('button[data-test-button="members-actions"]').click({ force: true });
         cy.get('span').contains('Export all members').should('not.exist');
@@ -36,7 +36,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });    
 
@@ -55,14 +55,14 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
         cy.wait(1000)
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.url().should('include', '/posts');
         cy.wait(1000)
         cy.contains(postTitle).click({force: true});
         cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(newPostContent);
         cy.get('span').contains('Update').click({ force: true });
         cy.url().should('include', '/editor/post');
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.contains(postTitle).click();
         cy.contains(newPostContent).should('exist');
     });    
@@ -90,10 +90,10 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
 
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.contains(postTitle).should('exist');
 
-        cy.visit('http://localhost:2369/ghost/#/tags');
+        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.contains(tags[0]).should('exist');
     });
 
@@ -113,7 +113,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
     
         tags.forEach(tag => {
             cy.get('a[data-test-nav="tags"]').click();
@@ -138,7 +138,7 @@ describe('Ghost Post Creation and Publication', () => {
     
         cy.get('span.settings-menu-open').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.contains(postTitle).click({ force: true });
         cy.get('button.settings-menu-toggle').click();
         cy.contains(tagtest1);
@@ -152,7 +152,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('New tag').click();
         cy.get('#tag-name').type(tagName);
         cy.get('span').contains('Save').click();
-        cy.visit('http://localhost:2369/ghost/#/tags');
+        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.wait(1000);
         cy.contains(tagName).click({ force: true });
         cy.get('span').contains('Delete tag').click();
@@ -172,11 +172,11 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
     
         for (let i = 1; i <= 3; i++) {
             const newPostContent = faker.lorem.paragraph();
-            cy.visit('http://localhost:2369/ghost/');
+            cy.visit('http://localhost:2368/ghost/');
             cy.get('a[href="#/posts/"]').click({ multiple: true, force: true });
             cy.url().should('include', '/posts');
             cy.contains(postTitle).click({ force: true });
@@ -203,7 +203,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
 
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.wait(1000);
 
         cy.contains(postTitle).click({ force: true });
@@ -225,7 +225,7 @@ describe('Ghost Post Creation and Publication', () => {
 
         posts.forEach(post => {
             const postContent= faker.lorem.paragraph();
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
             cy.url().should('include', '/posts');
             cy.get('span').contains('New post').click();
             cy.url().should('include', '/editor/post');
@@ -243,10 +243,10 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span').contains('Continue, final review').click();
             cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
 
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
             cy.contains(postContent).should('exist');
 
-            cy.visit('http://localhost:2369/ghost/#/tags');
+            cy.visit('http://localhost:2368/ghost/#/tags');
             cy.contains(tag).should('exist');
         });
     });   
@@ -266,7 +266,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
 
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.wait(1000);
 
         cy.contains(postTitle).click({ force: true });
@@ -277,7 +277,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Update').click( { force: true } );
         cy.url().should('include', '/editor/post');
 
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
 
         const tag1 = faker.lorem.word();
         const tag2 = faker.lorem.word();
@@ -331,7 +331,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click({ force: true });
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });  
 
@@ -379,7 +379,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/pages`);
+        cy.visit(`http://localhost:2368/ghost/#/pages`);
         cy.contains(pageTitle).should('exist');
     });
 
@@ -406,10 +406,10 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.contains(pageTitle).should('exist');
 
-        cy.visit('http://localhost:2369/ghost/#/tags');
+        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.contains(tags[0]).should('exist');
     });    
 
@@ -429,7 +429,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
     
         tags.forEach(tag => {
             cy.get('a[data-test-nav="tags"]').click();
@@ -456,7 +456,7 @@ describe('Ghost Post Creation and Publication', () => {
     
         cy.get('span.settings-menu-open').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Update').click();
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.contains(pageTitle).click({ force: true });
         cy.get('button.settings-menu-toggle').click();
         cy.contains(tagtest1);
@@ -472,7 +472,7 @@ describe('Ghost Post Creation and Publication', () => {
         pages.forEach((page, index) => {
             const pageContent = faker.lorem.paragraph();
             cy.wait(1000);
-            cy.visit('http://localhost:2369/ghost/#/pages');
+            cy.visit('http://localhost:2368/ghost/#/pages');
             cy.wait(1000);
             cy.get('span').contains('New page').click({force: true});
             cy.get('textarea[placeholder="Page title"]').type(page, { force: true });
@@ -480,7 +480,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span').contains('Publish').click({ force: true });
             cy.get('span').contains('Continue, final review').click();
             cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
-            cy.visit('http://localhost:2369/ghost/#/pages');
+            cy.visit('http://localhost:2368/ghost/#/pages');
             cy.contains(page).should('exist');
         });
     });
@@ -500,14 +500,14 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
         cy.wait(1000)
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.url().should('include', '/pages');
         cy.wait(1000)
         cy.contains(pageTitle).click({force: true});
         cy.get('p[data-koenig-dnd-droppable="true"]').clear().type(newPageContent);
         cy.get('span').contains('Update').click({ force: true });
         cy.url().should('include', '/editor/page');
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.contains(pageTitle).click();
         cy.contains(newPageContent).should('exist');
     });
@@ -533,13 +533,13 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/tags');
+        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.wait(1000);
 
         cy.get('span').contains(tag).click({ force: true });
         cy.get('#tag-name').type(tag);
         cy.get('span').contains('Save').click();
-        cy.visit('http://localhost:2369/ghost/#/tags');
+        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.wait(1000);
         cy.contains(tag).click({ force: true });
         cy.get('span').contains('Delete tag').click();
@@ -594,7 +594,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Saved').should('exist');
 
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/members')
+        cy.visit('http://localhost:2368/ghost/#/members')
         cy.wait(1000);
     
         cy.contains(nombre).click({ force: true });
@@ -626,7 +626,7 @@ describe('Ghost Post Creation and Publication', () => {
 
         nombres.forEach(nombreRaw => {
             const email = faker.internet.email();
-            cy.visit('http://localhost:2369/ghost/#/members');
+            cy.visit('http://localhost:2368/ghost/#/members');
             cy.url().should('include', '/members');
     
             cy.get("body").then($body => {
@@ -647,7 +647,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.contains(email).should('exist');
         });
     
-        cy.visit('http://localhost:2369/ghost/#/members');
+        cy.visit('http://localhost:2368/ghost/#/members');
         cy.url().should('include', '/members');
         cy.get('button[data-test-button="members-actions"]').click({ force: true });
         cy.get('span').contains('Export all members').click({ force: true });
@@ -748,7 +748,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.contains(nombre).should('exist');
         cy.contains(email).should('exist');
 
-        cy.visit('http://localhost:2369/ghost/#/dashboard');
+        cy.visit('http://localhost:2368/ghost/#/dashboard');
         cy.contains('6');
     });
 
@@ -800,7 +800,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
         cy.wait(1000)
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.url().should('include', '/posts');
         cy.wait(1000)
         cy.contains(postTitle).click({force: true});
@@ -808,7 +808,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').clear();
         cy.get('span').contains('Update').click({ force: true });
         cy.url().should('include', '/editor/post');
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.contains("(Untitled)");
     });
 
@@ -824,7 +824,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
         cy.wait(1000)
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.contains("(Untitled)");
     });
 
@@ -867,7 +867,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
         cy.wait(1000)
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.url().should('include', '/pages');
         cy.wait(1000)
         cy.contains(pageTitle).click({force: true});
@@ -875,7 +875,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('p[data-koenig-dnd-droppable="true"]').clear();
         cy.get('span').contains('Update').click({ force: true });
         cy.url().should('include', '/editor/page');
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.contains("(Untitled)");
     });
 
@@ -923,7 +923,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
     
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.wait(1000);
         cy.contains(postTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
@@ -969,7 +969,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
     
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.wait(1000);
     });
 
@@ -1009,7 +1009,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });
 
@@ -1033,7 +1033,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
 
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.wait(1000);
         cy.contains(postTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
@@ -1055,7 +1055,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     }); 
 
@@ -1072,7 +1072,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });   
 
@@ -1096,7 +1096,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
 
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.wait(1000);
         cy.contains(postTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
@@ -1118,7 +1118,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });
 
@@ -1142,7 +1142,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
     
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.wait(1000);
         cy.contains(pageTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
@@ -1173,7 +1173,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.wait(1000);
         cy.contains(pageTitle).click({force: true});
     });
@@ -1193,7 +1193,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });
 
@@ -1250,7 +1250,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });
 
@@ -1299,7 +1299,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.wait(1000);
         cy.contains(pageTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
@@ -1321,7 +1321,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/posts`);
+        cy.visit(`http://localhost:2368/ghost/#/posts`);
         cy.contains(postTitle).should('exist');
     });
 
@@ -1334,7 +1334,7 @@ describe('Ghost Post Creation and Publication', () => {
             const postContent = faker.lorem.paragraph();
     
             cy.wait(1000);
-            cy.visit(`http://localhost:2369/ghost/#/posts`);
+            cy.visit(`http://localhost:2368/ghost/#/posts`);
             cy.wait(1000);
             cy.get('span').contains('New post').click();
             cy.url().should('include', '/editor/post');
@@ -1343,7 +1343,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span').contains('Publish').click();
             cy.get('span').contains('Continue, final review').click();
             cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
     
             tags.forEach(tag => {
                 cy.get('a[data-test-nav="tags"]').click();
@@ -1368,7 +1368,7 @@ describe('Ghost Post Creation and Publication', () => {
     
             cy.get('span.settings-menu-open').click();
             cy.get('span[data-test-task-button-state="idle"]').contains('Update').click({ force: true});
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
             cy.contains(postTitle).click({ force: true });
             cy.get('button.settings-menu-toggle').click();
             cy.contains(tagtest1);
@@ -1394,9 +1394,9 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
         cy.contains(postTitle).should('exist');
-        cy.visit('http://localhost:2369/ghost/#/tags');
+        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.contains(tagNoExistente).should('exist');
     });
 
@@ -1420,7 +1420,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
     
         cy.wait(1000);
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.wait(1000);
     });
 
@@ -1430,7 +1430,7 @@ describe('Ghost Post Creation and Publication', () => {
     
         for (let i = 0; i < 2; i++) {
             cy.wait(1000);
-            cy.visit(`http://localhost:2369/ghost/#/posts`);
+            cy.visit(`http://localhost:2368/ghost/#/posts`);
             cy.wait(1000);
             cy.url().should('include', '/posts');
             cy.get('span').contains('New post').click();
@@ -1440,7 +1440,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span').contains('Publish').click();
             cy.get('span').contains('Continue, final review').click();
             cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-            cy.visit(`http://localhost:2369/ghost/#/posts`);
+            cy.visit(`http://localhost:2368/ghost/#/posts`);
             cy.contains(postTitle).should('exist');
             cy.wait(1000);
         }
@@ -1466,7 +1466,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
 
-        cy.visit('http://localhost:2369/ghost/#/pages');
+        cy.visit('http://localhost:2368/ghost/#/pages');
         cy.wait(1000);
         cy.contains(pageTitle).click({force: true});
         cy.get('button.settings-menu-toggle').click();
@@ -1482,7 +1482,7 @@ describe('Ghost Post Creation and Publication', () => {
             const postContent = faker.lorem.sentence();
     
             cy.wait(1000);
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
             cy.wait(1000);
             cy.url().should('include', '/posts');
             cy.get('span').contains('New post').click();
@@ -1497,7 +1497,7 @@ describe('Ghost Post Creation and Publication', () => {
             cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
     
             cy.wait(1000);
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
             cy.wait(1000);
         }
     });
@@ -1515,7 +1515,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish post, right now').click();
-        cy.visit('http://localhost:2369/ghost/#/posts');
+        cy.visit('http://localhost:2368/ghost/#/posts');
     
         for (let i = 1; i <= 3; i++) {
             const postContent1 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
@@ -1523,7 +1523,7 @@ describe('Ghost Post Creation and Publication', () => {
             const postContent3 = `https://www.invalid-${faker.random.alphaNumeric(5)}@${faker.random.word()}.com`;
             const newPostContent = postContent1 + " " + postContent2 + " " + postContent3;
             cy.wait(1000);
-            cy.visit('http://localhost:2369/ghost/#/posts');
+            cy.visit('http://localhost:2368/ghost/#/posts');
             cy.wait(1000);
             cy.contains(postTitle).click({force: true});
             cy.url().should('include', '/editor/post');
@@ -1572,7 +1572,7 @@ describe('Ghost Post Creation and Publication', () => {
         cy.get('span').contains('Publish').click();
         cy.get('span').contains('Continue, final review').click();
         cy.get('span[data-test-task-button-state="idle"]').contains('Publish page, right now').click();
-        cy.visit(`http://localhost:2369/ghost/#/pages`);
+        cy.visit(`http://localhost:2368/ghost/#/pages`);
         cy.contains(pageTitle).should('exist');
     });
 

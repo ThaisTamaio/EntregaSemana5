@@ -1,0 +1,6 @@
+id,email,name,note,subscribed_to_emails,complimentary_plan,stripe_customer_id,created_at,deleted_at,labels,tiers
+656b9b8c14b328a6a6d5813b,nombre18@gmail.com,Nombre18,,true,,,2023-12-02T21:03:08.000Z,,,
+656b9b8e14b328a6a6d58142,nombre19@gmail.com,Nombre19,,false,,,2023-12-02T21:03:10.000Z,,,
+656b9b9314b328a6a6d5814a,nombre20-1@gmail.com,nombre20-1,,true,,,2023-12-02T21:03:15.000Z,,,
+656b9b9414b328a6a6d58150,nombre20-2@gmail.com,nombre20-2,,true,,,2023-12-02T21:03:16.000Z,,,
+656b9b9514b328a6a6d58156,nombre20-3@gmail.com,nombre20-3,,true,,,2023-12-02T21:03:17.000Z,,,

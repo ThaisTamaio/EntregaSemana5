@@ -175,6 +175,15 @@ npm install
 
 [Tutorial ejecución pruebas Cypress](https://youtu.be/KZQ6f_LO2wU)
 
+4. Ejecutar el siguiente comando en terminal:
+
+```
+cypress open
+```
+
+5. Seleccionar Chrome
+
+6. Seleccionar el archivo: test.cy.js y ejecutar las pruebas
 
 ### BackstopJS
 

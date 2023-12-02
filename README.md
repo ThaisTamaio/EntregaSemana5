@@ -207,6 +207,10 @@ backstop test
 
 En primer lugar, es importante aclarar que para ejecutar el VRT con resemble, se debe hacer uso de la versión 18 de node.
 
+Para correr las pruebas seguir este tutorial:
+
+https://youtu.be/ar7QeW1J2Cs
+
 1. Abrir la carpeta **resembleGhost** en vscode:
 
 ```
@@ -250,4 +254,22 @@ Los resultados, incluyendo el html con el reporte se encuentran en:
 
 ```
 EntregaSemana5/CypressTesting/resembleGhost/results
+```
+
+### Monkey
+
+1. Abrir una terminal en la carpeta monkey-cypress-master
+
+2. Instalar dependencias con npm install (la versión de  node es la 18.17.0)
+
+3. Para correr el monkey ejecutar:
+
+```
+npm run monkey
+```
+
+4. Para correr el smart monkey ejecutar:
+
+```
+npm run smart-monkey
 ```
